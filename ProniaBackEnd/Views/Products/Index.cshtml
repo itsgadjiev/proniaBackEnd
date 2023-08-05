@@ -1,0 +1,76 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Index";
+    int counter = 0;
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Products</h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Image </th>
+                                <th scope="col">Price </th>
+                                <th scope="col">Size </th>
+                                <th scope="col">Color </th>
+                                <th scope="col">Creation Date </th>
+                                <th scope="col">Is Modified </th>
+
+
+                                <th scope="col">
+                                    Actions
+                                    <a class="btn btn-info" asp-action="create" asp-controller="Products">Create</a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@(++counter)</th>
+                                    <td>
+                                        @item.ProductName
+                                    </td>
+                                    <td>
+                                        @item.Description
+                                    </td>
+                                    <td>
+                                        @item.Image
+                                    </td>
+                                    <td>
+                                        @item.Price
+                                    </td>
+                                    <td>
+                                        @item.Size
+                                    </td>
+                                    <td>
+                                        @item.Color
+                                    </td>
+                                    <td>
+                                        @item.CreationDate
+                                    </td>
+                                    <td>
+                                        @(item.IsModified ? @item.LastModifiedDate.ToString("f") :"Not Modified")
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-info" asp-action="update" asp-controller="Products" asp-route-id="">Update</a>
+                                        <a class="btn btn-danger" asp-action="Delete" asp-controller="Products" asp-route-id="">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

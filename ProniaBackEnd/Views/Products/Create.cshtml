@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" >
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-12 @*col-xl-6*@">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Product</h6>
+                    <div class="form-floating mb-3">
+                        <input  class="form-control" id="floatingInput"
+                               placeholder="Product Name" name="productName">
+                        <label for="floatingInput">Product Name</label>
+                        <span class="text-danger" ></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="floatingInput"
+                               placeholder="Image" name="image">
+                        <label for="floatingInput">Image</label>
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="floatingInput"
+                               placeholder="Description" name="description">
+                        <label for="floatingInput">Description</label>
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="floatingInput"
+                               placeholder="Color" name="color">
+                        <label for="floatingInput">Color</label>
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="floatingInput"
+                               placeholder="Category" name="size">
+                        <label for="floatingInput">Size</label>
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="floatingInput"
+                               placeholder="price" name="price">
+                        <label for="floatingInput">Price</label>
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="floatingInput"
+                               placeholder="price" name="order">
+                        <label for="floatingInput">Order</label>
+                        <span class="text-danger"></span>
+                    </div>
+                  
+                    <div class="text-center">
+
+                    <button type="submit" class="btn btn-primary p-2">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
