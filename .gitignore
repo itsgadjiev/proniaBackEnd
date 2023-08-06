@@ -1,0 +1,11 @@
+# Visual Studio 2022 specific files
+.vs/
+*.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.nuget/
+*_i.c
+*_p.c
+*.~df
