@@ -17,7 +17,6 @@ namespace ProniaBackEnd.Controllers
         public IActionResult Index()
         {
             List<Product> products = _productsRepository.GetAll();
-
             return View(products);
         }
 
