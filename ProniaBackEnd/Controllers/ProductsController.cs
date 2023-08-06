@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Database.Repositories;
 
@@ -44,7 +45,7 @@ namespace ProniaBackEnd.Controllers
         public IActionResult Update(int id)
         {
             Product product = _productsRepository.GetBy(x => x.Id == id);
-            if (product is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+            if (product is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             return View(product);
 
@@ -53,7 +54,7 @@ namespace ProniaBackEnd.Controllers
         public IActionResult Update(int id,string productName, string image, string description, string color, string size, double price, byte order)
         {
             Product exProduct = _productsRepository.GetBy(x => x.Id == id);
-            if (exProduct is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+            if (exProduct is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             if (string.IsNullOrEmpty(productName) || string.IsNullOrEmpty(image) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(color) || string.IsNullOrEmpty(size) || price <= 0 || order == 0)
             {
@@ -78,7 +79,7 @@ namespace ProniaBackEnd.Controllers
         public IActionResult Delete(int id)
         {
             Product product = _productsRepository.GetBy(x => x.Id == id);
-            if (product is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+            if (product is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             _productsRepository.Delete(product);
             return RedirectToAction(nameof(Index));
@@ -87,7 +88,7 @@ namespace ProniaBackEnd.Controllers
         public IActionResult ProductDetail(int id)
         {
             Product product = _productsRepository.GetBy(x => x.Id == id);
-            if (product is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+            if (product is null) { return View(NotFoundConstants.NotFoundProniaUrl); }
 
             return View(product);
         }

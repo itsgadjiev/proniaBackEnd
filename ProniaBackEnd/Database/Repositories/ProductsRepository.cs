@@ -1,4 +1,5 @@
-﻿using ProniaBackEnd.Database.Models;
+﻿using ProniaBackEnd.Database.Base;
+using ProniaBackEnd.Database.Models;
 
 namespace ProniaBackEnd.Database.Repositories
 {

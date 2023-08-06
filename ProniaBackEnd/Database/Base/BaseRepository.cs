@@ -1,8 +1,9 @@
-﻿namespace ProniaBackEnd.Database.Repositories
+﻿namespace ProniaBackEnd.Database.Base
 {
     public class BaseRepository<TDomain>
+        where TDomain : BaseEntity
     {
-        public static List<TDomain> _entries = new List<TDomain>() ;
+        public static List<TDomain> _entries = new List<TDomain>();
 
         public void Add(TDomain entry)
         {
@@ -14,7 +15,7 @@
             _entries.Remove(entry);
         }
 
-        public TDomain GetBy(Predicate<TDomain> predicate )
+        public TDomain GetBy(Predicate<TDomain> predicate)
         {
             foreach (TDomain entry in _entries)
             {
@@ -31,7 +32,7 @@
             return _entries;
         }
 
-        
+
 
 
     }

@@ -21,7 +21,5 @@ namespace ProniaBackEnd.Controllers
 
             return View(homeViewModel);
         }
-
-       
     }
 }

@@ -48,7 +48,7 @@
                                     <td>
                                         @item.ButtonUrl
                                     </td>
-                                    <td>
+                                    <td class="@(item.Offering ? "text-success" : "text-danger"  )">
                                         @(item.Offering ? item.OfferText : "Not offering"  )
                                         
                                     </td>

@@ -1,9 +1,10 @@
-﻿namespace ProniaBackEnd.Database.Models
+﻿using ProniaBackEnd.Database.Base;
+
+namespace ProniaBackEnd.Database.Models
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        public int Id { get; set; }
-        public static int _idCounter;
+        public static int _idCounter = 1;
         public string ProductName{ get; set; }
         public string Description { get; set; }
         public string Image { get; set; }

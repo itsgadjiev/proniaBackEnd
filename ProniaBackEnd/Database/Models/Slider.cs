@@ -1,8 +1,9 @@
-﻿namespace ProniaBackEnd.Database.Models
+﻿using ProniaBackEnd.Database.Base;
+
+namespace ProniaBackEnd.Database.Models
 {
-    public class Slider
+    public class Slider:BaseEntity
     {
-        public int Id { get; set; }
         public static int _idCounter;
 
         public Slider(string title, string description, string image, string buttonUrl, byte order)

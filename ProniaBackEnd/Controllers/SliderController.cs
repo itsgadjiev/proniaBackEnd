@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Database.Repositories;
 
@@ -51,7 +52,7 @@ namespace ProniaBackEnd.Controllers
         public IActionResult Delete(int id)
         {
             Slider slider= _slidederRepository.GetBy(x => x.Id == id);
-            if (slider is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+            if (slider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             _slidederRepository.Delete(slider);
             return RedirectToAction(nameof(Index));
@@ -61,7 +62,7 @@ namespace ProniaBackEnd.Controllers
         public IActionResult Update(int id)
         {
             Slider slider = _slidederRepository.GetBy(x => x.Id == id);
-            if (slider is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+            if (slider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             return View(slider);
 
@@ -70,7 +71,7 @@ namespace ProniaBackEnd.Controllers
         public IActionResult Update(int id, string title, string image, string description, string offer, string buttonUrl, byte order, bool offering)
         {
             Slider exSlider = _slidederRepository.GetBy(x => x.Id == id);
-            if (exSlider is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+            if (exSlider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(image) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(buttonUrl) || order == 0) { return View(exSlider); }
 
