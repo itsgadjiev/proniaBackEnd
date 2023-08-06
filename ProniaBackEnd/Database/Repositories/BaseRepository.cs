@@ -26,7 +26,7 @@
             return default;
         }
 
-        public List<TDomain> GetAll()
+        public IEnumerable<TDomain> GetAll()
         {
             return _entries;
         }

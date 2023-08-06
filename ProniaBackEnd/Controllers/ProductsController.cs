@@ -16,7 +16,7 @@ namespace ProniaBackEnd.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Product> products = _productsRepository.GetAll();
+            List<Product> products = _productsRepository.GetAll().ToList();
             return View(products);
         }
 
@@ -29,10 +29,15 @@ namespace ProniaBackEnd.Controllers
         [HttpPost]
         public IActionResult Create(string productName, string image, string description, string color, string size, double price, byte order)
         {
+            if (string.IsNullOrEmpty(productName) || string.IsNullOrEmpty(image) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(color) || string.IsNullOrEmpty(size) || price <= 0 || order == 0)
+            {
+                return View();
+            }
+
             Product product = new Product(productName, image, description, color, size, price, order);
             _productsRepository.Add(product);
-            return RedirectToAction(nameof(Index));
 
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -47,17 +52,24 @@ namespace ProniaBackEnd.Controllers
         [HttpPost]
         public IActionResult Update(int id,string productName, string image, string description, string color, string size, double price, byte order)
         {
-            Product product = _productsRepository.GetBy(x => x.Id == id);
-            if (product is null) { return View(Constants.Constants.NotFoundApPageUrl); }
-            product.Price = price;
-            product.Order = order;
-            product.ProductName = productName;
-            product.Image = image;
-            product.Description = description;
-            product.Color = color;
-            product.Size = size;
-            product.IsModified = true;
-            product.LastModifiedDate = DateTime.Now;
+            Product exProduct = _productsRepository.GetBy(x => x.Id == id);
+            if (exProduct is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+
+            if (string.IsNullOrEmpty(productName) || string.IsNullOrEmpty(image) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(color) || string.IsNullOrEmpty(size) || price <= 0 || order == 0)
+            {
+                return View(exProduct);
+            }
+
+            exProduct.Price = price;
+            exProduct.Order = order;
+            exProduct.ProductName = productName;
+            exProduct.Image = image;
+            exProduct.Description = description;
+            exProduct.Color = color;
+            exProduct.Size = size;
+            exProduct.IsModified = true;
+            exProduct.LastModifiedDate = DateTime.Now;
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -70,6 +82,14 @@ namespace ProniaBackEnd.Controllers
 
             _productsRepository.Delete(product);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult ProductDetail(int id)
+        {
+            Product product = _productsRepository.GetBy(x => x.Id == id);
+            if (product is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+
+            return View(product);
         }
     }
 }

@@ -14,19 +14,14 @@ namespace ProniaBackEnd.Controllers
         {
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                Products = _productsRepository.GetAll(),
-                Sliders = _sliderRepository.GetAll().OrderBy(x=>x.Order).ToList(),
+                Products = _productsRepository.GetAll().ToList(),
+                Sliders = _sliderRepository.GetAll().OrderBy(x => x.Order).ToList(),
+                NewProducts = _productsRepository.GetAll().OrderByDescending(x=>x.CreationDate).ToList(),
             };
 
             return View(homeViewModel);
         }
 
-        public IActionResult ProductDetail(int id) 
-        {
-            Product product = _productsRepository.GetBy(x => x.Id == id);
-            if (product is null) { return View(Constants.Constants.NotFoundApPageUrl); }
-
-            return View(product);
-        }
+       
     }
 }

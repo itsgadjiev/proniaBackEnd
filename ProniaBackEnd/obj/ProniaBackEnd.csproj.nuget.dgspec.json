@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jake\\Desktop\\hackerRang\\ProniaBackEnd\\ProniaBackEnd.csproj": {}
+    "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\ProniaBackEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jake\\Desktop\\hackerRang\\ProniaBackEnd\\ProniaBackEnd.csproj": {
+    "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\ProniaBackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jake\\Desktop\\hackerRang\\ProniaBackEnd\\ProniaBackEnd.csproj",
+        "projectUniqueName": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\ProniaBackEnd.csproj",
         "projectName": "ProniaBackEnd",
-        "projectPath": "C:\\Users\\Jake\\Desktop\\hackerRang\\ProniaBackEnd\\ProniaBackEnd.csproj",
-        "packagesPath": "C:\\Users\\Jake\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jake\\Desktop\\hackerRang\\ProniaBackEnd\\obj\\",
+        "projectPath": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\ProniaBackEnd.csproj",
+        "packagesPath": "C:\\Users\\ceyhu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Jake\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ceyhu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

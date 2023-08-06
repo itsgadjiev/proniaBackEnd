@@ -17,7 +17,7 @@
                 class="slide-inner style-1 bg-height"
                 data-bg-image="assets/images/slider/bg/1-1.jpg"
               >
-                <div class="container">
+                <div class="container">Fode
                   <div class="row">
                     <div class="col-lg-6 order-2 order-lg-1 align-self-center">
                       <div class="slide-content text-black">
@@ -184,7 +184,7 @@
                     <div class="col-xl-3 col-md-4 col-sm-6">
                       <div class="product-item">
                         <div class="product-img">
-                                            <a asp-action="ProductDetail" asp-controller="home" asp-route-id="@product.Id">
+                                            <a asp-action="ProductDetail" asp-controller="products" asp-route-id="@product.Id">
                             <img
                               class="primary-img"
                               src="~/assets/images/website-images//1-1-270x300.jpg"
@@ -1717,12 +1717,12 @@
             <div class="col-lg-12">
               <div class="swiper-container product-slider">
                 <div class="swiper-wrapper">
-                 @foreach (var newProduct in Model.Products.OrderBy(x=>x.CreationDate).Take(4).ToList())
+                 @foreach (var newProduct in Model.NewProducts)
                         {
                             
-                  <div class="swiper-slide product-item">
+                  <div class=" product-item">
                     <div class="product-img">
-                                    <a asp-action="ProductDetail" asp-controller="home" asp-route-id="@newProduct.Id">
+                                    <a asp-action="ProductDetail" asp-controller="products" asp-route-id="@newProduct.Id">
                         <img
                           class="primary-img"
                           src="~/assets/images/website-images//1-7-270x300.jpg"
