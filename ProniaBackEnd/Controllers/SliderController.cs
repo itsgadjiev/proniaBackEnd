@@ -41,5 +41,18 @@ namespace ProniaBackEnd.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+        
+
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Slider slider= _slidederRepository.GetBy(x => x.Id == id);
+            if (slider is null) { return View(Constants.Constants.NotFoundApPageUrl); }
+
+            _slidederRepository.Delete(slider);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
