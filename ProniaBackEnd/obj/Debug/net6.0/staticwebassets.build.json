@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9tenx/2UEo3YUEI7oN2PjlZmMa0XmsK+v6iUr/4lrbI=",
+  "Hash": "WzJkDYfXJE83Ivo1uZQ3r0iO47E6CQYAGK79AsSQNSY=",
   "Source": "ProniaBackEnd",
   "BasePath": "_content/ProniaBackEnd",
   "Mode": "Default",
@@ -4964,23 +4964,6 @@
       "OriginalItemSpec": "wwwroot\\manage\\scss\\bootstrap\\scss\\mixins\\_alert.scss"
     },
     {
-      "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\manage\\scss\\bootstrap\\scss\\mixins\\_border-radius.scss",
-      "SourceId": "ProniaBackEnd",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\",
-      "BasePath": "_content/ProniaBackEnd",
-      "RelativePath": "manage/scss/bootstrap/scss/mixins/_border-radius.scss",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\manage\\scss\\bootstrap\\scss\\mixins\\_border-radius.scss"
-    },
-    {
       "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\manage\\scss\\bootstrap\\scss\\mixins\\_box-shadow.scss",
       "SourceId": "ProniaBackEnd",
       "SourceType": "Discovered",
@@ -4996,6 +4979,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\manage\\scss\\bootstrap\\scss\\mixins\\_box-shadow.scss"
+    },
+    {
+      "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\manage\\scss\\bootstrap\\scss\\mixins\\_border-radius.scss",
+      "SourceId": "ProniaBackEnd",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\",
+      "BasePath": "_content/ProniaBackEnd",
+      "RelativePath": "manage/scss/bootstrap/scss/mixins/_border-radius.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\manage\\scss\\bootstrap\\scss\\mixins\\_border-radius.scss"
     },
     {
       "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\manage\\scss\\bootstrap\\scss\\mixins\\_breakpoints.scss",

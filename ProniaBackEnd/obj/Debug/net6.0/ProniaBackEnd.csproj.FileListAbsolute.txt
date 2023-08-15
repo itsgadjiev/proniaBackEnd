@@ -677,7 +677,6 @@ C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\refs\System.Data.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\refs\System.Diagnostics.Contracts.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\refs\System.Diagnostics.Debug.dll
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\refs\System.Diagnostics.DiagnosticSource.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\refs\System.Diagnostics.EventLog.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\refs\System.Diagnostics.FileVersionInfo.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\refs\System.Diagnostics.Process.dll
@@ -1018,7 +1017,6 @@ C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.RazorAssemblyInfo.cs
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\scopedcss\bundle\ProniaBackEnd.styles.css
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\scopedcss\projectbundle\ProniaBackEnd.bundle.scp.css
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.csproj.CopyComplete
@@ -1027,3 +1025,13 @@ C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.pdb
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.genruntimeconfig.cache
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ref\ProniaBackEnd.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\Npgsql.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\scopedcss\Views\client\_Layout.cshtml.rz.scp.css

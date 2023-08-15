@@ -3,7 +3,7 @@ using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Database.Repositories;
 
-namespace ProniaBackEnd.Controllers
+namespace ProniaBackEnd.Controllers.manage
 {
     public class SliderController : Controller
     {
@@ -14,66 +14,66 @@ namespace ProniaBackEnd.Controllers
             _slidederRepository = new SliderRepository();
         }
 
-        [HttpGet]
+        [HttpGet("~/admin/sliders")]
         public IActionResult Index()
         {
             List<Slider> sliders = _slidederRepository.GetAll().ToList();
-            return View(sliders);
+            return View("~/Views/admin/slider/index.cshtml",sliders);
         }
 
-        [HttpGet]
+        [HttpGet("~/admin/sliders/create")]
         public IActionResult Create()
         {
-            return View();
+            return View("~/Views/admin/slider/create.cshtml");
         }
 
-        [HttpPost]
+        [HttpPost("~/admin/sliders/create")]
         public IActionResult Create(string title, string image, string description, string offer, string buttonUrl, byte order, bool offering)
         {
-            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(image) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(buttonUrl) || order == 0)
+            if (!ModelState.IsValid)
             {
-                return View();
+                return View("~/Views/admin/slider/create.cshtml");
             }
 
             Slider slider = new Slider(title, description, image, buttonUrl, order);
 
-            if (offer != null )
+            if (offer != null)
             {
                 slider.OfferText = offer.Trim();
                 slider.Offering = true;
             }
-            
+
             _slidederRepository.Add(slider);
             return RedirectToAction(nameof(Index));
 
         }
-        
-        [HttpGet]
+
+        [HttpGet("~/admin/sliders/delete/{id}")]
         public IActionResult Delete(int id)
         {
-            Slider slider= _slidederRepository.GetBy(x => x.Id == id);
+            Slider slider = _slidederRepository.GetBy(x => x.Id == id);
             if (slider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             _slidederRepository.Delete(slider);
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+        [HttpGet("~/admin/sliders/update/{id}")]
         public IActionResult Update(int id)
         {
             Slider slider = _slidederRepository.GetBy(x => x.Id == id);
             if (slider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-            return View(slider);
+            return View("~/Views/admin/slider/update.cshtml", slider);
 
         }
-        [HttpPost]
+        [HttpPost("~/admin/sliders/update/{id}")]
         public IActionResult Update(int id, string title, string image, string description, string offer, string buttonUrl, byte order, bool offering)
         {
             Slider exSlider = _slidederRepository.GetBy(x => x.Id == id);
             if (exSlider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(image) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(buttonUrl) || order == 0) { return View(exSlider); }
+            if (!ModelState.IsValid) { return View("~/Views/admin/slider/update.cshtml", exSlider); }
 
             exSlider.Title = title;
             exSlider.Order = order;
@@ -89,7 +89,7 @@ namespace ProniaBackEnd.Controllers
             else
             {
                 exSlider.Offering = false;
-                exSlider.OfferText = String.Empty;
+                exSlider.OfferText = string.Empty;
             }
 
             return RedirectToAction(nameof(Index));

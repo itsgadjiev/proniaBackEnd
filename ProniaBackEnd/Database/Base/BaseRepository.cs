@@ -24,7 +24,7 @@
                     return entry;
                 }
             }
-            return default;
+            return null;
         }
 
         public IEnumerable<TDomain> GetAll()
