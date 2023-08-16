@@ -1,24 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProniaBackEnd.Constants;
+using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
-using ProniaBackEnd.Database.Repositories;
 
 namespace ProniaBackEnd.Controllers.manage
 {
     public class SliderController : Controller
     {
-        public SliderRepository _slidederRepository;
+        private readonly AppDbContext _appDbContext;
 
         public SliderController()
         {
-            _slidederRepository = new SliderRepository();
+            _appDbContext = new AppDbContext();
         }
 
         [HttpGet("~/admin/sliders")]
         public IActionResult Index()
         {
-            List<Slider> sliders = _slidederRepository.GetAll().ToList();
-            return View("~/Views/admin/slider/index.cshtml",sliders);
+            List<Slider> sliders = _appDbContext.Sliders.ToList();
+            return View("~/Views/admin/slider/index.cshtml", sliders);
         }
 
         [HttpGet("~/admin/sliders/create")]
@@ -28,22 +28,22 @@ namespace ProniaBackEnd.Controllers.manage
         }
 
         [HttpPost("~/admin/sliders/create")]
-        public IActionResult Create(string title, string image, string description, string offer, string buttonUrl, byte order, bool offering)
+        public IActionResult Create(Slider slider)
         {
             if (!ModelState.IsValid)
             {
                 return View("~/Views/admin/slider/create.cshtml");
             }
 
-            Slider slider = new Slider(title, description, image, buttonUrl, order);
 
-            if (offer != null)
+            if (slider.OfferText != null)
             {
-                slider.OfferText = offer.Trim();
                 slider.Offering = true;
             }
 
-            _slidederRepository.Add(slider);
+            _appDbContext.Sliders.Add(slider);
+            _appDbContext.SaveChanges();
+
             return RedirectToAction(nameof(Index));
 
         }
@@ -51,46 +51,42 @@ namespace ProniaBackEnd.Controllers.manage
         [HttpGet("~/admin/sliders/delete/{id}")]
         public IActionResult Delete(int id)
         {
-            Slider slider = _slidederRepository.GetBy(x => x.Id == id);
+            Slider slider = _appDbContext.Sliders.FirstOrDefault(x=>x.Id == id);
             if (slider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-            _slidederRepository.Delete(slider);
+            _appDbContext.Remove(slider);
+            _appDbContext.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet("~/admin/sliders/update/{id}")]
         public IActionResult Update(int id)
         {
-            Slider slider = _slidederRepository.GetBy(x => x.Id == id);
+            Slider slider = _appDbContext.Sliders.FirstOrDefault(x => x.Id == id);
             if (slider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             return View("~/Views/admin/slider/update.cshtml", slider);
 
         }
         [HttpPost("~/admin/sliders/update/{id}")]
-        public IActionResult Update(int id, string title, string image, string description, string offer, string buttonUrl, byte order, bool offering)
+        public IActionResult Update(Slider slider)
         {
-            Slider exSlider = _slidederRepository.GetBy(x => x.Id == id);
+            Slider exSlider = _appDbContext.Sliders.FirstOrDefault(x => x.Id == slider.Id);
             if (exSlider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             if (!ModelState.IsValid) { return View("~/Views/admin/slider/update.cshtml", exSlider); }
 
-            exSlider.Title = title;
-            exSlider.Order = order;
-            exSlider.Image = image;
-            exSlider.Description = description;
-            exSlider.ButtonUrl = buttonUrl;
+            exSlider.Title = slider.Title;
+            exSlider.Order = slider.Order;
+            exSlider.Image = slider.Image;
+            exSlider.Description = slider.Description;
+            exSlider.ButtonUrl = slider.ButtonUrl;
 
-            if (offer != null)
-            {
-                exSlider.OfferText = offer.Trim();
-                exSlider.Offering = true;
-            }
-            else
-            {
-                exSlider.Offering = false;
-                exSlider.OfferText = string.Empty;
-            }
+            slider.Offering = slider.OfferText.Trim().Length == 0 ? true : false;
+
+            _appDbContext.SaveChanges();
+
 
             return RedirectToAction(nameof(Index));
         }

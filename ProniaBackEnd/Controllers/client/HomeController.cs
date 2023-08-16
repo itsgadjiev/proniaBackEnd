@@ -1,23 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProniaBackEnd.Database.Repositories;
+using ProniaBackEnd.Constants;
+using ProniaBackEnd.Database;
+using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.ViewModels;
 
 namespace ProniaBackEnd.Controllers.client
 {
     public class HomeController : Controller
     {
-        public SliderRepository _sliderRepository = new SliderRepository();
-        public ProductsRepository _productsRepository = new ProductsRepository();
+        private readonly AppDbContext _appDbContext;
+
+        public HomeController()
+        {
+            _appDbContext = new AppDbContext();
+        }
         public IActionResult Index()
         {
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                Products = _productsRepository.GetAll().ToList(),
-                Sliders = _sliderRepository.GetAll().OrderBy(x => x.Order).ToList(),
-                NewProducts = _productsRepository.GetAll().OrderByDescending(x => x.CreationDate).Take(4).ToList(),
+                Products = _appDbContext.Products.ToList(),
+                Sliders = _appDbContext.Sliders.OrderBy(x => x.Order).ToList(),
+                NewProducts = _appDbContext.Products.OrderByDescending(x => x.CreationDate).Take(4).ToList(),
             };
 
-            return View("~/Views/client/home/index.cshtml",homeViewModel);
+            return View("~/Views/client/home/index.cshtml", homeViewModel);
+        }
+
+        ~HomeController()
+        {
+
         }
     }
 }

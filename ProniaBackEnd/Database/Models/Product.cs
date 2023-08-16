@@ -1,34 +1,34 @@
-﻿using ProniaBackEnd.Database.Base;
+﻿using Microsoft.Build.Framework;
+using ProniaBackEnd.Database.Base;
 
 namespace ProniaBackEnd.Database.Models
 {
     public class Product : BaseEntity
     {
-        public static int _idCounter = 1;
+        [Required]
         public string ProductName{ get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public string Image { get; set; }
+        [Required]
         public string Color { get; set; }
+        [Required]
         public string Size { get; set; }
+        [Required]
         public double Price { get; set; }
+        [Required]
         public byte Order { get; set; }
+        [Required]
         public DateTime CreationDate { get; set; }
+
         public DateTime LastModifiedDate { get; set; }
         public bool IsModified { get; set; }
 
-        public Product(string productName,string description,string image,string color , string size , double price ,byte order)
+       
+        public Product()
         {
-            Id = _idCounter++;
-            ProductName = productName;
-            Description = description;
-            Image = image;
-            Color = color;
-            Size = size;
-            Price = price;
-            Order = order;
-            CreationDate = DateTime.Now;
-            IsModified = false;
-            LastModifiedDate = default;
+            CreationDate = DateTime.UtcNow;
         }
     }
 }
