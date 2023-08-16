@@ -73,7 +73,6 @@ namespace ProniaBackEnd.Controllers.manage
             return RedirectToAction(nameof(Index));
         }
 
-
         [HttpGet("admin/Products/delete/{id}")]
         public IActionResult Delete(int id)
         {
@@ -83,7 +82,5 @@ namespace ProniaBackEnd.Controllers.manage
             _appDbContext.Products.Remove(product);
             return RedirectToAction(nameof(Index));
         }
-
-       
     }
 }

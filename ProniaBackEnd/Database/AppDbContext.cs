@@ -16,6 +16,7 @@ namespace ProniaBackEnd.Database
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
     }
 }
