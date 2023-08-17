@@ -8,7 +8,6 @@ namespace ProniaBackEnd.ViewModels.admin.products
         public string ProductName { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
         public string Image { get; set; }
         [Required]
         public string Color { get; set; }
@@ -24,6 +23,8 @@ namespace ProniaBackEnd.ViewModels.admin.products
         public bool IsModified { get; set; }
         public int CategoryId { get; set; }
         public List<Category> Categories { get; set; }
+        [Required]
+        public IFormFile ImageFormFile{ get; set; }
 
     }
 }

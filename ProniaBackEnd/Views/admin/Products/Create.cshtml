@@ -5,7 +5,7 @@
     ViewData["Title"] = "Create";
 }
 
-<form method="post" >
+<form method="post" asp-action="create" asp-controller="products" enctype="multipart/form-data" >
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
             <div class="col-sm-12 @*col-xl-6*@">
@@ -16,12 +16,13 @@
                         <label for="floatingInput">Product Name</label>
                         <span class="text-danger" ></span>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingInput" asp-for="@Model.Image"
-                               placeholder="Image" name="image">
-                        <label for="floatingInput">Image</label>
-                        <span class="text-danger"></span>
+                    <div class="mb-3">
+                        <label  class="form-label">Default file input example</label>
+                        @*<input class="form-control bg-dark"  asp-for="@Model.ImageFormFile">*@
+                        <span asp-validation-for="@Model.ImageFormFile" class="text-danger"></span>
+                       <input asp-for="@Model.ImageFormFile"></input>
                     </div>
+                  
                     <div class="form-floating mb-3">
                         <input class="form-control" id="floatingInput"
                                placeholder="Description" name="description" asp-for="@Model.Description">

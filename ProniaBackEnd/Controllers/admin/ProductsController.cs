@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
+using ProniaBackEnd.Estensions;
 using ProniaBackEnd.ViewModels.admin.products;
 
 namespace ProniaBackEnd.Controllers.manage
@@ -36,6 +37,7 @@ namespace ProniaBackEnd.Controllers.manage
         [HttpPost("admin/products/create")]
         public IActionResult Create(ProductAddViewModel productAddVM)
         {
+            Console.WriteLine("Slaam");
             productAddVM.Categories = _appDbContext.Categories.ToList();
 
             if (!ModelState.IsValid)
@@ -43,6 +45,8 @@ namespace ProniaBackEnd.Controllers.manage
                 return View("~/Views/admin/Products/create.cshtml", productAddVM);
             }
 
+            string fileName = FileUploadExtension.SaveFile(productAddVM.ImageFormFile, "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\assets\\uploaded\\");
+         
             Product product = new Product()
             {
                 ProductName = productAddVM.ProductName,
@@ -52,10 +56,12 @@ namespace ProniaBackEnd.Controllers.manage
                 Color = productAddVM.Color,
                 IsModified = productAddVM.IsModified,
                 Order = productAddVM.Order,
-                Image = productAddVM.Image,
+                Image = fileName,
                 LastModifiedDate = productAddVM.LastModifiedDate,
                 Price = productAddVM.Price,
                 Size = productAddVM.Size,
+
+
             };
 
             _appDbContext.Products.Add(product);
