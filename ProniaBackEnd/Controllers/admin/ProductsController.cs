@@ -2,6 +2,7 @@
 using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
+using ProniaBackEnd.ViewModels.admin;
 
 namespace ProniaBackEnd.Controllers.manage
 {
@@ -25,14 +26,23 @@ namespace ProniaBackEnd.Controllers.manage
         [HttpGet("admin/products/create")]
         public IActionResult Create()
         {
-            return View("~/Views/admin/products/create.cshtml");
+            ProductAddViewModel viewModel = new ProductAddViewModel();
+            viewModel.Categories = _appDbContext.Categories.ToList();
+            return View("~/Views/admin/products/create.cshtml", viewModel);
         }
 
         [HttpPost("admin/products/create")]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductAddViewModel productAddVM)
         {
-            if (!ModelState.IsValid) { return View("~/Views/admin/Products/create.cshtml"); }
-         
+            if (!ModelState.IsValid)
+            {
+                productAddVM.Categories = _appDbContext.Categories.ToList();
+                return View("~/Views/admin/Products/create.cshtml", productAddVM);
+            }
+
+            Product product = productAddVM.Product;
+            productAddVM.Categories = _appDbContext.Categories.ToList();
+
             _appDbContext.Products.Add(product);
             _appDbContext.SaveChanges();
 
@@ -42,7 +52,7 @@ namespace ProniaBackEnd.Controllers.manage
         [HttpGet("admin/Products/update/{id}")]
         public IActionResult Update(int id)
         {
-            Product product = _appDbContext.Products.FirstOrDefault(x=>x.Id == id);
+            Product product = _appDbContext.Products.FirstOrDefault(x => x.Id == id);
             if (product is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             return View("~/Views/admin/Products/update.cshtml", product);
@@ -51,7 +61,7 @@ namespace ProniaBackEnd.Controllers.manage
         [HttpPost("admin/Products/update/{id}")]
         public IActionResult Update(Product product)
         {
-            Product exProduct = _appDbContext.Products.FirstOrDefault(x=>x.Id == product.Id);
+            Product exProduct = _appDbContext.Products.FirstOrDefault(x => x.Id == product.Id);
             if (exProduct is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             if (!ModelState.IsValid)

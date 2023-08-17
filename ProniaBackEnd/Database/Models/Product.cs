@@ -24,8 +24,10 @@ namespace ProniaBackEnd.Database.Models
 
         public DateTime LastModifiedDate { get; set; }
         public bool IsModified { get; set; }
+        [Required]
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
 
-       
         public Product()
         {
             CreationDate = DateTime.UtcNow;
