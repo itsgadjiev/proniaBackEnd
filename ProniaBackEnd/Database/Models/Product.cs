@@ -5,6 +5,11 @@ namespace ProniaBackEnd.Database.Models
 {
     public class Product : BaseEntity
     {
+        public Product()
+        {
+         
+        }
+
         [Required]
         public string ProductName{ get; set; }
         [Required]
@@ -21,16 +26,13 @@ namespace ProniaBackEnd.Database.Models
         public byte Order { get; set; }
         [Required]
         public DateTime CreationDate { get; set; }
-
         public DateTime LastModifiedDate { get; set; }
         public bool IsModified { get; set; }
-        [Required]
+
         public Category Category { get; set; }
+        [Required]
         public int CategoryId { get; set; }
 
-        public Product()
-        {
-            CreationDate = DateTime.UtcNow;
-        }
+       
     }
 }
