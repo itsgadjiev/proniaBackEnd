@@ -4,17 +4,21 @@ using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Estensions;
+using ProniaBackEnd.Mapper;
 using ProniaBackEnd.ViewModels.admin.products;
+using System.Reflection;
 
 namespace ProniaBackEnd.Controllers.manage
 {
     public class ProductsController : Controller
     {
         private readonly AppDbContext _appDbContext;
+        private readonly IWebHostEnvironment _env;
 
-        public ProductsController()
+        public ProductsController(AppDbContext appDbContext, IWebHostEnvironment env)
         {
-            _appDbContext = new AppDbContext();
+            _appDbContext = appDbContext;
+            _env = env;
         }
 
 
@@ -37,7 +41,6 @@ namespace ProniaBackEnd.Controllers.manage
         [HttpPost("admin/products/create")]
         public IActionResult Create(ProductAddViewModel productAddVM)
         {
-            Console.WriteLine("Slaam");
             productAddVM.Categories = _appDbContext.Categories.ToList();
 
             if (!ModelState.IsValid)
@@ -45,8 +48,6 @@ namespace ProniaBackEnd.Controllers.manage
                 return View("~/Views/admin/Products/create.cshtml", productAddVM);
             }
 
-            string fileName = FileUploadExtension.SaveFile(productAddVM.ImageFormFile, "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\assets\\uploaded\\");
-         
             Product product = new Product()
             {
                 ProductName = productAddVM.ProductName,
@@ -56,7 +57,7 @@ namespace ProniaBackEnd.Controllers.manage
                 Color = productAddVM.Color,
                 IsModified = productAddVM.IsModified,
                 Order = productAddVM.Order,
-                Image = fileName,
+                Image = productAddVM.ImageFormFile.SaveFile(_env.WebRootPath, "uploads/images"),
                 LastModifiedDate = productAddVM.LastModifiedDate,
                 Price = productAddVM.Price,
                 Size = productAddVM.Size,
@@ -78,22 +79,10 @@ namespace ProniaBackEnd.Controllers.manage
             Product product = _appDbContext.Products.FirstOrDefault(x => x.Id == id);
             if (product is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-            ProductUpdateViewModel productUpdateViewModel = new ProductUpdateViewModel
-            {
-                Categories = _appDbContext.Categories.ToList(),
-                ProductName = product.ProductName,
-                Price = product.Price,
-                Color = product.Color,
-                Description = product.Description,
-                CreationDate = product.CreationDate,
-                Order = product.Order,
-                Image = product.Image,
-                Size = product.Size,
-                CategoryId = product.CategoryId,
-                IsModified = product.IsModified,
+            ProductUpdateViewModel productUpdateViewModel = UpdateMapper<Product, ProductUpdateViewModel>.Handle(product);
 
-            };
-
+            productUpdateViewModel.Categories = _appDbContext.Categories.ToList();
+            productUpdateViewModel.Image = product.Image;
 
             return View("~/Views/admin/Products/update.cshtml", productUpdateViewModel);
 
@@ -106,14 +95,21 @@ namespace ProniaBackEnd.Controllers.manage
 
             if (!ModelState.IsValid)
             {
+                productUpdateViewModel.Image = exProduct.Image;
+                productUpdateViewModel.Categories = _appDbContext.Categories.ToList();
                 return View("~/Views/admin/Products/update.cshtml", productUpdateViewModel);
+            }
+
+            if (productUpdateViewModel.ImageFile != null)
+            {
+                FileService.RemoveFile(_env.WebRootPath, "uploads/images", exProduct.Image);
+                exProduct.Image = productUpdateViewModel.ImageFile.SaveFile(_env.WebRootPath, "uploads/images");
             }
 
             exProduct.LastModifiedDate = DateTime.UtcNow;
             exProduct.Price = productUpdateViewModel.Price;
             exProduct.Order = productUpdateViewModel.Order;
             exProduct.ProductName = productUpdateViewModel.ProductName;
-            exProduct.Image = productUpdateViewModel.Image;
             exProduct.Description = productUpdateViewModel.Description;
             exProduct.Color = productUpdateViewModel.Color;
             exProduct.Size = productUpdateViewModel.Size;
@@ -133,6 +129,8 @@ namespace ProniaBackEnd.Controllers.manage
             if (product is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             _appDbContext.Products.Remove(product);
+            FileService.RemoveFile(_env.WebRootPath, "uploads/images", product.Image);
+
             _appDbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

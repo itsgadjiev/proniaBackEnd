@@ -4,76 +4,68 @@
     int counter = 0;
 }
 
-<div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
-        <div class="col-12">
-            <div class="bg-secondary rounded h-100 p-4">
-                <h6 class="mb-4">Products</h6>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
+<div class="col-12 " style="margin-top:30px;">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Id</th>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Image </th>
-                                <th scope="col">Price </th>
-                                <th scope="col">Size </th>
-                                <th scope="col">Color </th>
-                                <th scope="col">Creation Date </th>
-                                <th scope="col">Is Modified </th>
 
+                                <td style="width:350px;">
+                                    <img src="~/uploads/images/@item.Image" alt="product image" height="50">
+                                    <p class="d-inline-block align-middle mb-0">
+                                        <a href="" class="d-inline-block align-middle mb-0 product-name">@item.ProductName</a>
+                                        <br>
+                                        <span class="badge badge-soft-@(item.IsModified ? "danger" : "blue")">@(item.IsModified ? "Modified" : "Not Modified")</span>
+                                    </p>
+                                </td>
+                                <td>@item.CategoryId</td>
+                                <td>@item.Price</td>
+                                <td>
+                                    <a asp-action="update" asp-controller="products" asp-route-id="@item.Id" class="mr-2"> <i class="las la-pen text-secondary font-16"></i></a>
+                                    <a asp-action="delete" asp-controller="products" asp-route-id="@item.Id"><i class="las la-trash-alt text-secondary font-16"></i></a>
 
-                                <th scope="col">
-                                    Actions
-                                    <a class="btn btn-info" asp-action="create" asp-controller="Products">Create</a>
-                                </th>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                           
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <th scope="row">@(++counter)</th>
-                                    <td>
-                                        @item.Id
-                                    </td>
-                                     <td>
-                                        @item.ProductName
-                                    </td>
-                                    <td>
-                                        @item.Description
-                                    </td>
-                                    <td>
-                                        @item.Image
-                                    </td>
-                                    <td>
-                                        @item.Price
-                                    </td>
-                                    <td>
-                                        @item.Size
-                                    </td>
-                                    <td>
-                                        @item.Color
-                                    </td>
-                                    <td>
-                                        @item.CreationDate
-                                    </td>
-                                    <td>
-                                        @(item.IsModified ? @item.LastModifiedDate.ToString("f") :"Not Modified")
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-outline-info" asp-action="update" asp-controller="Products" asp-route-id="@item.Id">Update</a>
-                                        <a class="btn btn-danger" asp-action="Delete" asp-controller="Products" asp-route-id="@item.Id">Delete</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                        }
+
+
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div>
-</div>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-outline-light btn-sm px-4 " asp-action="Create" asp-controller="products">+ Add New</a>
+                </div><!--end col-->
+                <div class="col-auto">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul><!--end pagination-->
+                    </nav><!--end nav-->
+                </div> <!--end col-->
+            </div><!--end row-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div> <!-- end col -->

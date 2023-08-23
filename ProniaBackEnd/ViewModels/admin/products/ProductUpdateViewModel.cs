@@ -9,7 +9,6 @@ namespace ProniaBackEnd.ViewModels.admin.products
         public string ProductName { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
         public string Image { get; set; }
         [Required]
         public string Color { get; set; }
@@ -19,7 +18,7 @@ namespace ProniaBackEnd.ViewModels.admin.products
         public double Price { get; set; }
         [Required]
         public byte Order { get; set; }
-        [Required]
+        public IFormFile ImageFile { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
         public bool IsModified { get; set; }

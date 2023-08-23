@@ -1,3 +1,5 @@
+using ProniaBackEnd.Database;
+
 namespace ProniaBackEnd
 {
     public class Program
@@ -8,6 +10,9 @@ namespace ProniaBackEnd
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services
+                .AddDbContext<AppDbContext>();
 
             var app = builder.Build();
 

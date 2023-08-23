@@ -1,81 +1,119 @@
-﻿@using ProniaBackEnd.ViewModels.admin;
+﻿
 @using ProniaBackEnd.ViewModels.admin.products;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
 
-@model ProductUpdateViewModel;
+@model ProductUpdateViewModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update Product";
 }
 
-<form method="post">
-    <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-            <div class="col-sm-12 @*col-xl-6*@">
-                <div class="bg-secondary rounded h-100 p-4">
-                    <h6 class="mb-4">Product</h6>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingInput" placeholder="Product Name" asp-for="@Model.ProductName" >
-                        <label for="floatingInput">Product Name</label>
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingInput" asp-for="@Model.Image"
-                               placeholder="Image" name="image">
-                        <label for="floatingInput">Image</label>
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingInput"
-                               placeholder="Description" name="description" asp-for="@Model.Description">
-                        <label for="floatingInput">Description</label>
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingInput"
-                               placeholder="Color" name="color" asp-for="@Model.Color">
-                        <label for="floatingInput">Color</label>
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingInput"
-                               placeholder="Category" name="size" asp-for="@Model.Size ">
-                        <label for="floatingInput">Size</label>
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingInput"
-                               placeholder="price" name="price" asp-for="@Model.Price">
-                        <label for="floatingInput">Price</label>
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingInput"
-                               placeholder="price" name="order" asp-for="@Model.Order">
-                        <label for="floatingInput">Order</label>
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelect"
-                                    aria-label="Floating label select example" asp-for="CategoryId">
-                                <option selected>Open this select menu</option>
-                                @foreach (var item in Model.Categories)
-                                {
-                                    <option value="@item.Id">@item.Name</option>
-                                }
-                            </select>
-                            <label for="floatingSelect">Category</label>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-end">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="product" asp-action="index">Products</a></li>
+                    <li class="breadcrumb-item active">Update Product</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Update Product</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form enctype="multipart/form-data" method="POST" asp-controller="products" asp-action="update" id="submit-form">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="ProductName"></label>
+                                <input class="form-control" asp-for="ProductName">
+                                <span asp-validation-for="ProductName" class="invalid-feedback" style="display:block"></span>
+                            </div>
                         </div>
-                        <span class="text-danger"></span>
+                      
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Description"></label>
+                                <input class="form-control" asp-for="Description" placeholder="Description">
+                                <span asp-validation-for="Description" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Order"></label>
+                                <input class="form-control" asp-for="Order" placeholder="Order">
+                                <span asp-validation-for="Order" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Size"></label>
+                                <input class="form-control" asp-for="Size" placeholder="Size">
+                                <span asp-validation-for="Size" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Price"></label>
+                                <input class="form-control" asp-for="Price" placeholder="Price">
+                                <span asp-validation-for="Price" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Color"></label>
+                                <input class="form-control" asp-for="Color" placeholder="Color">
+                                <span asp-validation-for="Color" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label>Category</label>
+                                <select class="form-select" asp-for="CategoryId">
+                                    <option disabled>Select the category</option>
+                                    @foreach (var item in Model.Categories)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="CategoryId" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="ImageFile"></label>
+                                <input class="form-control" type="file" asp-for="ImageFile"  >
+                                <span asp-validation-for="ImageFile" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <h4>Previous Photo</h4>
+                                <img style="max-width:200px; max-height:200px;" src="~/uploads/images/@Model.Image" />
+                            </div>
+                        </div>
+                      
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-                    <div class="text-center">
-
-                        <button type="submit" class="btn btn-primary p-2">Create</button>
-                    </div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group mt-3">
+                    <button class="btn btn-primary" type="submit" form="submit-form">Save</button>
+                    <a asp-controller="products" asp-action="index" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
         </div>
     </div>
-</form>
+</div>
