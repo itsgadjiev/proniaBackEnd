@@ -10,10 +10,11 @@ namespace ProniaBackEnd.Controllers.client
     {
         private readonly AppDbContext _appDbContext;
 
-        public HomeController()
+        public HomeController(AppDbContext appDbContext)
         {
-            _appDbContext = new AppDbContext();
+            _appDbContext = appDbContext;
         }
+        
         public IActionResult Index()
         {
             HomeViewModel homeViewModel = new HomeViewModel()

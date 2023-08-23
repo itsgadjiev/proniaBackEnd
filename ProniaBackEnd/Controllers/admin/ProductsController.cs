@@ -102,9 +102,11 @@ namespace ProniaBackEnd.Controllers.manage
 
             if (productUpdateViewModel.ImageFile != null)
             {
-                FileService.RemoveFile(_env.WebRootPath, "uploads/images", exProduct.Image);
+                productUpdateViewModel.ImageFile.RemoveFile(_env.WebRootPath, "uploads/images", exProduct.Image);
                 exProduct.Image = productUpdateViewModel.ImageFile.SaveFile(_env.WebRootPath, "uploads/images");
             }
+          
+
 
             exProduct.LastModifiedDate = DateTime.UtcNow;
             exProduct.Price = productUpdateViewModel.Price;
@@ -127,7 +129,7 @@ namespace ProniaBackEnd.Controllers.manage
         {
             Product product = _appDbContext.Products.FirstOrDefault(x => x.Id == id);
             if (product is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
-
+          
             _appDbContext.Products.Remove(product);
             FileService.RemoveFile(_env.WebRootPath, "uploads/images", product.Image);
 

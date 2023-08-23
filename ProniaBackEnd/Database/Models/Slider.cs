@@ -15,6 +15,10 @@ namespace ProniaBackEnd.Database.Models
             ButtonUrl = buttonUrl;
             Order = order;
         }
+        public Slider()
+        {
+
+        }
 
         public string Title { get; set; }
         public string Description { get; set; }

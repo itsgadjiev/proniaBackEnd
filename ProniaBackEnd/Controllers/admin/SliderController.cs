@@ -9,9 +9,9 @@ namespace ProniaBackEnd.Controllers.manage
     {
         private readonly AppDbContext _appDbContext;
 
-        public SliderController()
+        public SliderController(AppDbContext appDbContext)
         {
-            _appDbContext = new AppDbContext();
+            _appDbContext = appDbContext;
         }
 
         [HttpGet("~/admin/sliders")]
@@ -34,7 +34,6 @@ namespace ProniaBackEnd.Controllers.manage
             {
                 return View("~/Views/admin/slider/create.cshtml");
             }
-
 
             if (slider.OfferText != null)
             {

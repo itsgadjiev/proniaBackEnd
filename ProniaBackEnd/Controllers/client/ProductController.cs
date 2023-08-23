@@ -9,9 +9,9 @@ namespace ProniaBackEnd.Controllers.client
     {
         private readonly AppDbContext _appDbContext;
 
-        public ProductController()
+        public ProductController(AppDbContext appDbContext)
         {
-            _appDbContext = new AppDbContext();
+            _appDbContext = appDbContext;
         }
 
         [HttpGet("client/product/detail/{id}")]

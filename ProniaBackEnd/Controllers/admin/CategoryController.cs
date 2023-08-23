@@ -12,9 +12,9 @@ namespace ProniaBackEnd.Controllers.manage
     {
         private readonly AppDbContext _appDbContext;
 
-        public CategoriesController()
+        public CategoriesController(AppDbContext appDbContext)
         {
-            _appDbContext = new AppDbContext();
+            _appDbContext = appDbContext;
         }
 
         [HttpGet("")]

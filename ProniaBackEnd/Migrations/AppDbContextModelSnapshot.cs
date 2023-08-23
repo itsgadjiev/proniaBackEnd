@@ -31,7 +31,6 @@ namespace ProniaBackEnd.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -51,18 +50,15 @@ namespace ProniaBackEnd.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Color")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsModified")
@@ -78,11 +74,9 @@ namespace ProniaBackEnd.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Size")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -101,19 +95,15 @@ namespace ProniaBackEnd.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ButtonUrl")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("OfferText")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("Offering")
@@ -123,7 +113,6 @@ namespace ProniaBackEnd.Migrations
                         .HasColumnType("smallint");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

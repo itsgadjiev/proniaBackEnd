@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using ProniaBackEnd.Database;
 
 namespace ProniaBackEnd
@@ -12,7 +14,11 @@ namespace ProniaBackEnd
             builder.Services.AddControllersWithViews();
 
             builder.Services
-                .AddDbContext<AppDbContext>();
+                .AddDbContext<AppDbContext>(opt =>
+                {
+                    opt.UseNpgsql("Server=localhost;Port=5432;Database=ProniaDB;User Id=postgres;Password=admin;");
+
+                });
 
             var app = builder.Build();
 

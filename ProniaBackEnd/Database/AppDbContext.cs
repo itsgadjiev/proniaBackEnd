@@ -6,11 +6,9 @@ namespace ProniaBackEnd.Database
 {
     public class AppDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            :base(options)
         {
-            optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=ProniaDB;User Id=postgres;Password=admin;");
-
-            base.OnConfiguring(optionsBuilder);
 
         }
 
