@@ -16,7 +16,7 @@ namespace ProniaBackEnd
             builder.Services
                 .AddDbContext<AppDbContext>(opt =>
                 {
-                    opt.UseNpgsql("Server=localhost;Port=5432;Database=ProniaDB;User Id=postgres;Password=admin;");
+                    opt.UseNpgsql("Server=localhost;Port=5432;Database=ProniaDB1;User Id=postgres;Password=admin;");
 
                 });
 

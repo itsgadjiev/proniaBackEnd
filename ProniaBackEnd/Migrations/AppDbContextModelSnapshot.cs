@@ -46,9 +46,6 @@ namespace ProniaBackEnd.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Color")
                         .HasColumnType("text");
 
@@ -81,9 +78,23 @@ namespace ProniaBackEnd.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.ProductCategory", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ProductId", "CategoryId")
+                        .HasName("ProductCategories");
+
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("ProductCategory");
                 });
 
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Slider", b =>
@@ -120,20 +131,33 @@ namespace ProniaBackEnd.Migrations
                     b.ToTable("Sliders");
                 });
 
-            modelBuilder.Entity("ProniaBackEnd.Database.Models.Product", b =>
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.ProductCategory", b =>
                 {
                     b.HasOne("ProniaBackEnd.Database.Models.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany("ProductCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ProniaBackEnd.Database.Models.Product", "Product")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("ProductCategories");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Product", b =>
+                {
+                    b.Navigation("ProductCategories");
                 });
 #pragma warning restore 612, 618
         }

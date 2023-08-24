@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
@@ -6,7 +6,6 @@ using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Estensions;
 using ProniaBackEnd.Mapper;
 using ProniaBackEnd.ViewModels.admin.products;
-using System.Reflection;
 
 namespace ProniaBackEnd.Controllers.manage
 {
@@ -25,8 +24,18 @@ namespace ProniaBackEnd.Controllers.manage
         [HttpGet("admin/products")]
         public IActionResult Index()
         {
-            List<Product> products = _appDbContext.Products.ToList();
-            return View("~/Views/admin/products/index.cshtml", products);
+            List<ProductListViewModel> productListViewModels = _appDbContext.Products.Select(x => new ProductListViewModel
+            {
+                Categories = _appDbContext.ProductCategory.Where(pc => pc.ProductId == x.Id).Select(pc=>pc.Category).ToList(),
+                ProductName = x.ProductName,
+                Description = x.Description,
+                Id = x.Id,
+                Image = x.Image,
+                Price=x.Price,
+                IsModified = x.IsModified
+
+            }).ToList();
+            return View("~/Views/admin/products/index.cshtml", productListViewModels);
         }
 
         #region Crate
@@ -53,7 +62,6 @@ namespace ProniaBackEnd.Controllers.manage
                 ProductName = productAddVM.ProductName,
                 Description = productAddVM.Description,
                 CreationDate = DateTime.UtcNow,
-                CategoryId = productAddVM.CategoryId,
                 Color = productAddVM.Color,
                 IsModified = productAddVM.IsModified,
                 Order = productAddVM.Order,
@@ -61,11 +69,29 @@ namespace ProniaBackEnd.Controllers.manage
                 LastModifiedDate = productAddVM.LastModifiedDate,
                 Price = productAddVM.Price,
                 Size = productAddVM.Size,
-
-
             };
-
             _appDbContext.Products.Add(product);
+
+
+            foreach (var catId in productAddVM.CategoryIds)
+            {
+                var category = _appDbContext.Categories.FirstOrDefault(x => x.Id == catId);
+
+                if (category is null)
+                {
+                    ModelState.AddModelError("CategoryIds", "Category not found");
+                    return View("~/Views/admin/Products/create.cshtml", productAddVM);
+                }
+
+                ProductCategory productCategory = new ProductCategory()
+                {
+                    CategoryId = catId,
+                    Product = product
+                };
+
+                _appDbContext.ProductCategory.Add(productCategory);
+            }
+
             _appDbContext.SaveChanges();
 
             return RedirectToAction(nameof(Index));
@@ -82,11 +108,13 @@ namespace ProniaBackEnd.Controllers.manage
             ProductUpdateViewModel productUpdateViewModel = UpdateMapper<Product, ProductUpdateViewModel>.Handle(product);
 
             productUpdateViewModel.Categories = _appDbContext.Categories.ToList();
+            productUpdateViewModel.CategoryIds = _appDbContext.ProductCategory.Where(x => x.ProductId == product.Id).Select(x => x.CategoryId).ToArray();
             productUpdateViewModel.Image = product.Image;
 
             return View("~/Views/admin/Products/update.cshtml", productUpdateViewModel);
 
         }
+
         [HttpPost("admin/Products/update/{id}")]
         public IActionResult Update(ProductUpdateViewModel productUpdateViewModel)
         {
@@ -97,6 +125,7 @@ namespace ProniaBackEnd.Controllers.manage
             {
                 productUpdateViewModel.Image = exProduct.Image;
                 productUpdateViewModel.Categories = _appDbContext.Categories.ToList();
+                productUpdateViewModel.CategoryIds = _appDbContext.ProductCategory.Where(x => x.ProductId == exProduct.Id).Select(x => x.CategoryId).ToArray();
                 return View("~/Views/admin/Products/update.cshtml", productUpdateViewModel);
             }
 
@@ -105,8 +134,19 @@ namespace ProniaBackEnd.Controllers.manage
                 productUpdateViewModel.ImageFile.RemoveFile(_env.WebRootPath, "uploads/images", exProduct.Image);
                 exProduct.Image = productUpdateViewModel.ImageFile.SaveFile(_env.WebRootPath, "uploads/images");
             }
-          
 
+            if (productUpdateViewModel.CategoryIds != null)
+            {
+                var removeCats = _appDbContext.ProductCategory.Where(x => x.ProductId == exProduct.Id).ToList();
+                _appDbContext.RemoveRange(removeCats);
+
+                var addedCats = productUpdateViewModel.CategoryIds.Select(x => new ProductCategory
+                {
+                    CategoryId = x,
+                    ProductId = exProduct.Id,
+                });
+                _appDbContext.AddRange(addedCats);
+            }
 
             exProduct.LastModifiedDate = DateTime.UtcNow;
             exProduct.Price = productUpdateViewModel.Price;
@@ -129,7 +169,7 @@ namespace ProniaBackEnd.Controllers.manage
         {
             Product product = _appDbContext.Products.FirstOrDefault(x => x.Id == id);
             if (product is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
-          
+
             _appDbContext.Products.Remove(product);
             FileService.RemoveFile(_env.WebRootPath, "uploads/images", product.Image);
 

@@ -29,10 +29,8 @@ namespace ProniaBackEnd.Database.Models
         public DateTime LastModifiedDate { get; set; }
         public bool IsModified { get; set; }
 
-        public Category Category { get; set; }
-        [Required]
-        public int CategoryId { get; set; }
+        public List<ProductCategory> ProductCategories { get; set; }
 
-       
+
     }
 }

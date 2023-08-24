@@ -1,4 +1,5 @@
-﻿@model List<Product>
+﻿@using ProniaBackEnd.ViewModels.admin.products
+@model List<ProductListViewModel>
 @{
     ViewData["Title"] = "Index";
     int counter = 0;
@@ -12,8 +13,8 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Category</th>
                             <th>Price</th>
+                            <th>Categories</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -30,8 +31,14 @@
                                         <span class="badge badge-soft-@(item.IsModified ? "danger" : "blue")">@(item.IsModified ? "Modified" : "Not Modified")</span>
                                     </p>
                                 </td>
-                                <td>@item.CategoryId</td>
+                                @*  <td>@item.CategoryId</td>*@
                                 <td>@item.Price</td>
+                                <td>
+                                    @foreach (var cat in item.Categories)
+                                    {
+                                        @($"{cat.Name} ");
+                                    }
+                                </td>
                                 <td>
                                     <a asp-action="update" asp-controller="products" asp-route-id="@item.Id" class="mr-2"> <i class="las la-pen text-secondary font-16"></i></a>
                                     <a asp-action="delete" asp-controller="products" asp-route-id="@item.Id"><i class="las la-trash-alt text-secondary font-16"></i></a>

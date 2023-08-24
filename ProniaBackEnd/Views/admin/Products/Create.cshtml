@@ -1,6 +1,10 @@
 ﻿@using ProniaBackEnd.ViewModels.admin.products
 @model ProductAddViewModel
 
+@section plugin_styles{
+    <link href="~/admin/assets/plugins/select/selectr.min.css" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
 <div class="row">
     <div class="col-sm-12">
         <div class="page-title-box">
@@ -74,14 +78,14 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label>Category</label>
-                                <select class="form-select" asp-for="CategoryId">
+                                    <select class="form-select" asp-for="CategoryIds" id="categories-multiselect">
                                     <option disabled>Select the category</option>
                                     @foreach (var category in Model.Categories)
                                     {
                                         <option value="@category.Id">@category.Name</option>
                                     }
                                 </select>
-                                <span asp-validation-for="CategoryId" class="invalid-feedback" style="display:block"></span>
+                                <span asp-validation-for="CategoryIds" class="invalid-feedback" style="display:block"></span>
                             </div>
                         </div>
                     </div>
@@ -103,3 +107,17 @@
         </div>
     </div>
 </div>
+
+
+
+@section plugins_scripts{
+    <script src="~/admin/assets/plugins/select/selectr.min.js" asp-append-version="true"></script>
+}
+
+    @section custom_scripts{
+    <script>
+        new Selectr('#categories-multiselect', {
+            multiple: true
+        });
+    </script>
+}

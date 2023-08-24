@@ -1041,6 +1041,15 @@ C:\Users\Jake\Desktop\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\refint\Pronia
 C:\Users\Jake\Desktop\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.pdb
 C:\Users\Jake\Desktop\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.genruntimeconfig.cache
 C:\Users\Jake\Desktop\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ref\ProniaBackEnd.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.csproj.AssemblyReference.cache
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.AssemblyInfoInputs.cache
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.AssemblyInfo.cs
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.csproj.CoreCompileInputs.cache
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.RazorAssemblyInfo.cache
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.RazorAssemblyInfo.cs
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\appsettings.json
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\ProniaBackEnd.staticwebassets.runtime.json
@@ -1542,15 +1551,6 @@ C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.csproj.AssemblyReference.cache
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.AssemblyInfoInputs.cache
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.AssemblyInfo.cs
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.csproj.CoreCompileInputs.cache
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.RazorAssemblyInfo.cache
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.RazorAssemblyInfo.cs
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\scopedcss\Views\client\_Layout.cshtml.rz.scp.css
