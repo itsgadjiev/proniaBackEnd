@@ -1,0 +1,49 @@
+﻿@using ProniaBackEnd.ViewModels.admin.products
+@model EmailMessage
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="col-12 " style="margin-top:30px;">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Recivers</th>
+                            <th>Content</th>
+                            <th>SendDate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.Title</td>
+                            <td>
+                                @foreach (var reciever in Model.Recievers)
+                                {
+
+                                    @(reciever + "--")
+                                    ;
+
+
+                                }
+
+
+                            </td>
+                            <td>@Model.Content</td>
+                            <td>@Model.SendDate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-danger btn-sm px-4 " asp-action="index" asp-controller="email">Go back</a>
+                </div><!--end col-->
+               
+            </div><!--end row-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div> <!-- end col -->

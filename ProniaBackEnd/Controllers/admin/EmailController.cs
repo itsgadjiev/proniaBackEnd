@@ -16,7 +16,7 @@ namespace ProniaBackEnd.Controllers.admin
         private readonly AppDbContext _appDbContext;
         private readonly EmailMessageValidator _validationRules;
 
-        public EmailController(EmailSMTPService emailSMTPService,AppDbContext appDbContext , EmailMessageValidator validationRules)
+        public EmailController(EmailSMTPService emailSMTPService, AppDbContext appDbContext, EmailMessageValidator validationRules)
         {
             _emailSMTPService = emailSMTPService;
             _appDbContext = appDbContext;
@@ -64,6 +64,14 @@ namespace ProniaBackEnd.Controllers.admin
             _emailSMTPService.SendEmail(emailMessageAddViewModel.Recievers, emailMessageAddViewModel.Title, emailMessageAddViewModel.Content);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("~/admin/message/detail/{id}")]
+        public IActionResult Detail(int id)
+        {
+            EmailMessage emailMessage = _appDbContext.EmailMessage.FirstOrDefault(x => x.Id == id);
+            if (emailMessage == null) { return View(Constants.NotFoundConstants.NotFoundApPageUrl); }
+            return View("~/Views/admin/mesagges/detail.cshtml", emailMessage);
         }
     }
 }

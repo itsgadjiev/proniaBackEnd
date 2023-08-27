@@ -3,11 +3,13 @@ using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Services.Common;
 using ProniaBackEnd.ViewModels.admin.emailMesagges;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace ProniaBackEnd.Validations
 {
     public class EmailMessageValidator : AbstractValidator<EmailMessageAddViewModel>
     {
+
         public EmailMessageValidator()
         {
             RuleFor(em => em.Title).NotEmpty().WithMessage("Title cannot be empty.");
@@ -26,10 +28,11 @@ namespace ProniaBackEnd.Validations
         public bool BeValidEmailList(string emails)
         {
             var emailArray = RecieversEmailGetter.Handle(emails);
+            Regex emailRegex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
 
             foreach (var email in emailArray)
             {
-                if (!string.IsNullOrWhiteSpace(email) && !IsValidEmail(email))
+                if (!string.IsNullOrWhiteSpace(email) && !emailRegex.IsMatch(email))
                 {
                     return false;
                 }
@@ -38,10 +41,7 @@ namespace ProniaBackEnd.Validations
             return true;
         }
 
-        bool IsValidEmail(string email)
-        {
-            return new EmailAddressAttribute().IsValid(email);
-        }
+        
 
     }
 }

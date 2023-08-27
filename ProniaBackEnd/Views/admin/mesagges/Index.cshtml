@@ -29,7 +29,7 @@
                                     }</td>
                                 <td>@item.SendDate</td>
                                 <td>
-                                    <a class="btn btn-primary">Details</a>
+                                    <a class="btn btn-primary" asp-action="detail" asp-controller="email" asp-route-id="@item.Id">Details</a>
                                 </td>
                             </tr>
                         }
