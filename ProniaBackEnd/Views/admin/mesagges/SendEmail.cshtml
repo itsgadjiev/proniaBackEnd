@@ -1,0 +1,83 @@
+﻿@using ProniaBackEnd.ViewModels.admin.emailMesagges
+@using ProniaBackEnd.ViewModels.admin.products
+@model EmailMessageAddViewModel
+
+@section plugin_styles{
+    <link href="~/admin/assets/plugins/select/selectr.min.css" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Email" asp-action="index">Mesagges</a></li>
+                        <li class="breadcrumb-item active">Add Message</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Add Message</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" asp-controller="Email" asp-action="SendEmail" enctype="multipart/form-data" id="submit-form">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Title">Title </label>
+                                    <input class="form-control" asp-for="Title">
+                                    <span asp-validation-for="Title" class="invalid-feedback" style="display:block"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Content">Content</label>
+                                    <input class="form-control" asp-for="Content">
+                                    <span asp-validation-for="Content" class="invalid-feedback" style="display:block"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Recievers">Recievers</label>
+                                    <input class="form-control" asp-for="Recievers">
+                                    <span asp-validation-for="Recievers" class="invalid-feedback" style="display:block"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group mt-3 text-center">
+                        <button class="btn btn-primary" type="submit" form="submit-form">Create</button>
+                        <a asp-controller="EmailController" asp-action="index" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @section plugins_scripts{
+    <script src="~/admin/assets/plugins/select/selectr.min.js" asp-append-version="true"></script>
+}
+
+    @section custom_scripts{
+    <script>
+        new Selectr('#categories-multiselect', {
+            multiple: true
+        });
+    </script>
+}

@@ -38,6 +38,31 @@ namespace ProniaBackEnd.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.EmailMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string[]>("Recievers")
+                        .HasColumnType("text[]");
+
+                    b.Property<DateTime>("SendDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmailMessage");
+                });
+
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Product", b =>
                 {
                     b.Property<int>("Id")

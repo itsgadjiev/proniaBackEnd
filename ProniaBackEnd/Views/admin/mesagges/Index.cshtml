@@ -1,4 +1,5 @@
 ﻿@using ProniaBackEnd.ViewModels.admin.products
+@model List<EmailMessage>
 @{
     ViewData["Title"] = "Index";
     int counter = 0;
@@ -11,35 +12,34 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Categories</th>
-                            <th>Categories</th>
+                            <th>Title</th>
+                            <th>Recivers</th>
+                            <th>SendDate</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                       @* @foreach (var item in Model)
-                        {*@
+                        @foreach (var item in Model)
+                        {
                             <tr>
-                                @*  <td>@item.CategoryId</td>*@
-                                <td>Salam</td>
-                                <td>Salam</td>
-                                <td>Salam</td>
-                                <td>Salam</td>
+                                <td>@(item.Title.Length > 10 ? item.Title.Substring(0, 10) + "..." : item.Title.ToString())</td>
+                                <td>@foreach (var reciever in item.Recievers)
+                                    {
+                                       @(reciever + "--");
+                                    }</td>
+                                <td>@item.SendDate</td>
                                 <td>
                                     <a class="btn btn-primary">Details</a>
                                 </td>
                             </tr>
-                        @*}*@
-
+                        }
 
                     </tbody>
                 </table>
             </div>
             <div class="row">
                 <div class="col">
-                    <a class="btn btn-outline-light btn-sm px-4 " asp-action="Create" asp-controller="products">+ Add New</a>
+                    <a class="btn btn-outline-light btn-sm px-4 " asp-action="SendEmail" asp-controller="Email">+ Add New</a>
                 </div><!--end col-->
                 <div class="col-auto">
                     <nav aria-label="...">

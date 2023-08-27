@@ -31,6 +31,9 @@ namespace ProniaBackEnd.Database
                .WithMany(c => c.ProductCategories)
                .HasForeignKey(pc => pc.CategoryId);
 
+            modelBuilder
+                .Entity<EmailMessage>();
+                
 
             base.OnModelCreating(modelBuilder);
         }
@@ -39,6 +42,7 @@ namespace ProniaBackEnd.Database
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductCategory> ProductCategory { get; set; }
+        public DbSet<EmailMessage> EmailMessage { get; set; }
 
     }
 }
