@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using NETCore.MailKit.Core;
 using ProniaBackEnd.Database;
+using ProniaBackEnd.Services;
+using ProniaBackEnd.Services.abstracts;
 
 namespace ProniaBackEnd
 {
@@ -18,7 +21,9 @@ namespace ProniaBackEnd
                 {
                     opt.UseNpgsql("Server=localhost;Port=5432;Database=ProniaDB1;User Id=postgres;Password=admin;");
 
-                });
+                })
+                .AddTransient<EmailSMTPService>();
+
 
             var app = builder.Build();
 

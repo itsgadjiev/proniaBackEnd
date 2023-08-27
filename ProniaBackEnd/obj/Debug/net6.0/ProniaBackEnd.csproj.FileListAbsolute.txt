@@ -1562,3 +1562,7 @@ C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.pdb
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.genruntimeconfig.cache
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ref\ProniaBackEnd.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\MailKit.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\MimeKit.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\NETCore.MailKit.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\BouncyCastle.Crypto.dll
