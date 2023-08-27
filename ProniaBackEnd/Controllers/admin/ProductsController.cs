@@ -38,7 +38,7 @@ namespace ProniaBackEnd.Controllers.manage
             return View("~/Views/admin/products/index.cshtml", productListViewModels);
         }
 
-        #region Crate
+        #region Create
         [HttpGet("admin/products/create")]
         public IActionResult Create()
         {
