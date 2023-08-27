@@ -35,6 +35,7 @@
       "ProniaBackEnd/1.0.0": {
         "dependencies": {
           "AutoMapper": "12.0.1",
+          "FluentValidation": "11.7.1",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.20",
           "Microsoft.EntityFrameworkCore": "6.0.21",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.21",
@@ -348,6 +349,17 @@
         },
         "compile": {
           "lib/netstandard2.1/AutoMapper.dll": {}
+        }
+      },
+      "FluentValidation/11.7.1": {
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.7.1.0"
+          }
+        },
+        "compile": {
+          "lib/net6.0/FluentValidation.dll": {}
         }
       },
       "Humanizer/2.14.1": {
@@ -4659,6 +4671,13 @@
       "sha512": "sha512-hvV62vl6Hp/WfQ24yzo3Co9+OPl8wH8hApwVtgWpiAynVJkUcs7xvehnSftawL8Pe8FrPffBRM3hwzLQqWDNjA==",
       "path": "automapper/12.0.1",
       "hashPath": "automapper.12.0.1.nupkg.sha512"
+    },
+    "FluentValidation/11.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-w9Al4gls6iVGFbTd/NPOPlwzqDTghH+ntL4c4FYUatc+LeybpIwhYArLykZJP/VjF2n3ihj3ws+1yd7KR5lQlg==",
+      "path": "fluentvalidation/11.7.1",
+      "hashPath": "fluentvalidation.11.7.1.nupkg.sha512"
     },
     "Humanizer/2.14.1": {
       "type": "package",

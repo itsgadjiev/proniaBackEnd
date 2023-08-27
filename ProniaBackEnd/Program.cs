@@ -4,6 +4,7 @@ using NETCore.MailKit.Core;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Services;
 using ProniaBackEnd.Services.abstracts;
+using ProniaBackEnd.Validations;
 
 namespace ProniaBackEnd
 {
@@ -22,7 +23,8 @@ namespace ProniaBackEnd
                     opt.UseNpgsql("Server=localhost;Port=5432;Database=ProniaDB1;User Id=postgres;Password=admin;");
 
                 })
-                .AddTransient<EmailSMTPService>();
+                .AddTransient<EmailSMTPService>()
+                .AddTransient<EmailMessageValidator>();
 
 
             var app = builder.Build();

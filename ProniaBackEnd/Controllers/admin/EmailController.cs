@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Services;
 using ProniaBackEnd.Services.Common;
+using ProniaBackEnd.Validations;
 using ProniaBackEnd.ViewModels.admin.emailMesagges;
 
 namespace ProniaBackEnd.Controllers.admin
@@ -12,11 +14,13 @@ namespace ProniaBackEnd.Controllers.admin
     {
         private readonly EmailSMTPService _emailSMTPService;
         private readonly AppDbContext _appDbContext;
+        private readonly EmailMessageValidator _validationRules;
 
-        public EmailController(EmailSMTPService emailSMTPService,AppDbContext appDbContext)
+        public EmailController(EmailSMTPService emailSMTPService,AppDbContext appDbContext , EmailMessageValidator validationRules)
         {
             _emailSMTPService = emailSMTPService;
             _appDbContext = appDbContext;
+            _validationRules = validationRules;
         }
 
         [HttpGet("~/admin/mesagges")]
@@ -36,12 +40,16 @@ namespace ProniaBackEnd.Controllers.admin
         [HttpPost("~/admin/sendEmail")]
         public IActionResult SendEmail(EmailMessageAddViewModel emailMessageAddViewModel)
         {
-            if (!ModelState.IsValid)
+            var validationResult = _validationRules.Validate(emailMessageAddViewModel);
+
+            if (!validationResult.IsValid)
             {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
                 return View("~/Views/admin/mesagges/SendEmail.cshtml", emailMessageAddViewModel);
             }
-    
-            //string[] recievers = { "gafarov.elvin@gmail.com", " ceyhun592@rambler.ru" };
 
             EmailMessage emailMessage = new EmailMessage
             {

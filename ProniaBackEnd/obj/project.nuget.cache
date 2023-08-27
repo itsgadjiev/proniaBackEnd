@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ngCenmqoGlaGMx8qEJH1hdvFWHyDY8+DP7JtFIAFoxI0o49WESmO+JkNsHwwy4B6qKAFjdboPR1jUpUI9FotsA==",
+  "dgSpecHash": "gWZ8kPjzmUmFOYGt4GAgZsXfp41KCPoLafUUjZUZ01fW37fFSrlsQG5JuP3mN6xTw8CkgzoFsO/yy846GEToFw==",
   "success": true,
   "projectFilePath": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\ProniaBackEnd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ceyhu\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\ceyhu\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
     "C:\\Users\\ceyhu\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\ceyhu\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ceyhu\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",
