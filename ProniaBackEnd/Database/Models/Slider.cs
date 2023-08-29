@@ -1,20 +1,12 @@
 ﻿using ProniaBackEnd.Database.Base;
+using ProniaBackEnd.Interfaces;
 
 namespace ProniaBackEnd.Database.Models
 {
-    public class Slider:BaseEntity
+
+    public class Slider : BaseEntity, IAuditable
     {
         public static int _idCounter;
-
-        public Slider(string title, string description, string image, string buttonUrl, byte order)
-        {
-            Id = ++_idCounter;
-            Title = title;
-            Description = description;
-            Image = image;
-            ButtonUrl = buttonUrl;
-            Order = order;
-        }
         public Slider()
         {
 
@@ -26,7 +18,10 @@ namespace ProniaBackEnd.Database.Models
         public string ButtonUrl { get; set; }
         public byte Order { get; set; }
         public string OfferText { get; set; }
-        public bool Offering { get; set; }  
+        public bool Offering { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
+
 
     }
 }

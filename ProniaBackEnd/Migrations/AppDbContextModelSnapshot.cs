@@ -30,8 +30,14 @@ namespace ProniaBackEnd.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -74,7 +80,7 @@ namespace ProniaBackEnd.Migrations
                     b.Property<string>("Color")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -86,12 +92,6 @@ namespace ProniaBackEnd.Migrations
                     b.Property<bool>("IsModified")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<byte>("Order")
-                        .HasColumnType("smallint");
-
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
@@ -100,6 +100,9 @@ namespace ProniaBackEnd.Migrations
 
                     b.Property<string>("Size")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -133,6 +136,9 @@ namespace ProniaBackEnd.Migrations
                     b.Property<string>("ButtonUrl")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -150,6 +156,9 @@ namespace ProniaBackEnd.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

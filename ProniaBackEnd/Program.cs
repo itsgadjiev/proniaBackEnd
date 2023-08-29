@@ -20,7 +20,8 @@ namespace ProniaBackEnd
             builder.Services
                 .AddDbContext<AppDbContext>(opt =>
                 {
-                    opt.UseNpgsql("Server=localhost;Port=5432;Database=ProniaDB1;User Id=postgres;Password=admin;");
+                    string connectionStr = builder.Configuration.GetConnectionString("sql");
+                    opt.UseNpgsql(connectionStr);
 
                 })
                 .AddTransient<EmailSMTPService>()

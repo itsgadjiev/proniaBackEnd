@@ -7,7 +7,6 @@ namespace ProniaBackEnd.ViewModels.admin.products
     {
         public int Id { get; set; }
         [Required]
-
         public string ProductName { get; set; }
         [Required]
         public string Description { get; set; }
@@ -18,11 +17,7 @@ namespace ProniaBackEnd.ViewModels.admin.products
         public string Size { get; set; }
         [Required]
         public double Price { get; set; }
-        [Required]
-        public byte Order { get; set; }
         public IFormFile ImageFile { get; set; }
-        public DateTime CreationDate { get; set; }
-        public DateTime LastModifiedDate { get; set; }
         public bool IsModified { get; set; }
         public int[] CategoryIds { get; set; }
         public List<Category> Categories { get; set; }

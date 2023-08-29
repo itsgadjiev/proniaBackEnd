@@ -1,9 +1,10 @@
 ﻿using Microsoft.Build.Framework;
 using ProniaBackEnd.Database.Base;
+using ProniaBackEnd.Interfaces;
 
 namespace ProniaBackEnd.Database.Models
 {
-    public class Product : BaseEntity
+    public class Product : BaseEntity,IAuditable
     {
         public Product()
         {
@@ -23,14 +24,10 @@ namespace ProniaBackEnd.Database.Models
         [Required]
         public double Price { get; set; }
         [Required]
-        public byte Order { get; set; }
-        [Required]
-        public DateTime CreationDate { get; set; }
-        public DateTime LastModifiedDate { get; set; }
         public bool IsModified { get; set; }
-
         public List<ProductCategory> ProductCategories { get; set; }
-
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
 
     }
 }

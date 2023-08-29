@@ -19,15 +19,10 @@ namespace ProniaBackEnd.Controllers
             {
                 Products = _appDbContext.Products.ToList(),
                 Sliders = _appDbContext.Sliders.OrderBy(x => x.Order).ToList(),
-                NewProducts = _appDbContext.Products.OrderByDescending(x => x.CreationDate).Take(4).ToList(),
+                NewProducts = _appDbContext.Products.OrderByDescending(x => x.CreatedOn).Take(4).ToList(),
             };
 
             return View(homeViewModel);
-        }
-
-        ~HomeController()
-        {
-
         }
     }
 }

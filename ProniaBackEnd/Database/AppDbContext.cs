@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using ProniaBackEnd.Database.Models;
+using ProniaBackEnd.Interfaces;
 
 namespace ProniaBackEnd.Database
 {
@@ -11,6 +12,30 @@ namespace ProniaBackEnd.Database
         {
 
         }
+
+        public override int SaveChanges()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.Entity is IAuditable)
+                {
+                    var auditable = (IAuditable)entry.Entity;
+
+                    if (entry.State == EntityState.Added)
+                    {
+                        auditable.UpdatedOn = DateTime.UtcNow;
+                        auditable.CreatedOn = DateTime.UtcNow;
+                    }
+                    if (entry.State == EntityState.Modified)
+                    {
+                        auditable.UpdatedOn = DateTime.UtcNow;
+                    }
+                }
+            }
+
+            return base.SaveChanges();  
+        }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

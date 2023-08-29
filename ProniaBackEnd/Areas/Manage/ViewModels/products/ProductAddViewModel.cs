@@ -17,10 +17,6 @@ namespace ProniaBackEnd.ViewModels.admin.products
         [Required]
         public double Price { get; set; }
         [Required]
-        public byte Order { get; set; }
-        [Required]
-        public DateTime CreationDate { get; set; }
-        public DateTime LastModifiedDate { get; set; }
         public bool IsModified { get; set; }
         public int[] CategoryIds { get; set; }
         public List<Category> Categories { get; set; }

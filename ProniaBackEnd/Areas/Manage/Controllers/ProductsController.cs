@@ -60,12 +60,9 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             {
                 ProductName = productAddVM.ProductName,
                 Description = productAddVM.Description,
-                CreationDate = DateTime.UtcNow,
                 Color = productAddVM.Color,
                 IsModified = productAddVM.IsModified,
-                Order = productAddVM.Order,
                 Image = productAddVM.ImageFormFile.SaveFile(_env.WebRootPath, "uploads/images"),
-                LastModifiedDate = productAddVM.LastModifiedDate,
                 Price = productAddVM.Price,
                 Size = productAddVM.Size,
             };
@@ -146,9 +143,8 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
                 _appDbContext.AddRange(addedCats);
             }
 
-            exProduct.LastModifiedDate = DateTime.UtcNow;
+            
             exProduct.Price = productUpdateViewModel.Price;
-            exProduct.Order = productUpdateViewModel.Order;
             exProduct.ProductName = productUpdateViewModel.ProductName;
             exProduct.Description = productUpdateViewModel.Description;
             exProduct.Color = productUpdateViewModel.Color;
