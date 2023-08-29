@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
-using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.ViewModels;
 
-namespace ProniaBackEnd.Controllers.client
+namespace ProniaBackEnd.Controllers
 {
     public class HomeController : Controller
     {
@@ -14,7 +12,7 @@ namespace ProniaBackEnd.Controllers.client
         {
             _appDbContext = appDbContext;
         }
-        
+
         public IActionResult Index()
         {
             HomeViewModel homeViewModel = new HomeViewModel()
@@ -24,7 +22,7 @@ namespace ProniaBackEnd.Controllers.client
                 NewProducts = _appDbContext.Products.OrderByDescending(x => x.CreationDate).Take(4).ToList(),
             };
 
-            return View("~/Views/client/home/index.cshtml", homeViewModel);
+            return View(homeViewModel);
         }
 
         ~HomeController()

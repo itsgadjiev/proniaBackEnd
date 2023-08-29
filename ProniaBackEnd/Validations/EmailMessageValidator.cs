@@ -25,8 +25,11 @@ namespace ProniaBackEnd.Validations
                 .Must(BeValidEmailList).WithMessage("Invalid email address .");
         }
 
+
         public bool BeValidEmailList(string emails)
         {
+
+            if (emails is null) { return false; }
             var emailArray = RecieversEmailGetter.Handle(emails);
             Regex emailRegex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
 
@@ -41,7 +44,7 @@ namespace ProniaBackEnd.Validations
             return true;
         }
 
-        
+
 
     }
 }

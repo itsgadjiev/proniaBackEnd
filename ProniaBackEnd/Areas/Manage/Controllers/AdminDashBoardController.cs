@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ProniaBackEnd.Controllers.admin
+namespace ProniaBackEnd.Areas.Manage.Controllers
 {
+    [Route("manage/dashboard")]
+    [Area("Manage")]
     public class AdminDashBoardController : Controller
     {
-        [HttpGet("~/admin")]
+     
         public IActionResult Index()
         {
-            return View("~/Views/admin/index.cshtml");
+            return View();
         }
     }
 }

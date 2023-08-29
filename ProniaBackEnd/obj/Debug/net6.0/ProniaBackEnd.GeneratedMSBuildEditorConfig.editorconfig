@@ -15,72 +15,72 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/404.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cNDA0LmNzaHRtbA==
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/404.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXDQwNC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cSW5kZXguY3NodG1s
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/AdminDashBoard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEFkbWluRGFzaEJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/mesagges/Detail.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cbWVzYWdnZXNcRGV0YWlsLmNzaHRtbA==
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/email/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXGVtYWlsXERldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/mesagges/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cbWVzYWdnZXNcSW5kZXguY3NodG1s
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/email/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXGVtYWlsXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/mesagges/SendEmail.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cbWVzYWdnZXNcU2VuZEVtYWlsLmNzaHRtbA==
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/email/SendEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXGVtYWlsXFNlbmRFbWFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/Products/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cUHJvZHVjdHNcQ3JlYXRlLmNzaHRtbA==
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/Products/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFByb2R1Y3RzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/Products/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cUHJvZHVjdHNcSW5kZXguY3NodG1s
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/Products/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFByb2R1Y3RzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/Products/Update.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cUHJvZHVjdHNcVXBkYXRlLmNzaHRtbA==
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/Products/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFByb2R1Y3RzXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/Slider/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cU2xpZGVyXENyZWF0ZS5jc2h0bWw=
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/Slider/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/Slider/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cU2xpZGVyXEluZGV4LmNzaHRtbA==
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/Slider/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/Slider/Update.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cU2xpZGVyXFVwZGF0ZS5jc2h0bWw=
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/Slider/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/_AdminLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cX0FkbWluTGF5b3V0LmNzaHRtbA==
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/admin/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcYWRtaW5cX1ZpZXdTdGFydC5jc2h0bWw=
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/client/404.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcY2xpZW50XDQwNC5jc2h0bWw=
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Areas/Manage/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/client/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcY2xpZW50XEhvbWVcSW5kZXguY3NodG1s
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/404.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcNDA0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/client/products/Detail.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcY2xpZW50XHByb2R1Y3RzXERldGFpbC5jc2h0bWw=
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/client/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcY2xpZW50XF9WaWV3U3RhcnQuY3NodG1s
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/product/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NccHJvZHVjdFxEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/Shared/_ValidationScriptsPartial.cshtml]
@@ -91,6 +91,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/client/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcY2xpZW50XF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-0rjc66whrn
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-riswygihe5

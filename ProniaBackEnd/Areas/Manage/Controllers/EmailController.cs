@@ -7,8 +7,10 @@ using ProniaBackEnd.Services.Common;
 using ProniaBackEnd.Validations;
 using ProniaBackEnd.ViewModels.admin.emailMesagges;
 
-namespace ProniaBackEnd.Controllers.admin
+namespace ProniaBackEnd.Areas.Manage.Controllers
 {
+    [Route("manage/email")]
+    [Area("Manage")]
     public class EmailController : Controller
 
     {
@@ -23,21 +25,20 @@ namespace ProniaBackEnd.Controllers.admin
             _validationRules = validationRules;
         }
 
-        [HttpGet("~/admin/mesagges")]
+     
         public IActionResult Index()
         {
             List<EmailMessage> emailMessages = _appDbContext.EmailMessage.ToList();
-            return View("~/Views/admin/mesagges/index.cshtml", emailMessages);
+            return View(emailMessages);
         }
 
-        [HttpGet("~/admin/sendEmail")]
+        [HttpGet("sendEmail")]
         public IActionResult SendEmail()
         {
-
-            return View("~/Views/admin/mesagges/SendEmail.cshtml");
+            return View();
         }
 
-        [HttpPost("~/admin/sendEmail")]
+        [HttpPost("sendEmail")]
         public IActionResult SendEmail(EmailMessageAddViewModel emailMessageAddViewModel)
         {
             var validationResult = _validationRules.Validate(emailMessageAddViewModel);
@@ -48,7 +49,7 @@ namespace ProniaBackEnd.Controllers.admin
                 {
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                 }
-                return View("~/Views/admin/mesagges/SendEmail.cshtml", emailMessageAddViewModel);
+                return View(emailMessageAddViewModel);
             }
 
             EmailMessage emailMessage = new EmailMessage
@@ -66,12 +67,12 @@ namespace ProniaBackEnd.Controllers.admin
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("~/admin/message/detail/{id}")]
+        [HttpGet("detail/{id}")]
         public IActionResult Detail(int id)
         {
             EmailMessage emailMessage = _appDbContext.EmailMessage.FirstOrDefault(x => x.Id == id);
             if (emailMessage == null) { return View(Constants.NotFoundConstants.NotFoundApPageUrl); }
-            return View("~/Views/admin/mesagges/detail.cshtml", emailMessage);
+            return View( emailMessage);
         }
     }
 }

@@ -5,9 +5,10 @@ using ProniaBackEnd.Database.Models;
 using System;
 using System.Linq;
 
-namespace ProniaBackEnd.Controllers.manage
+namespace ProniaBackEnd.Areas.Manage.Controllers
 {
-    [Route("admin/categories")]
+    [Route("Manage/categories")]
+    [Area("Manage")]
     public class CategoriesController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -17,11 +18,11 @@ namespace ProniaBackEnd.Controllers.manage
             _appDbContext = appDbContext;
         }
 
-        [HttpGet("")]
+        
         public IActionResult Index()
         {
             var categories = _appDbContext.Categories.ToList();
-            return View("~/Views/admin/categories/index.cshtml", categories);
+            return View(categories);
         }
 
         [HttpGet("create")]
@@ -76,7 +77,7 @@ namespace ProniaBackEnd.Controllers.manage
         {
             Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
             if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
-          
+
             _appDbContext.Categories.Remove(category);
             _appDbContext.SaveChanges();
 

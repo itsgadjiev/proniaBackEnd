@@ -1553,7 +1553,6 @@ C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\scopedcss\Views\client\_Layout.cshtml.rz.scp.css
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\scopedcss\bundle\ProniaBackEnd.styles.css
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\scopedcss\projectbundle\ProniaBackEnd.bundle.scp.css
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.csproj.CopyComplete
@@ -1567,3 +1566,4 @@ C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\NETCore.MailKit.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\scopedcss\Views\_Layout.cshtml.rz.scp.css

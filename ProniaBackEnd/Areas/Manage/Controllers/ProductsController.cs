@@ -7,8 +7,10 @@ using ProniaBackEnd.Estensions;
 using ProniaBackEnd.Mapper;
 using ProniaBackEnd.ViewModels.admin.products;
 
-namespace ProniaBackEnd.Controllers.manage
+namespace ProniaBackEnd.Areas.Manage.Controllers
 {
+    [Route("manage/products")]
+    [Area("Manage")]
     public class ProductsController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -19,42 +21,39 @@ namespace ProniaBackEnd.Controllers.manage
             _appDbContext = appDbContext;
             _env = env;
         }
-
-
-        [HttpGet("admin/products")]
         public IActionResult Index()
         {
             List<ProductListViewModel> productListViewModels = _appDbContext.Products.Select(x => new ProductListViewModel
             {
-                Categories = _appDbContext.ProductCategory.Where(pc => pc.ProductId == x.Id).Select(pc=>pc.Category).ToList(),
+                Categories = _appDbContext.ProductCategory.Where(pc => pc.ProductId == x.Id).Select(pc => pc.Category).ToList(),
                 ProductName = x.ProductName,
                 Description = x.Description,
                 Id = x.Id,
                 Image = x.Image,
-                Price=x.Price,
+                Price = x.Price,
                 IsModified = x.IsModified
 
             }).ToList();
-            return View("~/Views/admin/products/index.cshtml", productListViewModels);
+            return View(productListViewModels);
         }
 
         #region Create
-        [HttpGet("admin/products/create")]
+        [HttpGet("create")]
         public IActionResult Create()
         {
             ProductAddViewModel viewModel = new ProductAddViewModel();
             viewModel.Categories = _appDbContext.Categories.ToList();
-            return View("~/Views/admin/products/create.cshtml", viewModel);
+            return View( viewModel);
         }
 
-        [HttpPost("admin/products/create")]
+        [HttpPost("create")]
         public IActionResult Create(ProductAddViewModel productAddVM)
         {
             productAddVM.Categories = _appDbContext.Categories.ToList();
 
             if (!ModelState.IsValid)
             {
-                return View("~/Views/admin/Products/create.cshtml", productAddVM);
+                return View( productAddVM);
             }
 
             Product product = new Product()
@@ -80,7 +79,7 @@ namespace ProniaBackEnd.Controllers.manage
                 if (category is null)
                 {
                     ModelState.AddModelError("CategoryIds", "Category not found");
-                    return View("~/Views/admin/Products/create.cshtml", productAddVM);
+                    return View( productAddVM);
                 }
 
                 ProductCategory productCategory = new ProductCategory()
@@ -93,13 +92,12 @@ namespace ProniaBackEnd.Controllers.manage
             }
 
             _appDbContext.SaveChanges();
-
             return RedirectToAction(nameof(Index));
         }
         #endregion
 
         #region Update
-        [HttpGet("admin/Products/update/{id}")]
+        [HttpGet("update/{id}")]
         public IActionResult Update(int id)
         {
             Product product = _appDbContext.Products.FirstOrDefault(x => x.Id == id);
@@ -111,11 +109,11 @@ namespace ProniaBackEnd.Controllers.manage
             productUpdateViewModel.CategoryIds = _appDbContext.ProductCategory.Where(x => x.ProductId == product.Id).Select(x => x.CategoryId).ToArray();
             productUpdateViewModel.Image = product.Image;
 
-            return View("~/Views/admin/Products/update.cshtml", productUpdateViewModel);
+            return View(productUpdateViewModel);
 
         }
 
-        [HttpPost("admin/Products/update/{id}")]
+        [HttpPost("update/{id}")]
         public IActionResult Update(ProductUpdateViewModel productUpdateViewModel)
         {
             Product exProduct = _appDbContext.Products.FirstOrDefault(x => x.Id == productUpdateViewModel.Id);
@@ -126,7 +124,7 @@ namespace ProniaBackEnd.Controllers.manage
                 productUpdateViewModel.Image = exProduct.Image;
                 productUpdateViewModel.Categories = _appDbContext.Categories.ToList();
                 productUpdateViewModel.CategoryIds = _appDbContext.ProductCategory.Where(x => x.ProductId == exProduct.Id).Select(x => x.CategoryId).ToArray();
-                return View("~/Views/admin/Products/update.cshtml", productUpdateViewModel);
+                return View( productUpdateViewModel);
             }
 
             if (productUpdateViewModel.ImageFile != null)
@@ -164,7 +162,7 @@ namespace ProniaBackEnd.Controllers.manage
         #endregion
 
         #region Delete
-        [HttpGet("admin/Products/delete/{id}")]
+        [HttpGet("delete/{id}")]
         public IActionResult Delete(int id)
         {
             Product product = _appDbContext.Products.FirstOrDefault(x => x.Id == id);

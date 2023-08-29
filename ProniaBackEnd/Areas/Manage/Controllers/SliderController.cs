@@ -3,8 +3,10 @@ using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
 
-namespace ProniaBackEnd.Controllers.manage
+namespace ProniaBackEnd.Areas.Manage.Controllers
 {
+    [Route("manage/slider")]
+    [Area("Manage")]
     public class SliderController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -13,26 +15,25 @@ namespace ProniaBackEnd.Controllers.manage
         {
             _appDbContext = appDbContext;
         }
-
-        [HttpGet("~/admin/sliders")]
+     
         public IActionResult Index()
         {
             List<Slider> sliders = _appDbContext.Sliders.ToList();
-            return View("~/Views/admin/slider/index.cshtml", sliders);
+            return View(sliders);
         }
 
-        [HttpGet("~/admin/sliders/create")]
+        [HttpGet("create")]
         public IActionResult Create()
         {
-            return View("~/Views/admin/slider/create.cshtml");
+            return View();
         }
 
-        [HttpPost("~/admin/sliders/create")]
+        [HttpPost("create")]
         public IActionResult Create(Slider slider)
         {
             if (!ModelState.IsValid)
             {
-                return View("~/Views/admin/slider/create.cshtml");
+                return View();
             }
 
             if (slider.OfferText != null)
@@ -47,10 +48,10 @@ namespace ProniaBackEnd.Controllers.manage
 
         }
 
-        [HttpGet("~/admin/sliders/delete/{id}")]
+        [HttpGet("delete/{id}")]
         public IActionResult Delete(int id)
         {
-            Slider slider = _appDbContext.Sliders.FirstOrDefault(x=>x.Id == id);
+            Slider slider = _appDbContext.Sliders.FirstOrDefault(x => x.Id == id);
             if (slider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
             _appDbContext.Remove(slider);
@@ -59,22 +60,22 @@ namespace ProniaBackEnd.Controllers.manage
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("~/admin/sliders/update/{id}")]
+        [HttpGet("update/{id}")]
         public IActionResult Update(int id)
         {
             Slider slider = _appDbContext.Sliders.FirstOrDefault(x => x.Id == id);
             if (slider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-            return View("~/Views/admin/slider/update.cshtml", slider);
+            return View(slider);
 
         }
-        [HttpPost("~/admin/sliders/update/{id}")]
+        [HttpPost("update/{id}")]
         public IActionResult Update(Slider slider)
         {
             Slider exSlider = _appDbContext.Sliders.FirstOrDefault(x => x.Id == slider.Id);
             if (exSlider is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-            if (!ModelState.IsValid) { return View("~/Views/admin/slider/update.cshtml", exSlider); }
+            if (!ModelState.IsValid) { return View( exSlider); }
 
             exSlider.Title = slider.Title;
             exSlider.Order = slider.Order;

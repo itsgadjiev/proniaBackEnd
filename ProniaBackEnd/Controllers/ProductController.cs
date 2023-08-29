@@ -3,7 +3,7 @@ using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Database;
 
-namespace ProniaBackEnd.Controllers.client
+namespace ProniaBackEnd.Controllers
 {
     public class ProductController : Controller
     {
@@ -20,12 +20,10 @@ namespace ProniaBackEnd.Controllers.client
             Product product = _appDbContext.Products.FirstOrDefault(x => x.Id == id);
             if (product is null) { return View(NotFoundConstants.NotFoundProniaUrl); }
 
-            return View("~/Views/client/products/Detail.cshtml",product);
+            return View( product);
         }
 
-        ~ProductController()
-        {
-
-        }
+ 
+      
     }
 }
