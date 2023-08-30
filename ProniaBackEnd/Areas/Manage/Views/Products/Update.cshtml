@@ -46,13 +46,7 @@
                                 <span asp-validation-for="Description" class="invalid-feedback" style="display:block"></span>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label asp-for="Size"></label>
-                                <input class="form-control" asp-for="Size" placeholder="Size">
-                                <span asp-validation-for="Size" class="invalid-feedback" style="display:block"></span>
-                            </div>
-                        </div>
+                       
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label asp-for="Price"></label>
@@ -60,13 +54,7 @@
                                 <span asp-validation-for="Price" class="invalid-feedback" style="display:block"></span>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label asp-for="Color"></label>
-                                <input class="form-control" asp-for="Color" placeholder="Color">
-                                <span asp-validation-for="Color" class="invalid-feedback" style="display:block"></span>
-                            </div>
-                        </div>
+                        
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label>Category</label>
@@ -78,6 +66,32 @@
                                     }
                                 </select>
                                 <span asp-validation-for="CategoryIds" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label>Size</label>
+                                <select class="form-select" asp-for="SizeIds" id="sizes-multiselect">
+                                    <option disabled>Select the Size</option>
+                                    @foreach (var size in Model.Sizes)
+                                    {
+                                        <option value="@size.Id">@size.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="SizeIds" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label>Color</label>
+                                <select class="form-select" asp-for="ColorIds" id="colors-multiselect">
+                                    <option disabled>Select the Color</option>
+                                    @foreach (var category in Model.Colors)
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="ColorIds" class="invalid-feedback" style="display:block"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -93,7 +107,6 @@
                                 <img style="max-width:200px; max-height:200px;" src="~/uploads/images/@Model.Image" />
                             </div>
                         </div>
-                      
                     </div>
                 </form>
             </div>
@@ -120,6 +133,16 @@
     @section custom_scripts{
     <script>
         new Selectr('#categories-multiselect', {
+            multiple: true
+        });
+    </script>
+    <script>
+        new Selectr('#colors-multiselect', {
+            multiple: true
+        });
+    </script>
+    <script>
+        new Selectr('#sizes-multiselect', {
             multiple: true
         });
     </script>

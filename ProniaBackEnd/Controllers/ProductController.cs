@@ -34,8 +34,7 @@ namespace ProniaBackEnd.Controllers
             {
                 basketItem = new BasketItem();
                 basketItem.ProductId = product.Id;
-                basketItem.Quantity = 1;
-                basketItem.TotalPrice = product.Price * basketItem.Quantity;
+                basketItem.Color =
 
                 _appDbContext.BasketItems.Add(basketItem);
 
@@ -43,6 +42,9 @@ namespace ProniaBackEnd.Controllers
             else
             {
                 basketItem.Quantity += 1;
+                basketItem.Product.ProductCategories = _appDbContext.ProductCategory.Where(x => x.ProductId == product.Id).ToList();
+                basketItem.Product.ProductSizes = _appDbContext.ProductSize.Where(x => x.ProductId == product.Id).ToList();
+                basketItem.Product.ProductColors = _appDbContext.ProductColor.Where(x => x.ProductId == product.Id).ToList();
                 basketItem.TotalPrice = product.Price * basketItem.Quantity;
             }
             _appDbContext.SaveChanges();

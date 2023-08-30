@@ -68,6 +68,22 @@ namespace ProniaBackEnd.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Color", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Color");
+                });
+
             modelBuilder.Entity("ProniaBackEnd.Database.Models.EmailMessage", b =>
                 {
                     b.Property<int>("Id")
@@ -101,9 +117,6 @@ namespace ProniaBackEnd.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Color")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp with time zone");
 
@@ -120,9 +133,6 @@ namespace ProniaBackEnd.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("ProductName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Size")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedOn")
@@ -147,6 +157,52 @@ namespace ProniaBackEnd.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("ProductCategory");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.ProductColor", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ColorId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ProductId", "ColorId");
+
+                    b.HasIndex("ColorId");
+
+                    b.ToTable("ProductColor");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.ProductSize", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SizeId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ProductId", "SizeId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("ProductSize");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Size", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Size");
                 });
 
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Slider", b =>
@@ -219,14 +275,66 @@ namespace ProniaBackEnd.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.ProductColor", b =>
+                {
+                    b.HasOne("ProniaBackEnd.Database.Models.Color", "Color")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProniaBackEnd.Database.Models.Product", "Product")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Color");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.ProductSize", b =>
+                {
+                    b.HasOne("ProniaBackEnd.Database.Models.Product", "Product")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProniaBackEnd.Database.Models.Size", "Size")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
+                });
+
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Category", b =>
                 {
                     b.Navigation("ProductCategories");
                 });
 
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Color", b =>
+                {
+                    b.Navigation("ProductColors");
+                });
+
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Product", b =>
                 {
                     b.Navigation("ProductCategories");
+
+                    b.Navigation("ProductColors");
+
+                    b.Navigation("ProductSizes");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Size", b =>
+                {
+                    b.Navigation("ProductSizes");
                 });
 #pragma warning restore 612, 618
         }

@@ -43,6 +43,8 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
         {
             ProductAddViewModel viewModel = new ProductAddViewModel();
             viewModel.Categories = _appDbContext.Categories.ToList();
+            viewModel.Sizes = _appDbContext.Size.ToList();
+            viewModel.Colors = _appDbContext.Color.ToList();
             return View( viewModel);
         }
 
@@ -50,7 +52,9 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
         public IActionResult Create(ProductAddViewModel productAddVM)
         {
             productAddVM.Categories = _appDbContext.Categories.ToList();
-
+            productAddVM.Sizes =_appDbContext.Size.ToList();
+            productAddVM.Colors = _appDbContext.Color.ToList();   
+            
             if (!ModelState.IsValid)
             {
                 return View( productAddVM);
@@ -60,14 +64,11 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             {
                 ProductName = productAddVM.ProductName,
                 Description = productAddVM.Description,
-                Color = productAddVM.Color,
                 IsModified = productAddVM.IsModified,
                 Image = productAddVM.ImageFormFile.SaveFile(_env.WebRootPath, "uploads/images"),
                 Price = productAddVM.Price,
-                Size = productAddVM.Size,
             };
             _appDbContext.Products.Add(product);
-
 
             foreach (var catId in productAddVM.CategoryIds)
             {
@@ -88,6 +89,44 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
                 _appDbContext.ProductCategory.Add(productCategory);
             }
 
+            foreach (var sizeId in productAddVM.SizeIds)
+            {
+                var size = _appDbContext.Size.FirstOrDefault(x => x.Id == sizeId);
+
+                if (size is null)
+                {
+                    ModelState.AddModelError("SizeIds", "size not found");
+                    return View(productAddVM);
+                }
+
+                ProductSize productSize = new ProductSize()
+                {
+                    SizeId = sizeId,
+                    Product = product
+                };
+
+                _appDbContext.ProductSize.Add(productSize);
+            }
+
+            foreach (var ColorID in productAddVM.ColorIds)
+            {
+                var color = _appDbContext.Size.FirstOrDefault(x => x.Id == ColorID);
+
+                if (color is null)
+                {
+                    ModelState.AddModelError("ColorIds", "size not found");
+                    return View(productAddVM);
+                }
+
+                ProductColor productColor = new ProductColor()
+                {
+                    ColorId = ColorID,
+                    Product = product
+                };
+
+                _appDbContext.ProductColor.Add(productColor);
+            }
+
             _appDbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -102,8 +141,12 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
 
             ProductUpdateViewModel productUpdateViewModel = UpdateMapper<Product, ProductUpdateViewModel>.Handle(product);
 
+            productUpdateViewModel.Sizes = _appDbContext.Size.ToList();
+            productUpdateViewModel.Colors = _appDbContext.Color.ToList();
             productUpdateViewModel.Categories = _appDbContext.Categories.ToList();
             productUpdateViewModel.CategoryIds = _appDbContext.ProductCategory.Where(x => x.ProductId == product.Id).Select(x => x.CategoryId).ToArray();
+            productUpdateViewModel.ColorIds = _appDbContext.ProductColor.Where(x => x.ProductId == product.Id).Select(x => x.ColorId).ToArray();
+            productUpdateViewModel.SizeIds = _appDbContext.ProductSize.Where(x => x.ProductId == product.Id).Select(x => x.SizeId).ToArray();
             productUpdateViewModel.Image = product.Image;
 
             return View(productUpdateViewModel);
@@ -143,12 +186,23 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
                 _appDbContext.AddRange(addedCats);
             }
 
-            
+            if (productUpdateViewModel.SizeIds != null)
+            {
+                var removeIds = _appDbContext.ProductSize.Where(x => x.ProductId == exProduct.Id).ToList();
+                _appDbContext.RemoveRange(removeIds);
+
+                var addedSizes = productUpdateViewModel.SizeIds.Select(x => new ProductSize
+                {
+                    SizeId = x,
+                    ProductId = exProduct.Id,
+                });
+                _appDbContext.AddRange(addedSizes);
+            }
+
+
             exProduct.Price = productUpdateViewModel.Price;
             exProduct.ProductName = productUpdateViewModel.ProductName;
             exProduct.Description = productUpdateViewModel.Description;
-            exProduct.Color = productUpdateViewModel.Color;
-            exProduct.Size = productUpdateViewModel.Size;
             exProduct.IsModified = true;
 
             _appDbContext.SaveChanges();
