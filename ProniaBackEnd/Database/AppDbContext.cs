@@ -33,7 +33,7 @@ namespace ProniaBackEnd.Database
                 }
             }
 
-            return base.SaveChanges();  
+            return base.SaveChanges();
         }
 
 
@@ -58,6 +58,11 @@ namespace ProniaBackEnd.Database
 
             modelBuilder
                 .Entity<EmailMessage>();
+
+            modelBuilder.Entity<BasketItem>()
+                .HasOne(bi => bi.Product)
+                .WithMany()
+                .HasForeignKey(bi => bi.ProductId);
                 
 
             base.OnModelCreating(modelBuilder);
@@ -68,6 +73,8 @@ namespace ProniaBackEnd.Database
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductCategory> ProductCategory { get; set; }
         public DbSet<EmailMessage> EmailMessage { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
+
 
     }
 }

@@ -6,6 +6,7 @@ using ProniaBackEnd.Services;
 using ProniaBackEnd.Services.abstracts;
 using ProniaBackEnd.Validations;
 
+
 namespace ProniaBackEnd
 {
     public class Program
@@ -24,7 +25,7 @@ namespace ProniaBackEnd
                     opt.UseNpgsql(connectionStr);
 
                 })
-                .AddTransient<EmailSMTPService>()
+                .AddTransient<ICustomEmailService, EmailSMTPService>()
                 .AddTransient<EmailMessageValidator>();
 
 

@@ -8,7 +8,7 @@ using ProniaBackEnd.Services.Common;
 namespace ProniaBackEnd.Services
 {
 
-    public class EmailSMTPService : IEmailSMTPService
+    public class EmailSMTPService : ICustomEmailService
     {
         private readonly IConfiguration _configuration;
 
