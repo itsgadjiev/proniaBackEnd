@@ -5,60 +5,60 @@
     <link href="~/admin/assets/plugins/select/selectr.min.css" rel="stylesheet" type="text/css" asp-append-version="true" />
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="page-title-box">
-            <div class="float-end">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-controller="product" asp-action="index">Products</a></li>
-                    <li class="breadcrumb-item active">Add Product</li>
-                </ol>
-            </div>
-            <h4 class="page-title">Add product</h4>
-        </div><!--end page-title-box-->
-    </div><!--end col-->
-</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="product" asp-action="index">Products</a></li>
+                        <li class="breadcrumb-item active">Add Product</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Add product</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <form method="post" asp-controller="products" asp-action="create" enctype="multipart/form-data" id="submit-form">
-                    <div asp-validation-summary="ModelOnly"></div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label asp-for="ProductName">Product Name</label>
-                                <input class="form-control" asp-for="ProductName">
-                                <span asp-validation-for="ProductName" class="invalid-feedback" style="display:block"></span>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" asp-controller="products" asp-action="create" enctype="multipart/form-data" id="submit-form">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="ProductName">Product Name</label>
+                                    <input class="form-control" asp-for="ProductName">
+                                    <span asp-validation-for="ProductName" class="invalid-feedback" style="display:block"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label>Product's photo</label>
-                                <input type="file" asp-for="ImageFormFile" class="form-control">
-                                <span asp-validation-for="ImageFormFile" class="invalid-feedback" style="display:block"></span>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label>Product's photo</label>
+                                    <input type="file" asp-for="ImageFormFile" class="form-control">
+                                    <span asp-validation-for="ImageFormFile" class="invalid-feedback" style="display:block"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label asp-for="Description">Description</label>
-                                <input class="form-control" asp-for="Description">
-                                <span asp-validation-for="Description" class="invalid-feedback" style="display:block"></span>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Description">Description</label>
+                                    <input class="form-control" asp-for="Description">
+                                    <span asp-validation-for="Description" class="invalid-feedback" style="display:block"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label asp-for="Price">Price</label>
-                                <input class="form-control" asp-for="Price">
-                                <span asp-validation-for="Price" class="invalid-feedback" style="display:block"></span>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label asp-for="Price">Price</label>
+                                    <input class="form-control" asp-for="Price">
+                                    <span asp-validation-for="Price" class="invalid-feedback" style="display:block"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label>Category</label>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label>Category</label>
                                     <select class="form-select" asp-for="CategoryIds" id="categories-multiselect">
-                                    <option disabled>Select the category</option>
+                                        <option disabled>Select the category</option>
                                     @foreach (var category in Model.Categories)
                                     {
                                         <option value="@category.Id">@category.Name</option>
@@ -94,7 +94,14 @@
                             </div>
                         </div>
                     </div>
+                 
                 </form>
+                <div class="container mt-5">
+                    <button id="addElementButton" class="btn btn-primary">Add Group of Elements</button>
+                    <div id="elementContainer" class="row mt-3"></div>
+                </div>
+              
+
             </div>
         </div>
     </div>
@@ -137,3 +144,57 @@
         });
     </script>
 }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addElementButton').click(function () {
+                var newGroup = `
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label>Size</label>
+                                                <select class="form-select" asp-for="SizeIds" id="sizes-multiselect">
+                                                    <option disabled>Select the Size</option>
+    @foreach (var size in Model.Sizes)
+    {
+                                                        <option value="@size.Id">@size.Name</option>
+    }
+                                        </select>
+                                        <span asp-validation-for="SizeIds" class="invalid-feedback" style="display:block"></span>
+                                    </div>
+                                </div>
+                                <!-- Repeat the same structure for Color -->
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label>Color</label>
+                                        <select class="form-select" asp-for="ColorIds" id="colors-multiselect">
+                                            <option disabled>Select the Color</option>
+    @foreach (var category in Model.Colors)
+    {
+                                                        <option value="@category.Id">@category.Name</option>
+    }
+                                        </select>
+                                        <span asp-validation-for="ColorIds" class="invalid-feedback" style="display:block"></span>
+                                    </div>
+                                </div>
+                                <!-- Repeat the same structure for Size again -->
+                                    <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label>Category</label>
+                                        <select class="form-select" asp-for="CategoryIds" id="categories-multiselect">
+                                            <option disabled>Select the category</option>
+    @foreach (var category in Model.Categories)
+    {
+                                                <option value="@category.Id">@category.Name</option>
+    }
+                                    </select>
+                                    <span asp-validation-for="CategoryIds" class="invalid-feedback" style="display:block"></span>
+                                </div>
+                        `;
+
+            $('#elementContainer').append(newGroup);
+        });
+    });
+</script>
