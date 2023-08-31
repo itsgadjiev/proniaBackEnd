@@ -153,7 +153,6 @@
                         <div class="product-item-wrap row">
                             @foreach (var product in Model.Products)
                             {
-
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
@@ -193,6 +192,7 @@
                                                     </li>
                                                     <li>
                                                         <form asp-action="addtobasket" asp-controller="product" asp-route-id="@product.Id" method="post">
+                                                                                                                     
                                                             <button type="submit"
                                                                 data-tippy="Add to cart"
                                                                 data-tippy-inertia="true"

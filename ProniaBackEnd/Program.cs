@@ -29,6 +29,7 @@ namespace ProniaBackEnd
                 .AddTransient<EmailMessageValidator>();
 
 
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
