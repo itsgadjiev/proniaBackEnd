@@ -41,17 +41,21 @@ function AddDataCategory() {
 function UpdateCategory() {
     let categoryName = $('.category-name-update-ajax').val();
     let catId = $('.categoryId-update-modal').val();
+    let creationDateString = $('.categoryCreationDate-update-modal').val();
 
-    let category = {
+    let creationDate = new Date(creationDateString);
+
+    let categoryVM = {
+        Id: catId,
         Name: categoryName,
-        Id: catId
-    }
+        CreatedOn: creationDate
+    };
 
     $.ajax({
         url: '/Manage/category/update/' + catId , 
         type: 'PUT',
         contentType: 'application/json',
-        data: JSON.stringify(category), 
+        data: JSON.stringify(categoryVM), 
         success: function (response) {
             
         },
@@ -61,9 +65,11 @@ function UpdateCategory() {
     });
 }
 
-function UpdateCategoryModal(categoryName,categoryId) {
+function UpdateCategoryModal(categoryName,categoryId,categoryCreationDate) {
     $('.categoryId-update-modal').val(categoryId);
     $('.category-name-update-ajax').val(categoryName);
+    $('.categoryCreationDate-update-modal').val(categoryCreationDate);
+
 }
 
 

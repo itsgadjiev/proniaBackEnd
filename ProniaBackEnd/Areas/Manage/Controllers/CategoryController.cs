@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProniaBackEnd.Areas.Manage.ViewModels.categories;
 using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
@@ -60,38 +61,22 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
 
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> Update([FromBody] Category category)
+        public async Task<IActionResult> Update([FromBody] CategoryUpdateViewModel categoryVM)
         {
+            //Validation    
+
+            Category category = await _appDbContext.Categories.FirstOrDefaultAsync(x => x.Id == categoryVM.Id);
+
+            if (category is null)
+            {
+                return NotFound();
+            }
+
+            category.Name = categoryVM.Name;
+            await _appDbContext.SaveChangesAsync();
 
             return Ok();
         }
-
-        //[HttpGet("update/{id}")]
-        //public IActionResult Update(int id)
-        //{
-        //    Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
-        //    if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
-
-
-        //    return View("~/Views/admin/categories/update.cshtml", category);
-        //}
-
-        //[HttpPost("update/{id}")]
-        //public IActionResult Update(Category category)
-        //{
-        //    Category exCategory = _appDbContext.Categories.FirstOrDefault(x => x.Id == category.Id);
-        //    if (exCategory is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(exCategory);
-        //    }
-
-        //    exCategory.Name = category.Name;
-
-        //    _appDbContext.SaveChanges();
-        //    return RedirectToAction(nameof(Index));
-        //}
 
         //[HttpGet("delete/{id}")]
         //public IActionResult Delete(int id)
