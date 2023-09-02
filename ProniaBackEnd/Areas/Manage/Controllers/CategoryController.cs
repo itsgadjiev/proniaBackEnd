@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
@@ -7,81 +8,101 @@ using System.Linq;
 
 namespace ProniaBackEnd.Areas.Manage.Controllers
 {
-    [Route("Manage/categories")]
+    [Route("Manage/category")]
     [Area("Manage")]
-    public class CategoriesController : Controller
+    public class CategoryController : Controller
     {
         private readonly AppDbContext _appDbContext;
 
-        public CategoriesController(AppDbContext appDbContext)
+        public CategoryController(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
 
-        
+
+
+        //public async Task<IActionResult> Index()
+        //{
+        //    var categories = await _appDbContext.Categories.ToListAsync();
+        //    return View(categories);
+        //}
+
         public IActionResult Index()
         {
             var categories = _appDbContext.Categories.ToList();
             return View(categories);
         }
 
-        [HttpGet("create")]
-        public IActionResult Create()
-        {
-            return View("~/Views/admin/categories/create.cshtml");
-        }
+
+        //[HttpGet("getall")]
+        //public async Task<IActionResult> GetCategories()
+        //{
+        //    return View();
+        //}
+
 
         [HttpPost("create")]
-        public IActionResult Create(Category category)
+        public async Task<IActionResult> Create([FromBody] Category postedCategory)
         {
-            if (!ModelState.IsValid)
+            //validation
+
+            Category addingCategory = new Category
             {
-                return View("~/Views/admin/categories/create.cshtml");
-            }
+                Name = postedCategory.Name,
+            };
 
-            _appDbContext.Categories.Add(category);
-            _appDbContext.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+            await _appDbContext.AddAsync(addingCategory);
+            await _appDbContext.SaveChangesAsync();
+
+            return Ok();
         }
 
-        [HttpGet("update/{id}")]
-        public IActionResult Update(int id)
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> Update([FromBody] Category category)
         {
-            Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
-            if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-
-            return View("~/Views/admin/categories/update.cshtml", category);
+            return Ok();
         }
 
-        [HttpPost("update/{id}")]
-        public IActionResult Update(Category category)
-        {
-            Category exCategory = _appDbContext.Categories.FirstOrDefault(x => x.Id == category.Id);
-            if (exCategory is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
+        //[HttpGet("update/{id}")]
+        //public IActionResult Update(int id)
+        //{
+        //    Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
+        //    if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-            if (!ModelState.IsValid)
-            {
-                return View(exCategory);
-            }
 
-            exCategory.Name = category.Name;
+        //    return View("~/Views/admin/categories/update.cshtml", category);
+        //}
 
-            _appDbContext.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
+        //[HttpPost("update/{id}")]
+        //public IActionResult Update(Category category)
+        //{
+        //    Category exCategory = _appDbContext.Categories.FirstOrDefault(x => x.Id == category.Id);
+        //    if (exCategory is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-        [HttpGet("delete/{id}")]
-        public IActionResult Delete(int id)
-        {
-            Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
-            if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(exCategory);
+        //    }
 
-            _appDbContext.Categories.Remove(category);
-            _appDbContext.SaveChanges();
+        //    exCategory.Name = category.Name;
 
-            return RedirectToAction(nameof(Index));
-        }
+        //    _appDbContext.SaveChanges();
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+        //[HttpGet("delete/{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
+        //    if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
+
+        //    _appDbContext.Categories.Remove(category);
+        //    _appDbContext.SaveChanges();
+
+        //    return RedirectToAction(nameof(Index));
+        //}
     }
 }

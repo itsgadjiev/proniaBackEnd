@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XCaNeFTn1lUg/LWr4uDautEIph8LFcQ/7MzCChn6c0c=",
+  "Hash": "Vii3Fe3ralhdhBPh0vNwhP18rBDCnF3MmKNS3cjvBas=",
   "Source": "ProniaBackEnd",
   "BasePath": "_content/ProniaBackEnd",
   "Mode": "Default",
@@ -3296,6 +3296,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\admin\\assets\\js\\app.min.js.map"
+    },
+    {
+      "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\admin\\assets\\js\\custom.js",
+      "SourceId": "ProniaBackEnd",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\",
+      "BasePath": "_content/ProniaBackEnd",
+      "RelativePath": "admin/assets/js/custom.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\admin\\assets\\js\\custom.js"
     },
     {
       "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\admin\\assets\\pages\\analytics-customers.init.js",
@@ -19089,6 +19106,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\images\\2a33f1cb-06d0-4b39-a6aa-44d209bf2911.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\uploads\\images\\54e8da0d-4977-472c-b075-1560847e4ae0.jpg",
+      "SourceId": "ProniaBackEnd",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\",
+      "BasePath": "_content/ProniaBackEnd",
+      "RelativePath": "uploads/images/54e8da0d-4977-472c-b075-1560847e4ae0.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\images\\54e8da0d-4977-472c-b075-1560847e4ae0.jpg"
     },
     {
       "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\uploads\\images\\602acf46-5239-49e5-8b4a-1fbc72298db2.png",

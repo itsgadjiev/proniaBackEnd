@@ -98,6 +98,10 @@
                          <li class="nav-item">
                             <a class="nav-link" asp-action="index" asp-controller="Email">Email Messages</a>
                         </li><!--end nav-item-->
+                          <li class="nav-item">
+                            @*<a class="nav-link" onclick="GetAjaxCategories()">Categories</a>*@
+                            <a class="nav-link" asp-action="index" asp-controller="category">Categories</a>
+                        </li><!--end nav-item-->
 
                     </ul><!--end nav-->
 
@@ -1105,7 +1109,9 @@
     <!-- Javascript  -->
     <!-- App js -->
     
-    <script src="~/admin/assets/js/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer asp-append-version="true"></script>
+    <script src="~/admin/assets/js/app.js" asp-append-version="true"></script>
+    <script src="~/admin/assets/js/custom.js" defer asp-append-version="true"></script>
     @RenderSection("plugins_scripts", false);
     @RenderSection("custom_scripts", false);
 </body>

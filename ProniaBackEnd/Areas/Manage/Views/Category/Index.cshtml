@@ -1,0 +1,183 @@
+﻿@model List<Category>
+<div class="col-12 " style="margin-top:30px;">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <td>Actions</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(item.Name)</td>
+                                <td>
+                                    <a class="btn btn-de-primary update-category-ajax" data-bs-toggle="modal" data-bs-target="#updateModalLogin" onclick="UpdateCategoryModal('@item.Name','@item.Id')">
+                                         Update
+                                    </a>
+                                   @* <a class="btn btn-outline-info" asp-action="update" asp-controller="category" asp-route-id="@item.Id">Update</a>*@
+                                    <a class="btn btn-danger" asp-action="Delete" asp-controller="category" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-de-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLogin">
+                        Create
+                    </a>
+                    @*<a class="btn btn-outline-light btn-sm px-4 " asp-action="SendEmail" asp-controller="Email">+ Add New</a>*@
+                </div><!--end col-->
+                <div class="col-auto">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul><!--end pagination-->
+                    </nav><!--end nav-->
+                </div> <!--end col-->
+            </div><!--end row-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div> <!-- end col -->
+
+<!--CREATE MODAL-->
+<div class="modal fade" id="exampleModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalDefaultLogin" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title m-0" id="exampleModalDefaultLogin">Category Add</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div><!--end modal-header-->
+            <div class="modal-body">
+                <div class="card-body p-0 auth-header-box">
+                    <div class="text-center">
+                        <a href="index.html" class="logo logo-admin">
+                            <img src="~/admin/assets/images/logo-sm.png" height="50" alt="logo" class="auth-logo">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active p-3 pt-3" id="LogIn_Tab" role="tabpanel">
+                            <form class="form-horizontal auth-form my-4" action="index.html">
+                                <div class="form-group">
+                                    <label for="username">Category Name</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control category-name-ajax" name="username" id="username" placeholder="Enter Category">
+                                    </div>
+                                </div><!--end form-group-->
+                                @* <div class="form-group">
+                                <label for="userpassword">Password</label>
+                                <div class="input-group mb-3">
+                                <input type="password" class="form-control" name="password" id="userpassword" placeholder="Enter password">
+                                </div>
+                                </div><!--end form-group-->*@
+
+
+
+                                <div class="form-group mb-0 row">
+                                    <div class="col-12 mt-2">
+                                        <div class="d-grid">
+                                            <a class="btn btn-de-primary btn-block" onclick="AddDataCategory()">Save <i class="fas fa-sign-in-alt ml-1"></i></a>
+                                        </div>
+                                    </div><!--end col-->
+                                </div> <!--end form-group-->
+                            </form><!--end form-->
+
+
+                        </div>
+                      
+                    </div>
+                </div><!--end card-body-->
+                <div class="card-body bg-light-alt text-center mx-n3 mb-n3">
+                    <span class="text-muted d-none d-sm-inline-block">Mannatthemes © 2021</span>
+                </div>
+            </div><!--end modal-body-->
+
+        </div><!--end modal-content-->
+    </div><!--end modal-dialog-->
+</div><!--end modal-->
+<!--CREATE MODAL================================================================================================================-->
+
+
+<div class="modal fade" id="updateModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalDefaultLogin" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title m-0" id="exampleModalDefaultLogin">Category Update</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div><!--end modal-header-->
+            <div class="modal-body">
+                <div class="card-body p-0 auth-header-box">
+                    <div class="text-center">
+                        <a href="index.html" class="logo logo-admin">
+                            <img src="~/admin/assets/images/logo-sm.png" height="50" alt="logo" class="auth-logo">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active p-3 pt-3" id="LogIn_Tab" role="tabpanel">
+                            <form class="form-horizontal auth-form my-4" action="index.html">
+                                <div class="form-group">
+                                    <label for="username">Category Name</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control category-name-update-ajax" name="username" id="username" placeholder="Enter Category">
+                                        <input type="hidden" class="categoryId-update-modal" />
+                                        <input type="hidden" class="categoryCreationDate-update-modal" />
+                                    </div>
+                                </div><!--end form-group-->
+                                @* <div class="form-group">
+                                <label for="userpassword">Password</label>
+                                <div class="input-group mb-3">
+                                <input type="password" class="form-control" name="password" id="userpassword" placeholder="Enter password">
+                                </div>
+                                </div><!--end form-group-->*@
+
+
+
+                                <div class="form-group mb-0 row">
+                                    <div class="col-12 mt-2">
+                                        <div class="d-grid">
+                                            <a class="btn btn-de-primary btn-block" onclick="UpdateCategory()">Save <i class="fas fa-sign-in-alt ml-1"></i></a>
+                                        </div>
+                                    </div><!--end col-->
+                                </div> <!--end form-group-->
+                            </form><!--end form-->
+
+
+                        </div>
+
+                    </div>
+                </div><!--end card-body-->
+                <div class="card-body bg-light-alt text-center mx-n3 mb-n3">
+                    <span class="text-muted d-none d-sm-inline-block">Mannatthemes © 2021</span>
+                </div>
+            </div><!--end modal-body-->
+
+        </div><!--end modal-content-->
+    </div><!--end modal-dialog-->
+</div>

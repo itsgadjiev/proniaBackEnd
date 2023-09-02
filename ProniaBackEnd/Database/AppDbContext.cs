@@ -13,6 +13,30 @@ namespace ProniaBackEnd.Database
 
         }
 
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.Entity is IAuditable)
+                {
+                    var auditable = (IAuditable)entry.Entity;
+
+                    if (entry.State == EntityState.Added)
+                    {
+                        auditable.UpdatedOn = DateTime.UtcNow;
+                        auditable.CreatedOn = DateTime.UtcNow;
+                    }
+                    if (entry.State == EntityState.Modified)
+                    {
+                        auditable.UpdatedOn = DateTime.UtcNow;
+                    }
+                }
+            }
+
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
         public override int SaveChanges()
         {
             foreach (var entry in ChangeTracker.Entries())
