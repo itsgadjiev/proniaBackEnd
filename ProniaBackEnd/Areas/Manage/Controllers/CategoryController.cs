@@ -28,14 +28,14 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
 
         public IActionResult Index()
         {
-            var categories = _appDbContext.Categories.OrderByDescending(x => x.CreatedOn).ToList();
+            var categories = _appDbContext.Categories.ToList();
             return View(categories);
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] Category postedCategory)
+        public async Task<IActionResult> Create([FromBody] CategoryAddViewModel postedCategoryVM)
         {
-            var validationResult = _validationRules.Validate(postedCategory);
+            var validationResult = _validationRules.Validate(postedCategoryVM);
             var ListError = new List<ValidationFailure>();
             if (!validationResult.IsValid)
             {
@@ -48,7 +48,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
 
             Category addingCategory = new Category
             {
-                Name = postedCategory.Name,
+                Name = postedCategoryVM.Name,
             };
 
 
@@ -62,7 +62,16 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
         [HttpPut("update/{id}")]
         public async Task<IActionResult> Update([FromBody] CategoryUpdateViewModel categoryVM)
         {
-            //Validation    
+            var validationResult = _validationRules.Validate(categoryVM);
+            var ListError = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ListError.Add(error);
+                }
+                return BadRequest(ListError);
+            }
 
             Category category = await _appDbContext.Categories.FirstOrDefaultAsync(x => x.Id == categoryVM.Id);
 
@@ -78,13 +87,13 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
+            Category category = await _appDbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
             if (category is null) { return NotFound(); }
 
             _appDbContext.Categories.Remove(category);
-            _appDbContext.SaveChanges();
+            await _appDbContext.SaveChangesAsync();
 
             return NoContent();
         }

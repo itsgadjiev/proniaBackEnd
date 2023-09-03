@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
+using ProniaBackEnd.Areas.Manage.ViewModels.categories;
 using ProniaBackEnd.Database.Models;
 
 namespace ProniaBackEnd.Validations
 {
-    public class CategoryValidator:AbstractValidator<Category>
+    public class CategoryValidator:AbstractValidator<BaseCategoryViewModel>
     {
         public CategoryValidator()
         {

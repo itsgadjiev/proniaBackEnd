@@ -84,24 +84,19 @@ function UpdateCategory() {
         success: function (response) {
 
             $(`.${elementClass}`).text(categoryVM.Name);
-            console.log(categoryVM)
-
-            UpdateCategoryModal(categoryVM.Name, categoryVM.Id, categoryVM.CreatedOn);
-
-            $('.categoryId-update-modal').val(response.Id);
-            $('.category-name-update-ajax').val(categoryVM.Name);
-            $('.categoryCreationDate-update-modal').val(response.createdOn);
-
+            console.log(response)
+          
+       
         },
         error: function (error) {
-            console.error('Error:', error);
+            
             for (var i = 0; i < error.responseJSON.length; i++) {
                 let elementId = error.responseJSON[i].propertyName;
 
-                $(`#${elementId}`).text(error.responseJSON[i].errorMessage);
+                $(`#${elementId}-Update`).text(error.responseJSON[i].errorMessage);
 
                 setTimeout(function () {
-                    $(`#${elementId}`).text("");
+                    $(`#${elementId}-Update`).text("");
                 }, 3000);
             }
         }
