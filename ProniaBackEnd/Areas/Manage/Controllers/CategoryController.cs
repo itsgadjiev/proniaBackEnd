@@ -30,7 +30,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
 
         public IActionResult Index()
         {
-            var categories = _appDbContext.Categories.ToList();
+            var categories = _appDbContext.Categories.OrderByDescending(x=>x.CreatedOn).ToList();
             return View(categories);
         }
 
@@ -56,7 +56,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             await _appDbContext.AddAsync(addingCategory);
             await _appDbContext.SaveChangesAsync();
 
-            return Ok();
+            return Ok(addingCategory);
         }
 
 
@@ -75,13 +75,23 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             category.Name = categoryVM.Name;
             await _appDbContext.SaveChangesAsync();
 
-            return Ok();
+            return Ok(category);
         }
 
-        //[HttpGet("delete/{id}")]
-        //public IActionResult Delete(int id)
+        [HttpDelete("delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
+            if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
+
+            _appDbContext.Categories.Remove(category);
+            _appDbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+        //public async Task<IActionResult> Delete(int id)
         //{
-        //    Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
+        //    Category category = await _appDbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
         //    if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
         //    _appDbContext.Categories.Remove(category);
