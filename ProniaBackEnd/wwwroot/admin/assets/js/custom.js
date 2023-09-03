@@ -43,8 +43,17 @@ function AddDataCategory() {
             $('#categoryList').append(newRow);
         },
         error: function (error) {
-            console.error('Error:', error);
-        }
+            for (var i = 0; i < error.responseJSON.length; i++) {
+                let elementId = error.responseJSON[i].propertyName;
+
+                $(`#${elementId}`).text(error.responseJSON[i].errorMessage);
+
+                setTimeout(function () {
+                    $(`#${elementId}`).text(""); 
+                }, 3000);
+            }
+        },
+       
     });
 
     $('.category-name-ajax').val('');
@@ -86,6 +95,15 @@ function UpdateCategory() {
         },
         error: function (error) {
             console.error('Error:', error);
+            for (var i = 0; i < error.responseJSON.length; i++) {
+                let elementId = error.responseJSON[i].propertyName;
+
+                $(`#${elementId}`).text(error.responseJSON[i].errorMessage);
+
+                setTimeout(function () {
+                    $(`#${elementId}`).text("");
+                }, 3000);
+            }
         }
     });
 }

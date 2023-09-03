@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProniaBackEnd.Areas.Manage.ViewModels.categories;
 using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
+using ProniaBackEnd.Validations;
+using ProniaBackEnd.ViewModels.admin.emailMesagges;
 using System;
 using System.Linq;
 
@@ -14,38 +18,33 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
     public class CategoryController : Controller
     {
         private readonly AppDbContext _appDbContext;
+        private readonly CategoryValidator _validationRules;
 
-        public CategoryController(AppDbContext appDbContext)
+        public CategoryController(AppDbContext appDbContext, CategoryValidator validationRules)
         {
             _appDbContext = appDbContext;
+            _validationRules = validationRules;
         }
-
-
-
-        //public async Task<IActionResult> Index()
-        //{
-        //    var categories = await _appDbContext.Categories.ToListAsync();
-        //    return View(categories);
-        //}
 
         public IActionResult Index()
         {
-            var categories = _appDbContext.Categories.OrderByDescending(x=>x.CreatedOn).ToList();
+            var categories = _appDbContext.Categories.OrderByDescending(x => x.CreatedOn).ToList();
             return View(categories);
         }
-
-
-        //[HttpGet("getall")]
-        //public async Task<IActionResult> GetCategories()
-        //{
-        //    return View();
-        //}
-
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] Category postedCategory)
         {
-            //validation
+            var validationResult = _validationRules.Validate(postedCategory);
+            var ListError = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ListError.Add(error);
+                }
+                return BadRequest(ListError);
+            }
 
             Category addingCategory = new Category
             {
@@ -56,7 +55,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             await _appDbContext.AddAsync(addingCategory);
             await _appDbContext.SaveChangesAsync();
 
-            return Ok(addingCategory);
+            return Created("postedCategory", addingCategory);
         }
 
 
@@ -82,22 +81,13 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
         public IActionResult Delete(int id)
         {
             Category category = _appDbContext.Categories.FirstOrDefault(x => x.Id == id);
-            if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
+            if (category is null) { return NotFound(); }
 
             _appDbContext.Categories.Remove(category);
             _appDbContext.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+            return NoContent();
         }
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    Category category = await _appDbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
-        //    if (category is null) { return View(NotFoundConstants.NotFoundApPageUrl); }
 
-        //    _appDbContext.Categories.Remove(category);
-        //    _appDbContext.SaveChanges();
-
-        //    return RedirectToAction(nameof(Index));
-        //}
     }
 }

@@ -23,10 +23,10 @@ namespace ProniaBackEnd
                 {
                     string connectionStr = builder.Configuration.GetConnectionString("sql");
                     opt.UseNpgsql(connectionStr);
-
                 })
                 .AddTransient<ICustomEmailService, EmailSMTPService>()
-                .AddTransient<EmailMessageValidator>();
+                .AddTransient<EmailMessageValidator>()
+                .AddTransient<CategoryValidator>();
 
 
 
