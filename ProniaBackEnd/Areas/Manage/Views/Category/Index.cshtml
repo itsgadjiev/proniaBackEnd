@@ -17,7 +17,7 @@
                             <tr class=" @($"category-{item.Id}-ajax") @($"category-add-ajax")">
                                 <td class="@($"category-{item.Id}-ajax-name")">@(item.Name)</td>
                                 <td>
-                                    <a class="btn btn-de-primary update-category-ajax" data-bs-toggle="modal" data-bs-target="#updateModalLogin" onclick="UpdateCategoryModal('@item.Name','@item.Id','@item.CreatedOn')">
+                                    <a class="btn btn-de-primary update-category-ajax @($"update-category-ajax-{item.Id}")" data-bs-toggle="modal" data-bs-target="#updateModalLogin" onclick="UpdateCategoryModal('@item.Name','@item.Id','@item.CreatedOn')">
                                          Update
                                     </a>
                                    @* <a class="btn btn-outline-info" asp-action="update" asp-controller="category" asp-route-id="@item.Id">Update</a>*@

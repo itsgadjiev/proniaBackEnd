@@ -33,7 +33,7 @@ function AddDataCategory() {
                 <tr class="category-${newCategory.id}-ajax category-add-ajax">
                     <td>${newCategory.name}</td>
                     <td>
-                        <a class="btn btn-de-primary update-category-ajax" data-bs-toggle="modal" data-bs-target="#updateModalLogin" onclick="UpdateCategoryModal('${newCategory.name}', '${newCategory.id}', '${newCategory.createdOn}')">
+                        <a class="btn btn-de-primary update-category-ajax 'update-category-ajax-${newCategory.Id}'" data-bs-toggle="modal" data-bs-target="#updateModalLogin" onclick="UpdateCategoryModal('${newCategory.name}', '${newCategory.id}', '${newCategory.createdOn}')">
                             Update
                         </a>
                         <a class="btn btn-danger" onclick="DeleteCategory('${newCategory.Id}')">Delete</a>
@@ -85,7 +85,23 @@ function UpdateCategory() {
 
             $(`.${elementClass}`).text(categoryVM.Name);
             console.log(response)
-          
+
+         
+
+            var $existingElement = $(`.update-category-ajax-${response.id}`);
+            console.log($existingElement,"$existingElement")
+            var $newElement = $('<a>', {
+                class: `btn btn-de-primary update-category-ajax update-category-ajax-${response.id}`,
+                'data-bs-toggle': 'modal',
+                'data-bs-target': '#updateModalLogin',
+                onclick: `UpdateCategoryModal('${response.name}', '${response.id}', '${response.createdOn}')`,
+                text: 'Update'
+            });
+            console.log($newElement,"$newElement")
+            
+            $existingElement.replaceWith($newElement);
+
+
        
         },
         error: function (error) {
