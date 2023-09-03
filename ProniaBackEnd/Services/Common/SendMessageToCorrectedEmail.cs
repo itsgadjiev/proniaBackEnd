@@ -2,8 +2,16 @@
 
 namespace ProniaBackEnd.Services.Common
 {
+
     public class SendMessageToCorrectedEmail
     {
+        private readonly ILogger<SendMessageToCorrectedEmail> _logger;
+
+        public SendMessageToCorrectedEmail(ILogger<SendMessageToCorrectedEmail> logger)
+        {
+            _logger = logger;
+        }
+
         public static void Handle(MimeMessage message, string[] correctedEmail)
         {
             for (int i = 0; i < correctedEmail.Length; i++)
@@ -14,11 +22,7 @@ namespace ProniaBackEnd.Services.Common
                 }
                 catch (Exception e)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"An error has been occurred while sending email to {correctedEmail[i]}");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"Inner details {e.InnerException}");
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    throw;
                 }
             }
         }
