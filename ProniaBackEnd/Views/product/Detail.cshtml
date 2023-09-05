@@ -1,4 +1,4 @@
-﻿@model ProductDetailViewModel
+﻿@model ProductDetailBasketViewModel
 <!-- Begin Main Content Area  -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
@@ -30,7 +30,7 @@
                                     <a href="~/assets/images/website-images/1-1-570x633.jpg"
                                        class="single-img gallery-popup">
                                         <img class="img-full"
-                                             src="~/uploads/images/@Model.Product.Image"
+                                             src="~/uploads/images/@Model.ProductDetailViewModel.Product.Image"
                                              alt="Product Image" />
                                     </a>
                                 </div>
@@ -99,9 +99,9 @@
                 </div>
                 <div class="col-lg-6 pt-5 pt-lg-0">
                     <div class="single-product-content">
-                        <h2 class="title">@Model.Product.ProductName</h2>
+                        <h2 class="title">@Model.ProductDetailViewModel.Product.ProductName</h2>
                         <div class="price-box">
-                            <span class="new-price">$@Model.Product.Price</span>
+                            <span class="new-price">$@Model.ProductDetailViewModel.Product.Price</span>
                         </div>
                         <div class="rating-box-wrap">
                             <div class="rating-box">
@@ -117,12 +117,12 @@
                                 <a href="#">( 1 Review )</a>
                             </div>
                         </div>
-                        <form method="post" asp-controller="product" asp-action="AddToBasket">
+                        <form method="post" asp-controller="product" asp-action="AddToBasket" asp-route-id="@Model.ProductDetailViewModel.Product.Id">
 
                             <div class="selector-wrap color-option">
                                 <span class="selector-title border-bottom-0">Color</span>
                                 <select asp-for="BasketItem.ColorId" class="nice-select wide border-bottom-0 rounded-0">
-                                    @foreach (var item in Model.ProductColors)
+                                    @foreach (var item in Model.ProductDetailViewModel.ProductColors)
                                     {
                                         <option value="@item.Color.Id">@item.Color.Name</option>
                                     }
@@ -131,22 +131,22 @@
                             <div class="selector-wrap size-option">
                                 <span class="selector-title">Size</span>
                                 <select asp-for="BasketItem.SizeId" class="nice-select wide rounded-0">
-                                    @foreach (var item in Model.ProductSizes)
+                                    @foreach (var item in Model.ProductDetailViewModel.ProductSizes)
                                     {
                                         <option value="@item.Size.Id">@item.Size.Name</option>
                                     }
                                 </select>
                             </div>
                             <p class="short-desc">
-                                @Model.Product.Description
+                                @Model.ProductDetailViewModel.Product.Description
                             </p>
-                            <input type="hidden" asp-for="Product.Id" value="@Model.Product.Id" />
+                            <input type="hidden" asp-for="@Model.BasketItem.ProductId" value="@Model.ProductDetailViewModel.Product.Id" />
                             <ul class="quantity-with-btn">
                                 <li class="quantity">
                                     <div class="cart-plus-minus">
                                         <input class="cart-plus-minus-box"
                                                value="1"
-                                               asp-for="@Model.Count"
+                                               asp-for="@Model.BasketItem.Quantity"
                                                 />
                                     </div>
                                 </li>
@@ -218,7 +218,7 @@
                         <div class="product-category">
                             <span class="title">Categories :</span>
                             <ul>
-                                @foreach (var item in Model.ProductCategorys)
+                                @foreach (var item in Model.ProductDetailViewModel.ProductCategorys)
                                 {
                                     <li>
                                         <a href="#">@item.Category.Name</a>

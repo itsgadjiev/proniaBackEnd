@@ -93,7 +93,7 @@ namespace ProniaBackEnd.Database
                 .Entity<ProductColor>()
                 .HasKey(pc => new { pc.ProductId, pc.ColorId })
                 ;
-                
+
 
             modelBuilder
                 .Entity<ProductColor>()
@@ -123,6 +123,12 @@ namespace ProniaBackEnd.Database
                .WithMany(c => c.ProductSizes)
                .HasForeignKey(pc => pc.SizeId);
 
+            modelBuilder
+              .Entity<Basket>()
+              .ToTable("Baskets");
+
+
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -137,6 +143,7 @@ namespace ProniaBackEnd.Database
         public DbSet<Color> Color { get; set; }
         public DbSet<ProductSize> ProductSize { get; set; }
         public DbSet<ProductColor> ProductColor { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
 
 
 

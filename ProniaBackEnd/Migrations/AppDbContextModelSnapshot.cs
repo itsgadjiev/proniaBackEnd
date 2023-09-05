@@ -22,6 +22,19 @@ namespace ProniaBackEnd.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Basket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Baskets", (string)null);
+                });
+
             modelBuilder.Entity("ProniaBackEnd.Database.Models.BasketItem", b =>
                 {
                     b.Property<int>("Id")
@@ -30,19 +43,24 @@ namespace ProniaBackEnd.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ColorId")
+                    b.Property<int>("BasketId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ColorId")
                         .HasColumnType("integer");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
-                    b.Property<double>("Quantity")
+                    b.Property<double?>("Quantity")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("SizeId")
+                    b.Property<int?>("SizeId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
 
                     b.HasIndex("ColorId");
 
@@ -254,11 +272,15 @@ namespace ProniaBackEnd.Migrations
 
             modelBuilder.Entity("ProniaBackEnd.Database.Models.BasketItem", b =>
                 {
-                    b.HasOne("ProniaBackEnd.Database.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
+                    b.HasOne("ProniaBackEnd.Database.Models.Basket", "Basket")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("BasketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ProniaBackEnd.Database.Models.Color", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorId");
 
                     b.HasOne("ProniaBackEnd.Database.Models.Product", "Product")
                         .WithMany()
@@ -268,9 +290,9 @@ namespace ProniaBackEnd.Migrations
 
                     b.HasOne("ProniaBackEnd.Database.Models.Size", "Size")
                         .WithMany()
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SizeId");
+
+                    b.Navigation("Basket");
 
                     b.Navigation("Color");
 
@@ -334,6 +356,11 @@ namespace ProniaBackEnd.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Basket", b =>
+                {
+                    b.Navigation("BasketItems");
                 });
 
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Category", b =>

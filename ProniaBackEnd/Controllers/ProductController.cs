@@ -4,9 +4,11 @@ using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.ViewModels;
 using ProniaBackEnd.ViewModels.admin.products;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProniaBackEnd.Controllers
 {
+    [Route("client")]
     public class ProductController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -16,7 +18,7 @@ namespace ProniaBackEnd.Controllers
             _appDbContext = appDbContext;
         }
 
-        [HttpGet("client/product/detail/{id}")]
+        [HttpGet("product/detail/{id}")]
         public IActionResult Detail(int id)
         {
             Product product = _appDbContext.Products.FirstOrDefault(x => x.Id == id);
@@ -25,73 +27,67 @@ namespace ProniaBackEnd.Controllers
             ProductDetailViewModel productDetailViewModel = new ProductDetailViewModel()
             {
                 Product = product,
-                Sizes = _appDbContext.Size.ToList(),
-                Colors = _appDbContext.Color.ToList(),
-                Category = _appDbContext.Categories.ToList(),
-                ProductCategorys = _appDbContext.ProductCategory.Where(x => x.ProductId == product.Id).ToList(),
-                ProductColors = _appDbContext.ProductColor.Where(x => x.ProductId == product.Id).ToList(),
-                ProductSizes = _appDbContext.ProductSize.Where(x => x.ProductId == product.Id).ToList(),
+                ProductCategorys = _appDbContext.ProductCategory.Include(x => x.Category).Where(x => x.ProductId == product.Id).ToList(),
+                ProductColors = _appDbContext.ProductColor.Include(x => x.Color).Where(x => x.ProductId == product.Id).ToList(),
+                ProductSizes = _appDbContext.ProductSize.Include(x => x.Size).Where(x => x.ProductId == product.Id).ToList(),
             };
 
+            ProductDetailBasketViewModel productDetailBasketViewModel = new ProductDetailBasketViewModel();
+            productDetailBasketViewModel.ProductDetailViewModel = productDetailViewModel;
 
-
-
-            return View(productDetailViewModel);
+            return View(productDetailBasketViewModel);
         }
 
-        [HttpPost]
-        public IActionResult AddToBasket(ProductDetailViewModel viewModel, int? id)
+        [HttpPost("product/addToBasket/{id}")]
+        public IActionResult AddToBasket(ProductDetailBasketViewModel productDetailBasketVM)
         {
-            if (id is not null)
-            {
-                viewModel.Product = new Product();
-                viewModel.BasketItem = new BasketItem();
-                viewModel.Product.Id = (int)id;
-                viewModel.BasketItem.SizeId = _appDbContext.ProductSize.Where(x => x.ProductId == id).Select(x => x.SizeId).FirstOrDefault();
-                viewModel.BasketItem.ColorId = _appDbContext.ProductColor.Where(x => x.ProductId == id).Select(x => x.ColorId).FirstOrDefault();
+            var basket = _appDbContext.Baskets.SingleOrDefault();
 
-            }
-            else
+            if (basket is null)
             {
-                id = viewModel.Product.Id;
+                basket = new Basket();
+                _appDbContext.Baskets.Add(basket);
             }
 
-            Product product = _appDbContext.Products.FirstOrDefault(x => x.Id == viewModel.Product.Id);
-            if (product is null) { return View(NotFoundConstants.NotFoundProniaUrl); }
+            var product = _appDbContext.Products.FirstOrDefault(x => x.Id == productDetailBasketVM.BasketItem.ProductId);
+            if (product is null) { return NotFound(); }
 
-            BasketItem basketItem = _appDbContext.BasketItems.Where(x => x.ProductId == product.Id && x.SizeId == viewModel.BasketItem.SizeId && x.ColorId == viewModel.BasketItem.ColorId).FirstOrDefault();
+            var productSize = _appDbContext.ProductSize
+                .FirstOrDefault(ps => ps.ProductId == productDetailBasketVM.BasketItem.ProductId
+                && (productDetailBasketVM.BasketItem.SizeId != null ? ps.SizeId == productDetailBasketVM.BasketItem.SizeId : true));
 
+            if (productSize is null) { return NotFound(); }
+
+            var productColor = _appDbContext.ProductColor
+               .FirstOrDefault(pc => pc.ProductId == productDetailBasketVM.BasketItem.ProductId
+               && (productDetailBasketVM.BasketItem.ColorId != null ? pc.ColorId == productDetailBasketVM.BasketItem.ColorId : true));
+
+            if (productColor is null) { return NotFound(); }
+
+
+            BasketItem basketItem = _appDbContext.BasketItems
+                .FirstOrDefault(x =>
+                x.ProductId == productDetailBasketVM.BasketItem.ProductId
+                && x.ColorId == productColor.ColorId
+                && x.SizeId == productSize.SizeId
+                && x.Basket == basket);
 
             if (basketItem is null)
             {
-                basketItem = new BasketItem();
-                basketItem.ProductId = product.Id;
-                basketItem.ColorId = viewModel.BasketItem.ColorId;
-                basketItem.SizeId = viewModel.BasketItem.SizeId;
-
-                if (viewModel.Count is null)
+                basketItem = new BasketItem()
                 {
-                    basketItem.Quantity = 1;
-                }
-                else
-                {
-                    basketItem.Quantity = viewModel.Count;
-                }
+                    Basket = basket,
+                    ColorId = productColor.ColorId,
+                    SizeId = productSize.SizeId,
+                    Quantity = productDetailBasketVM.BasketItem.Quantity != null ? productDetailBasketVM.BasketItem.Quantity : 1,
+                    ProductId = product.Id
 
-
+                };
                 _appDbContext.BasketItems.Add(basketItem);
-
             }
             else
             {
-                if (viewModel.Count is null )
-                {
-                    basketItem.Quantity += 1;
-                }
-                else
-                {
-                    basketItem.Quantity += viewModel.Count;
-                }
+                basketItem.Quantity += productDetailBasketVM.BasketItem.Quantity != null ? productDetailBasketVM.BasketItem.Quantity : 1;
             }
 
             _appDbContext.SaveChanges();

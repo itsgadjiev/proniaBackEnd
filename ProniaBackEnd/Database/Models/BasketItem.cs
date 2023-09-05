@@ -12,5 +12,7 @@ namespace ProniaBackEnd.Database.Models
         public int? SizeId { get; set; }
         public Color Color { get; set; }
         public int? ColorId { get; set; }
+        public Basket Basket{ get; set; }
+        public int BasketId { get; set; }
     }
 }
