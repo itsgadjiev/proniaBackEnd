@@ -39,7 +39,7 @@ namespace ProniaBackEnd.Controllers
         }
 
         [HttpPost("product/addToBasket/{id}")]
-        public IActionResult AddToBasket(ProductDetailBasketViewModel productDetailBasketVM)
+        public IActionResult AddToBasket(ProductDetailBasketViewModel productDetailBasketVM,int id)
         {
             var basket = _appDbContext.Baskets.SingleOrDefault();
 
@@ -49,25 +49,25 @@ namespace ProniaBackEnd.Controllers
                 _appDbContext.Baskets.Add(basket);
             }
 
-            var product = _appDbContext.Products.FirstOrDefault(x => x.Id == productDetailBasketVM.BasketItem.ProductId);
+            var product = _appDbContext.Products.FirstOrDefault(x => x.Id == (productDetailBasketVM != null ? id : productDetailBasketVM.BasketItem.ProductId));
             if (product is null) { return NotFound(); }
 
             var productSize = _appDbContext.ProductSize
-                .FirstOrDefault(ps => ps.ProductId == productDetailBasketVM.BasketItem.ProductId
-                && (productDetailBasketVM.BasketItem.SizeId != null ? ps.SizeId == productDetailBasketVM.BasketItem.SizeId : true));
+                .FirstOrDefault(ps => ps.ProductId == product.Id
+                && (productDetailBasketVM.BasketItem != null ? ps.SizeId == productDetailBasketVM.BasketItem.SizeId : true));
 
             if (productSize is null) { return NotFound(); }
 
             var productColor = _appDbContext.ProductColor
-               .FirstOrDefault(pc => pc.ProductId == productDetailBasketVM.BasketItem.ProductId
-               && (productDetailBasketVM.BasketItem.ColorId != null ? pc.ColorId == productDetailBasketVM.BasketItem.ColorId : true));
+               .FirstOrDefault(pc => pc.ProductId == product.Id
+               && (productDetailBasketVM.BasketItem != null ? pc.ColorId == productDetailBasketVM.BasketItem.ColorId : true));
 
             if (productColor is null) { return NotFound(); }
 
 
             BasketItem basketItem = _appDbContext.BasketItems
                 .FirstOrDefault(x =>
-                x.ProductId == productDetailBasketVM.BasketItem.ProductId
+                x.ProductId == product.Id
                 && x.ColorId == productColor.ColorId
                 && x.SizeId == productSize.SizeId
                 && x.Basket == basket);
@@ -79,7 +79,7 @@ namespace ProniaBackEnd.Controllers
                     Basket = basket,
                     ColorId = productColor.ColorId,
                     SizeId = productSize.SizeId,
-                    Quantity = productDetailBasketVM.BasketItem.Quantity != null ? productDetailBasketVM.BasketItem.Quantity : 1,
+                    Quantity = (productDetailBasketVM.BasketItem != null ? productDetailBasketVM.BasketItem.Quantity : 1),
                     ProductId = product.Id
 
                 };
@@ -87,12 +87,13 @@ namespace ProniaBackEnd.Controllers
             }
             else
             {
-                basketItem.Quantity += productDetailBasketVM.BasketItem.Quantity != null ? productDetailBasketVM.BasketItem.Quantity : 1;
+                basketItem.Quantity += (productDetailBasketVM.BasketItem != null ? productDetailBasketVM.BasketItem.Quantity : 1);
             }
 
             _appDbContext.SaveChanges();
             return RedirectToAction("Index", "home");
         }
+
 
 
 
