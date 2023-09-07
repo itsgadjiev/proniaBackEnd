@@ -1,6 +1,5 @@
 ﻿using Microsoft.Build.Framework;
 using ProniaBackEnd.Database.Base;
-using ProniaBackEnd.Interfaces;
 
 namespace ProniaBackEnd.Database.Models
 {

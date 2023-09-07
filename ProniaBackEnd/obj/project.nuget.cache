@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "VE5JD7qkEWVf7xcRDRPvQcnD4P8Dj1x75U6ay8rkEOceomB3RO/cVYMhTYskGBHCXsndIygxAgYk+BAvX54MPA==",
+  "dgSpecHash": "SA/h03/DPMEb8+8PhZk/edp7N4uNWebq7wANACbxsILlJ9y1o0svmBvvmrJ0s0gQslOc9Hn2GwIgR/geEajNAg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\ProniaBackEnd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ceyhu\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\ceyhu\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\ceyhu\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
     "C:\\Users\\ceyhu\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\ceyhu\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

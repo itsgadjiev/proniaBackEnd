@@ -2099,3 +2099,4 @@ C:\Users\Jake\Desktop\New folder (2)\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.
 C:\Users\Jake\Desktop\New folder (2)\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.pdb
 C:\Users\Jake\Desktop\New folder (2)\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ProniaBackEnd.genruntimeconfig.cache
 C:\Users\Jake\Desktop\New folder (2)\proniaBackEnd\ProniaBackEnd\obj\Debug\net6.0\ref\ProniaBackEnd.dll
+C:\Users\ceyhu\OneDrive\Рабочий стол\proniaBackEnd\ProniaBackEnd\bin\Debug\net6.0\BCrypt.Net-Next.dll

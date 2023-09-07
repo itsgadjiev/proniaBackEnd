@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using ProniaBackEnd.Database.Base;
 using ProniaBackEnd.Database.Models;
-using ProniaBackEnd.Interfaces;
 
 namespace ProniaBackEnd.Database
 {
@@ -91,8 +91,7 @@ namespace ProniaBackEnd.Database
 
             modelBuilder
                 .Entity<ProductColor>()
-                .HasKey(pc => new { pc.ProductId, pc.ColorId })
-                ;
+                .HasKey(pc => new { pc.ProductId, pc.ColorId });
 
 
             modelBuilder
@@ -125,8 +124,15 @@ namespace ProniaBackEnd.Database
 
             modelBuilder
               .Entity<Basket>()
-              .ToTable("Baskets");
+              .ToTable("Baskets")
+              .HasOne<User>(u => u.User)
+              .WithOne(b => b.Basket);
+              
 
+
+            modelBuilder
+                .Entity<User>()
+                .ToTable("Users");
 
 
 
@@ -144,8 +150,7 @@ namespace ProniaBackEnd.Database
         public DbSet<ProductSize> ProductSize { get; set; }
         public DbSet<ProductColor> ProductColor { get; set; }
         public DbSet<Basket> Baskets { get; set; }
-
-
+        public DbSet<User> Users { get; set; }
 
 
     }

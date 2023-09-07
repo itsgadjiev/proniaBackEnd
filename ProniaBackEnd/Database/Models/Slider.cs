@@ -1,5 +1,4 @@
 ﻿using ProniaBackEnd.Database.Base;
-using ProniaBackEnd.Interfaces;
 
 namespace ProniaBackEnd.Database.Models
 {

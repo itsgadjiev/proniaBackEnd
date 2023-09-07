@@ -30,7 +30,13 @@ namespace ProniaBackEnd.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Baskets", (string)null);
                 });
@@ -270,6 +276,48 @@ namespace ProniaBackEnd.Migrations
                     b.ToTable("Sliders");
                 });
 
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Basket", b =>
+                {
+                    b.HasOne("ProniaBackEnd.Database.Models.User", "User")
+                        .WithOne("Basket")
+                        .HasForeignKey("ProniaBackEnd.Database.Models.Basket", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ProniaBackEnd.Database.Models.BasketItem", b =>
                 {
                     b.HasOne("ProniaBackEnd.Database.Models.Basket", "Basket")
@@ -385,6 +433,11 @@ namespace ProniaBackEnd.Migrations
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Size", b =>
                 {
                     b.Navigation("ProductSizes");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.User", b =>
+                {
+                    b.Navigation("Basket");
                 });
 #pragma warning restore 612, 618
         }
