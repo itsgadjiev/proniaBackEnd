@@ -7,25 +7,30 @@ using ProniaBackEnd.ViewModels;
 using System.Security.Claims;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
+using ProniaBackEnd.Services;
 
 namespace ProniaBackEnd.Controllers
 {
-    [Route("Client")]
+    [Route("client")]
     public class AuthController : Controller
     {
         private readonly AppDbContext _appDbContext;
+        private readonly UserService _userService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthController(AppDbContext appDbContext)
+        public AuthController(AppDbContext appDbContext, UserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _appDbContext = appDbContext;
+            _userService = userService;
+            _httpContextAccessor = httpContextAccessor;
         }
-        [HttpGet("register")]
+        [HttpGet("auth/register")]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost("register")]
+        [HttpPost("auth/register")]
         public IActionResult Register(RegisterViewModel registerViewModel)
         {
             if (!ModelState.IsValid)
@@ -45,7 +50,7 @@ namespace ProniaBackEnd.Controllers
                 LastName = registerViewModel.LastName,
                 Email = registerViewModel.Email,
                 Password = BCrypt.Net.BCrypt.HashPassword(registerViewModel.Password),
-
+                Role = Role.RoleEnums.User,
             };
 
             _appDbContext.Add(user);
@@ -57,7 +62,7 @@ namespace ProniaBackEnd.Controllers
 
         #region Login
 
-        [HttpGet]
+        [HttpGet("auth/login")]
         public async Task<IActionResult> Login()
         {
             if (_userService.IsCurrentUserAuthenticated())
@@ -69,22 +74,23 @@ namespace ProniaBackEnd.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("auth/login")]
+
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            var user = _dbContext.Users.SingleOrDefault(u => u.Email == model.Email);
+            var user = _appDbContext.Users.SingleOrDefault(u => u.Email == model.Login);
             if (user is null)
             {
-                ModelState.AddModelError("Password", "Email not found");
+                ModelState.AddModelError("Password", "Data is not valid");
                 return View(model);
             }
 
             if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
-                ModelState.AddModelError("Password", "Password is not valid");
+                ModelState.AddModelError("Password", "Data is not valid");
                 return View(model);
             }
 
@@ -93,19 +99,42 @@ namespace ProniaBackEnd.Controllers
                 new Claim("id", user.Id.ToString()),
             };
 
-            if (_userService.DoesUserHaveRole(user, "Super admin"))
+            if (user.Role == Role.RoleEnums.Admin)
             {
-                claims.Add(new Claim(ClaimTypes.Role, "Super admin"));
+                claims.Add(new Claim(ClaimTypes.Role, Role.Admin));
+            }
+            else if (user.Role == Role.RoleEnums.User)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, Role.User));
+            }
+            else if (user.Role == Role.RoleEnums.SuperAdmin)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, Role.SuperAdmin));
+
+            }
+            else if (user.Role == Role.RoleEnums.Moderator)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, Role.Moderator));
             }
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var claimsPricipal = new ClaimsPrincipal(claimsIdentity);
 
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPricipal);
+            //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPricipal);
 
             return RedirectToAction("index", "home");
         }
 
+        #endregion
+
+        #region Logout
+
+        [HttpGet("auth/logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
         #endregion
     }
 }

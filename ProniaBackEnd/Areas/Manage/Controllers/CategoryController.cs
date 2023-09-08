@@ -26,9 +26,9 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             _validationRules = validationRules;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var categories = _appDbContext.Categories.ToList();
+            var categories =  await _appDbContext.Categories.ToListAsync();
             return View(categories);
         }
 

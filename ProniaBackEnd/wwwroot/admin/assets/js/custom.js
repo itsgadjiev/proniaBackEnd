@@ -5,8 +5,6 @@
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-
-
             },
             error: function (error) {
                 console.error('Error:', error);
@@ -14,11 +12,7 @@
         });
     });
 }
-
-
-
 function AddDataCategory() {
-
     let category = {
         Name: $('.category-name-ajax').val(),
     };
@@ -29,18 +23,39 @@ function AddDataCategory() {
         contentType: 'application/json',
         data: JSON.stringify(category),
         success: function (newCategory) {
-            let newRow = `
-                <tr class="category-${newCategory.id}-ajax category-add-ajax">
-                    <td>${newCategory.name}</td>
-                    <td>
-                        <a class="btn btn-de-primary update-category-ajax 'update-category-ajax-${newCategory.Id}'" data-bs-toggle="modal" data-bs-target="#updateModalLogin" onclick="UpdateCategoryModal('${newCategory.name}', '${newCategory.id}', '${newCategory.createdOn}')">
-                            Update
-                        </a>
-                        <a class="btn btn-danger" onclick="DeleteCategory('${newCategory.Id}')">Delete</a>
-                    </td>
-                </tr>
-            `;
-            $('#categoryList').append(newRow);
+            let $newRow = $('<tr>', {
+                class: `category-${newCategory.id}-ajax category-add-ajax`,
+            });
+
+            let $nameTd = $('<td>', {
+                text: newCategory.name,
+                class: `category-${newCategory.id}-ajax-name`,
+            });
+
+            $newRow.append($nameTd);
+
+            let $actionsTd = $('<td>');
+            let $updateButton = $('<a>', {
+                class: `btn btn-de-primary update-category-ajax update-category-ajax-${newCategory.id}`,
+                'data-bs-toggle': 'modal',
+                'data-bs-target': '#updateModalLogin',
+                text: 'Update',
+                click: function () {
+                    UpdateCategoryModal(newCategory.name, newCategory.id, newCategory.createdOn);
+                },
+            });
+            let $deleteButton = $('<a>', {
+                class: 'btn btn-danger',
+                click: function () {
+                    DeleteCategory(newCategory.id);
+                },
+            }).text('Delete');
+            $actionsTd.append($updateButton, $deleteButton);
+            $newRow.append($actionsTd);
+
+            $updateButton.attr('onclick', `UpdateCategoryModal('${newCategory.name}', '${newCategory.id}', '${newCategory.createdOn}')`);
+
+            $('#categoryList').append($newRow);
         },
         error: function (error) {
             for (var i = 0; i < error.responseJSON.length; i++) {
@@ -49,24 +64,19 @@ function AddDataCategory() {
                 $(`#${elementId}`).text(error.responseJSON[i].errorMessage);
 
                 setTimeout(function () {
-                    $(`#${elementId}`).text(""); 
+                    $(`#${elementId}`).text("");
                 }, 3000);
             }
-        },
-       
+        }
     });
 
     $('.category-name-ajax').val('');
-
 }
-
 function UpdateCategory() {
     let categoryName = $('.category-name-update-ajax').val();
     let catId = $('.categoryId-update-modal').val();
     let creationDateString = $('.categoryCreationDate-update-modal').val();
-
     let creationDate = new Date(creationDateString);
-
 
     let categoryVM = {
         Id: catId,
@@ -74,58 +84,43 @@ function UpdateCategory() {
         CreatedOn: creationDate
     };
 
-    let elementClass = `category-${catId}-ajax-name`;
+    let elementClass = `update-category-ajax-${catId}`;
 
-    $.ajax({
-        url: '/Manage/category/update/' + catId,
-        type: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify(categoryVM),
-        success: function (response) {
+    if ($(`.${elementClass}`).length > 0) {
+        $.ajax({
+            url: '/Manage/category/update/' + catId,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(categoryVM),
+            success: function (response) {
+                $(`.category-${catId}-ajax-name`).text(categoryVM.Name);
 
-            $(`.${elementClass}`).text(categoryVM.Name);
-            console.log(response)
+                let newOnclick = `UpdateCategoryModal('${categoryName}', '${catId}', '${creationDateString}')`;
+                $(`.update-category-ajax-${catId}`).attr('onclick', newOnclick);
 
-         
+                console.log(response, "gfsdgadfg");
+            },
+            error: function (error) {
+                for (var i = 0; i < error.responseJSON.length; i++) {
+                    let elementId = error.responseJSON[i].propertyName;
 
-            var $existingElement = $(`.update-category-ajax-${response.id}`);
-            console.log($existingElement,"$existingElement")
-            var $newElement = $('<a>', {
-                class: `btn btn-de-primary update-category-ajax update-category-ajax-${response.id}`,
-                'data-bs-toggle': 'modal',
-                'data-bs-target': '#updateModalLogin',
-                onclick: `UpdateCategoryModal('${response.name}', '${response.id}', '${response.createdOn}')`,
-                text: 'Update'
-            });
-            console.log($newElement,"$newElement")
-            
-            $existingElement.replaceWith($newElement);
+                    $(`#${elementId}-Update`).text(error.responseJSON[i].errorMessage);
 
-
-       
-        },
-        error: function (error) {
-            
-            for (var i = 0; i < error.responseJSON.length; i++) {
-                let elementId = error.responseJSON[i].propertyName;
-
-                $(`#${elementId}-Update`).text(error.responseJSON[i].errorMessage);
-
-                setTimeout(function () {
-                    $(`#${elementId}-Update`).text("");
-                }, 3000);
+                    setTimeout(function () {
+                        $(`#${elementId}-Update`).text("");
+                    }, 3000);
+                }
             }
-        }
-    });
+        });
+    } 
 }
-
 function UpdateCategoryModal(categoryName, categoryId, categoryCreationDate) {
     $('.categoryId-update-modal').val(categoryId);
     $('.category-name-update-ajax').val(categoryName);
     $('.categoryCreationDate-update-modal').val(categoryCreationDate);
 
+    $('#updateModalLogin').modal('show');
 }
-
 function DeleteCategory(categoryId) {
     $.ajax({
         url: '/Manage/category/delete/' + categoryId,
@@ -140,8 +135,3 @@ function DeleteCategory(categoryId) {
 
     $(`[class*="category-${categoryId}-ajax"]`).remove();
 }
-
-
-
-
-

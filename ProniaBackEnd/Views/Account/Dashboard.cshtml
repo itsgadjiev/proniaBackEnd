@@ -1,0 +1,31 @@
+﻿ <!-- Begin Main Content Area -->
+<main class="main-content">
+    @Html.Partial(
+    "Partials/_BreadcrumbPartial",
+    new BreadcrumbViewModel("dahsboard page", "dashboard"))
+
+    <div class="account-page-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <partial name="Partials/_SidebarMenuPartial" />
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="myaccount-dashboard">
+                        <p>
+                            Hello <b>Pronia</b> (not Pronia?
+                            <a href="login-register.html">Sign out</a>)
+                        </p>
+                        <p>
+                            From your account dashboard you can view your recent
+                            orders, manage your shipping and billing addresses and
+                            <a href="#">edit your password and account details</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Main Content Area End Here -->

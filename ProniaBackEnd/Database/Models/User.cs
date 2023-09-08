@@ -10,7 +10,7 @@ namespace ProniaBackEnd.Database.Models
         public string Password { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-
+        public Role.RoleEnums Role { get; set; }
         public Basket Basket { get; set; }
     }
 }

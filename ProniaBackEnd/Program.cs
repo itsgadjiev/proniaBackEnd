@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using NETCore.MailKit.Core;
@@ -24,9 +25,15 @@ namespace ProniaBackEnd
                     string connectionStr = builder.Configuration.GetConnectionString("sql");
                     opt.UseNpgsql(connectionStr);
                 })
-                .AddTransient<ICustomEmailService, EmailSMTPService>()
-                .AddTransient<EmailMessageValidator>()
-                .AddTransient<CategoryValidator>();
+                .AddScoped<ICustomEmailService, EmailSMTPService>()
+                .AddScoped<EmailMessageValidator>()
+                .AddScoped<CategoryValidator>()
+                .AddScoped<UserService>()
+                .AddHttpContextAccessor();
+
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie();
 
 
 
@@ -45,6 +52,7 @@ namespace ProniaBackEnd
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

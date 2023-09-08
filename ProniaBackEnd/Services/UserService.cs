@@ -8,7 +8,7 @@ namespace ProniaBackEnd.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly AppDbContext _appDbContext;
         private User _user;
-        public UserService(IHttpContextAccessor httpContextAccessor,AppDbContext appDbContext)
+        public UserService(IHttpContextAccessor httpContextAccessor, AppDbContext appDbContext)
         {
             _httpContextAccessor = httpContextAccessor;
             _appDbContext = appDbContext;
@@ -21,11 +21,33 @@ namespace ProniaBackEnd.Services
 
         public User GetCurrentUser()
         {
-            if (!IsUserAuthorized())
+            if (_user != null)
             {
-               
+                return _user;
             }
-            return;
+
+            if (!IsCurrentUserAuthenticated())
+            {
+                throw new Exception("User is not authenticated");
+            }
+
+            var userClaimId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "id");
+            if (userClaimId is null)
+            {
+                throw new Exception("User is not authenticated");
+            }
+
+            var userClaimIdInt = Convert.ToInt32(userClaimId.Value);
+            var user = _appDbContext.Users.SingleOrDefault(x => x.Id == userClaimIdInt);
+
+            if (user is null)
+            {
+                throw new Exception("User is not found");
+            }
+
+            _user = user;
+
+            return _user;
 
         }
 

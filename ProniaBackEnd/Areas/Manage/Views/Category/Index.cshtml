@@ -20,11 +20,11 @@
                                     <a class="btn btn-de-primary update-category-ajax @($"update-category-ajax-{item.Id}")" data-bs-toggle="modal" data-bs-target="#updateModalLogin" onclick="UpdateCategoryModal('@item.Name','@item.Id','@item.CreatedOn')">
                                          Update
                                     </a>
-                                   @* <a class="btn btn-outline-info" asp-action="update" asp-controller="category" asp-route-id="@item.Id">Update</a>*@
                                     <a class="btn btn-danger" onclick="DeleteCategory('@item.Id')">Delete</a>
                                 </td>
                             </tr>
                         }
+                 
                     </tbody>
                 </table>
             </div>
@@ -79,7 +79,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade show active p-3 pt-3" id="LogIn_Tab" role="tabpanel">
-                            <form class="form-horizontal auth-form my-4" action="index.html">
+                            <form class="form-horizontal auth-form my-4" >
                                 <div class="form-group">
                                     <label for="username">Category Name</label>
                                     <div class="input-group mb-3">
@@ -142,7 +142,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade show active p-3 pt-3" id="LogIn_Tab" role="tabpanel">
-                            <form class="form-horizontal auth-form my-4" action="index.html">
+                            <form class="form-horizontal auth-form my-4" >
                                 <div class="form-group">
                                     <label for="username">Category Name</label>
                                     <div class="input-group mb-3">
