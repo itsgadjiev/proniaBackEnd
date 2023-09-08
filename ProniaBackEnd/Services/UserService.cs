@@ -51,5 +51,11 @@ namespace ProniaBackEnd.Services
 
         }
 
+        public string GetCurrentUserFullName()
+        {
+            User user = GetCurrentUser();
+            return $"{user.Name} {user.LastName}";
+        }
+
     }
 }

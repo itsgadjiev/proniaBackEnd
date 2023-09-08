@@ -5,6 +5,8 @@ using ProniaBackEnd.Database;
 using ProniaBackEnd.ViewModels;
 using ProniaBackEnd.ViewModels.admin.products;
 using Microsoft.EntityFrameworkCore;
+using ProniaBackEnd.Services;
+using System.Linq;
 
 namespace ProniaBackEnd.Controllers
 {
@@ -12,10 +14,12 @@ namespace ProniaBackEnd.Controllers
     public class ProductController : Controller
     {
         private readonly AppDbContext _appDbContext;
+        private readonly UserService _userService;
 
-        public ProductController(AppDbContext appDbContext)
+        public ProductController(AppDbContext appDbContext,UserService userService)
         {
             _appDbContext = appDbContext;
+            _userService = userService;
         }
 
         [HttpGet("product/detail/{id}")]
@@ -41,11 +45,15 @@ namespace ProniaBackEnd.Controllers
         [HttpPost("product/addToBasket/{id}")]
         public IActionResult AddToBasket(ProductDetailBasketViewModel productDetailBasketVM,int id)
         {
-            var basket = _appDbContext.Baskets.SingleOrDefault();
+            var user = _userService.GetCurrentUser();
+            var basket = _appDbContext.Baskets.SingleOrDefault(b=>b.UserId==user.Id);
 
             if (basket is null)
             {
-                basket = new Basket();
+                basket = new Basket()
+                {
+                    UserId = user.Id,
+                };
                 _appDbContext.Baskets.Add(basket);
             }
 

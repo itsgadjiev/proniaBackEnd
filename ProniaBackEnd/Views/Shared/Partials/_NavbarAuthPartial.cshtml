@@ -1,0 +1,39 @@
+﻿@using ProniaBackEnd.Services
+@inject UserService userService
+
+@if (userService.IsCurrentUserAuthenticated())
+{
+    <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButton" data-bs-toggle="dropdown" aria-label="setting" aria-expanded="false">
+        @userService.GetCurrentUserFullName()
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="settingButton">
+        <li>
+            <a class="dropdown-item" asp-controller="account" asp-action="dashboard">
+                Dashboard
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="auth" asp-action="logout">
+                Logout
+            </a>
+        </li>
+    </ul>
+}
+else
+{
+    <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButton" data-bs-toggle="dropdown" aria-label="setting" aria-expanded="false">
+        <i class="pe-7s-users"></i>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="settingButton">
+        <li>
+            <a class="dropdown-item" asp-controller="auth" asp-action="login">
+                Login
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="auth" asp-action="register">
+                Register
+            </a>
+        </li>
+    </ul>
+}

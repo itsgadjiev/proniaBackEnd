@@ -120,7 +120,7 @@ namespace ProniaBackEnd.Controllers
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var claimsPricipal = new ClaimsPrincipal(claimsIdentity);
 
-            //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPricipal);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPricipal);
 
             return RedirectToAction("index", "home");
         }
