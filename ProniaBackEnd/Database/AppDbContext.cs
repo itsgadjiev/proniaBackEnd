@@ -151,7 +151,9 @@ namespace ProniaBackEnd.Database
         public DbSet<ProductColor> ProductColor { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<User> Users { get; set; }
-
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        
 
     }
 }

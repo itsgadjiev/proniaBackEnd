@@ -11,9 +11,9 @@ namespace ProniaBackEnd.Database.Models
         public string ProductOrderPhoto { get; set; }
         public double? ProductOrderQuantity { get; set; }
         public string ProductOrderDescription { get; set; }
-        public List<string> ProductOrderSizes { get; set; }
-        public List<string> ProductOrderColors { get; set; }
-
+        public string ProductOrderSizes { get; set; }
+        public string ProductOrderColor { get; set; }
+        public string ProductOrderCategory { get; set; }
         public Order Order { get; set; }
         public int OrderId { get; set; }
         public DateTime CreatedOn { get; set; }

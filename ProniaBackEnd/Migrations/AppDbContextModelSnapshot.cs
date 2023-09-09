@@ -140,6 +140,86 @@ namespace ProniaBackEnd.Migrations
                     b.ToTable("EmailMessage");
                 });
 
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("OrderItemStatusValue")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BasketItemId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ProductOrderCategory")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProductOrderColor")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProductOrderDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProductOrderName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProductOrderPhoto")
+                        .HasColumnType("text");
+
+                    b.Property<double>("ProductOrderPrice")
+                        .HasColumnType("double precision");
+
+                    b.Property<double?>("ProductOrderQuantity")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("ProductOrderSizes")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -352,6 +432,34 @@ namespace ProniaBackEnd.Migrations
                     b.Navigation("Size");
                 });
 
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Order", b =>
+                {
+                    b.HasOne("ProniaBackEnd.Database.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.OrderItem", b =>
+                {
+                    b.HasOne("ProniaBackEnd.Database.Models.BasketItem", "BasketItem")
+                        .WithMany()
+                        .HasForeignKey("BasketItemId");
+
+                    b.HasOne("ProniaBackEnd.Database.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BasketItem");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("ProniaBackEnd.Database.Models.ProductCategory", b =>
                 {
                     b.HasOne("ProniaBackEnd.Database.Models.Category", "Category")
@@ -422,6 +530,11 @@ namespace ProniaBackEnd.Migrations
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Color", b =>
                 {
                     b.Navigation("ProductColors");
+                });
+
+            modelBuilder.Entity("ProniaBackEnd.Database.Models.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("ProniaBackEnd.Database.Models.Product", b =>
