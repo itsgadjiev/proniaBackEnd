@@ -16,6 +16,7 @@ namespace ProniaBackEnd.ViewModels
             public double ProductPrice { get; set; }
             public double? ProductQuantity { get; set; }
             public string ImageUrl { get; set; }
+            public double ProductTotal { get; set; }
         }
     }
 }
