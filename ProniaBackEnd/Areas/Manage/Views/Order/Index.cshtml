@@ -1,0 +1,81 @@
+﻿@using ProniaBackEnd.Areas.Manage.ViewModels.orders
+@model List<OrderListViewModel>
+@{
+    int counter = 1;
+}
+<div class="col-12 " style="margin-top:30px;">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Total Price</th>
+                            <th>Item Count</th>
+                            <th>Order Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(counter++)</td>
+                                <td style="width:350px;">
+                                    <p class="d-inline-block align-middle mb-0">
+                                        <a href="" class="d-inline-block align-middle mb-0 product-name">@item.TracingCode</a>
+                                        <br>
+                                        @*<span class="badge badge-soft-@(item. ? "danger" : "blue")">@(item.IsModified ? "Modified" : "Not Modified")</span>*@
+                                    </p>
+                                </td>
+                                @*  <td>@item.CategoryId</td>*@
+                                <td>@item.Total</td>
+                                <td>
+                                    @item.Count
+                                </td>
+                                <td>
+                                    @item.CreatedOn
+                                </td>
+                                <td>
+                                   @item.OrderStatus
+                                </td> 
+                                <td>
+                                    <a asp-action="detail" asp-controller="order" asp-area="manage" asp-route-id="@item.Id" class="mr-2"> <i class="las la-pen text-secondary font-16"></i></a>
+                                    @*<a asp-action="delete" asp-controller="products" asp-route-id="@item.Id"><i class="las la-trash-alt text-secondary font-16"></i></a>*@
+
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-outline-light btn-sm px-4 " asp-action="Create" asp-controller="products">+ Add New</a>
+                </div><!--end col-->
+                <div class="col-auto">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul><!--end pagination-->
+                    </nav><!--end nav-->
+                </div> <!--end col-->
+            </div><!--end row-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div> <!-- end col -->

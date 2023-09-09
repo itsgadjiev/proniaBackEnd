@@ -7,5 +7,6 @@
         public string OrderStatus { get; set; }
         public string TracingCode { get; set; }
         public DateTime CreatedOn { get; set; }
+        public string ImageURL { get; set; }
     }
 }
