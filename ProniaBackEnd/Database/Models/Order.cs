@@ -10,6 +10,7 @@ namespace ProniaBackEnd.Database.Models
         public List<OrderItem> OrderItems { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
+        public string TracingCode { get; set; }
         public OrderItemStatus.OrderItemStatusValue OrderItemStatusValue { get; set; }
     }
 }

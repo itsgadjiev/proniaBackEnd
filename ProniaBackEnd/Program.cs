@@ -29,6 +29,7 @@ namespace ProniaBackEnd
                 .AddScoped<EmailMessageValidator>()
                 .AddScoped<CategoryValidator>()
                 .AddScoped<UserService>()
+                .AddScoped<OrderCodeGenerator>()
                 .AddHttpContextAccessor();
 
 

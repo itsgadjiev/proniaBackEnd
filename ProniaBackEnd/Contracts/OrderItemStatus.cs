@@ -2,7 +2,7 @@
 {
     public class OrderItemStatus
     {
-        public const string Creted = "Creted";
+        public const string Created = "Created";
         public const string Confirmed = "Confirmed";
         public const string Rejected = "Rejected";
         public const string Sended = "Sended";
@@ -11,7 +11,7 @@
         public enum OrderItemStatusValue
         {
 
-            Creted = 0,
+            Created = 0,
             Confirmed = 1,
             Rejected = 2,
             Sended = 4,

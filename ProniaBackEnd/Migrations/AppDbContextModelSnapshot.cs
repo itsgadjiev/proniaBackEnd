@@ -55,6 +55,9 @@ namespace ProniaBackEnd.Migrations
                     b.Property<int?>("ColorId")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("IsOrdered")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
@@ -153,6 +156,9 @@ namespace ProniaBackEnd.Migrations
 
                     b.Property<int>("OrderItemStatusValue")
                         .HasColumnType("integer");
+
+                    b.Property<string>("TracingCode")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("timestamp with time zone");

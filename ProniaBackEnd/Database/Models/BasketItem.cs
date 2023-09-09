@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿using ProniaBackEnd.Database.Base;
+using System.Transactions;
 
 namespace ProniaBackEnd.Database.Models
 {
@@ -14,5 +15,6 @@ namespace ProniaBackEnd.Database.Models
         public int? ColorId { get; set; }
         public Basket Basket{ get; set; }
         public int BasketId { get; set; }
+        public bool IsOrdered { get; set; } = false;
     }
 }

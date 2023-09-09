@@ -18,5 +18,6 @@ namespace ProniaBackEnd.Database.Models
         public int OrderId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
+        
     }
 }

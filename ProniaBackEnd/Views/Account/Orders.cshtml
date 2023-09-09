@@ -1,4 +1,5 @@
 ﻿﻿ <!-- Begin Main Content Area -->
+@model List<AccountOrderViewModel>
 <main class="main-content">
     @Html.Partial(
     "Partials/_BreadcrumbPartial",
@@ -24,28 +25,22 @@
                                         <th>TOTAL</th>
                                         <th></th>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <a class="account-order-id" href="#">#5364</a>
-                                        </td>
-                                        <td>Mar 27, 2019</td>
-                                        <td>On Hold</td>
-                                        <td>$162.00 for 2 items</td>
-                                        <td>
-                                            <a href="#" class="btn btn-dark"><span>View</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a class="account-order-id" href="#">#5356</a>
-                                        </td>
-                                        <td>Mar 27, 2019</td>
-                                        <td>On Hold</td>
-                                        <td>$162.00 for 2 items</td>
-                                        <td>
-                                            <a href="#" class="btn btn-dark"><span>View</span></a>
-                                        </td>
-                                    </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a class="account-order-id" href="#">@item.TracingCode</a>
+                                            </td>
+                                            <td>@item.CreatedOn.ToString("d")</td>
+                                            <td>@item.OrderStatus</td>
+                                            <td>$@item.Total for @item.Count items</td>
+                                            <td>
+                                                <a href="#" class="btn btn-dark"><span>View</span></a>
+                                            </td>
+                                        </tr>
+                                    }
+
+
                                 </tbody>
                             </table>
                         </div>

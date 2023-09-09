@@ -27,7 +27,7 @@ namespace ProniaBackEnd.Controllers
             var cartViewModel = new CartViewModel();
 
             var basketItems = _appDbContext.BasketItems
-                .Where(x => x.Basket.UserId == user.Id)
+                .Where(x => x.Basket.UserId == user.Id && x.IsOrdered ==false)
                 .Select(x => new CartViewModel.BasketItemViewModel
                 {
                     ColorName = x.Color.Name,

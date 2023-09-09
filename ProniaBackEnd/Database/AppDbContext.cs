@@ -2,15 +2,20 @@
 using Microsoft.Extensions.Options;
 using ProniaBackEnd.Database.Base;
 using ProniaBackEnd.Database.Models;
+using ProniaBackEnd.Services;
+using System.Linq;
+using System.Security.AccessControl;
 
 namespace ProniaBackEnd.Database
 {
     public class AppDbContext : DbContext
     {
+        private readonly UserService _userService;
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
-
+            
         }
 
 
@@ -55,6 +60,7 @@ namespace ProniaBackEnd.Database
                         auditable.UpdatedOn = DateTime.UtcNow;
                     }
                 }
+               
             }
 
             return base.SaveChanges();

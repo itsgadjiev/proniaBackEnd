@@ -28,7 +28,7 @@ namespace ProniaBackEnd.ViewComponents
             var cartViewModel = new CartViewModel();
 
             cartViewModel.BasketItems = _appDbContext.BasketItems
-                .Where(x => x.Basket.UserId == User.Id)
+                .Where(x => x.Basket.UserId == User.Id && x.IsOrdered == false)
                 .Select(x => new CartViewModel.BasketItemViewModel
                 {
                     ColorName = x.Color.Name,
@@ -40,7 +40,7 @@ namespace ProniaBackEnd.ViewComponents
                 })
                 .ToList();
 
-            cartViewModel.Total = _appDbContext.BasketItems.Where(x => x.Basket.UserId == User.Id).Sum(bi=>bi.Quantity * bi.Product.Price).Value;
+            cartViewModel.Total = _appDbContext.BasketItems.Where(x => x.Basket.UserId == User.Id && x.IsOrdered == false).Sum(bi=>bi.Quantity * bi.Product.Price).Value;
 
 
             return View(cartViewModel);

@@ -45,6 +45,11 @@ namespace ProniaBackEnd.Controllers
         [HttpPost("product/addToBasket/{id}")]
         public IActionResult AddToBasket(ProductDetailBasketViewModel productDetailBasketVM,int id)
         {
+            if (!_userService.IsCurrentUserAuthenticated())
+            {
+                return RedirectToAction("login", "auth");
+            }
+
             var user = _userService.GetCurrentUser();
             var basket = _appDbContext.Baskets.SingleOrDefault(b=>b.UserId==user.Id);
 
@@ -78,7 +83,8 @@ namespace ProniaBackEnd.Controllers
                 x.ProductId == product.Id
                 && x.ColorId == productColor.ColorId
                 && x.SizeId == productSize.SizeId
-                && x.Basket == basket);
+                && x.Basket == basket
+                && x.IsOrdered ==false);
 
             if (basketItem is null)
             {
