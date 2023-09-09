@@ -43,5 +43,16 @@ namespace ProniaBackEnd.Controllers
 
             return View(cartViewModel);
         }
+
+        [HttpPost]
+        public IActionResult Order()
+        {
+            var user = _userService.GetCurrentUser();
+
+
+
+
+            return RedirectToAction("orders", "account");
+        }
     }
 }

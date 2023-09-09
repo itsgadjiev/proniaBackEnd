@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-
+﻿
+@model CartViewModel
 <!-- Begin Main Content Area -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
@@ -295,7 +295,9 @@
                         </div>
                     </form>
                 </div>
+
                 <div class="col-lg-6 col-12">
+                    <form>
                     <div class="your-order">
                         <h3>Your order</h3>
                         <div class="your-order-table table-responsive">
@@ -307,36 +309,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="cart_item">
-                                        <td class="cart-product-name">
-                                            Vestibulum suscipit<strong class="product-quantity">
-                                                × 1
-                                            </strong>
-                                        </td>
-                                        <td class="cart-product-total">
-                                            <span class="amount">$165.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr class="cart_item">
-                                        <td class="cart-product-name">
-                                            Vestibulum suscipit<strong class="product-quantity">
-                                                × 1
-                                            </strong>
-                                        </td>
-                                        <td class="cart-product-total">
-                                            <span class="amount">$165.00</span>
-                                        </td>
-                                    </tr>
+                                    @foreach (var item in Model.BasketItems)
+                                    {
+                                            <tr class="cart_item">
+                                                <td class="cart-product-name">
+                                                    @item.ProductName<strong class="product-quantity">
+                                                        × @item.ProductQuantity
+                                                    </strong>
+                                                </td>
+                                                <td class="cart-product-total">
+                                                    <span class="amount">$@item.ProductTotal</span>
+                                                </td>
+                                            </tr>
+                                        }
+                                    
+                                
                                 </tbody>
                                 <tfoot>
                                     <tr class="cart-subtotal">
                                         <th>Cart Subtotal</th>
-                                        <td><span class="amount">$215.00</span></td>
+                                        <td><span class="amount">$@Model.Total</span></td>
                                     </tr>
                                     <tr class="order-total">
                                         <th>Order Total</th>
                                         <td>
-                                            <strong><span class="amount">$215.00</span></strong>
+                                                <strong><span class="amount">$@Model.Total</span></strong>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -422,13 +419,14 @@
                                     </div>
                                 </div>
                                 <div class="order-button-payment">
-                                    <input class="chechkoutBtnCart" value="Place order" type="submit" />
+                                    @*<input class="chechkoutBtnCart" value="Place order" type="submit" />*@
                                     <button class="chechkoutBtnCart" value="Place order" type="submit">Place order</button>
 
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

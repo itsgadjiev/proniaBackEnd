@@ -3783,9 +3783,31 @@ blockquote p {
   transition: all 0.3s ease 0s;
 }
 
+.chechkoutBtnCart {
+    background-color: #505050;
+    border: medium none;
+    color: #ffffff;
+    font-size: 17px;
+    height: 50px;
+    margin: 20px 0 0;
+    padding: 0;
+    text-transform: uppercase;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    width: 100%;
+    border: 1px solid transparent;
+    cursor: pointer;
+
+}
+
+.chechkoutBtnCart:hover{
+    background-color:greenyellow;
+}
+
 .single-product-content .quantity-with-btn li a.custom-circle-btn:hover i {
-  background-color: #abd373;
-  color: #ffffff;
+    background-color: #abd373;
+    color: #ffffff;
 }
 
 .single-product-content .quantity-with-btn li:not(:last-child) {
