@@ -27,6 +27,7 @@ namespace ProniaBackEnd
                 })
                 .AddScoped<ICustomEmailService, EmailSMTPService>()
                 .AddScoped<EmailMessageValidator>()
+                .AddScoped<OrderStatusMessageService>()
                 .AddScoped<CategoryValidator>()
                 .AddScoped<UserService>()
                 .AddScoped<OrderCodeGenerator>()

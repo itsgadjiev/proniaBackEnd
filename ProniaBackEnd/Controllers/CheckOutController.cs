@@ -58,7 +58,7 @@ namespace ProniaBackEnd.Controllers
             Order order = new()
             {
                 UserId = user.Id,
-                OrderItemStatusValue = OrderItemStatus.OrderItemStatusValue.Created,
+                OrderItemStatusValue = OrderItemStatus.OrderItemStatusValue.CREATED,
                 TracingCode = _orderCodeGenerator.GenarateAndReturnUniqueOrderCode(),
             };
 

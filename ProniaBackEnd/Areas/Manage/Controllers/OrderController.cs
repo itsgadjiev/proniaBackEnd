@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProniaBackEnd.Areas.Manage.ViewModels.orders;
 using ProniaBackEnd.Database;
+using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Services;
 using ProniaBackEnd.ViewModels;
 using static ProniaBackEnd.Contracts.OrderItemStatus;
@@ -13,10 +14,12 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
     public class OrderController : Controller
     {
         private readonly AppDbContext _appDbContext;
+        private readonly OrderStatusMessageService _orderStatusMessageService;
 
-        public OrderController(AppDbContext appDbContext)
+        public OrderController(AppDbContext appDbContext, OrderStatusMessageService orderStatusMessageService)
         {
             _appDbContext = appDbContext;
+            _orderStatusMessageService = orderStatusMessageService;
         }
 
         [HttpGet]
@@ -45,7 +48,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
         {
             OrderDetailStatusViewModel orderDetailStatusVM = new OrderDetailStatusViewModel();
             var orderItems = _appDbContext.OrderItems.Where(x => x.OrderId == orderId).ToList();
-
+            var order = _appDbContext.Orders.SingleOrDefault(x => x.Id == orderId);
             orderDetailStatusVM.OrderItems = orderItems;
             orderDetailStatusVM.OrderId = orderId;
             orderDetailStatusVM.OrderItemStatusValues = Enum.GetValues(typeof(OrderItemStatusValue))
@@ -56,15 +59,22 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
                 Value = ((int)v).ToString()
             })
             .ToList();
-
+            orderDetailStatusVM.OrderStatusValue = order.OrderItemStatusValue;
             return View(orderDetailStatusVM);
         }
 
         [HttpPost("Details")]
-        public IActionResult UpdateOrderStatus(OrderDetailStatusViewModel OrderDetailStatusViewModel)
+        public IActionResult OrderDetails(OrderDetailStatusViewModel orderDetailStatusViewModel)
         {
+            Order order = _appDbContext.Orders.SingleOrDefault(x => x.Id == orderDetailStatusViewModel.OrderId);
+            if (order is null) { return BadRequest(); }
 
 
+            order.OrderItemStatusValue = orderDetailStatusViewModel.OrderStatusValue;
+            _orderStatusMessageService.SendMessageDueStatusForOrder(order);
+            _appDbContext.SaveChanges();
+            
+           
             return RedirectToAction(nameof(Index));
         }
     }

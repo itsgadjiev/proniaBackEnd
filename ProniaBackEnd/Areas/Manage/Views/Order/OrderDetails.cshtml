@@ -49,8 +49,8 @@
                     </table>
                 }
 
-                <form method="post" asp-action="UpdateOrderStatus" asp-controller="order" asp-area="manage">
-                    <input type="hidden" >
+                <form method="post" asp-action="OrderDetails" asp-controller="order" asp-area="manage" id="OrderDetailStatus">
+                    <input type="hidden" value="@Model.OrderId" asp-for="@Model.OrderId">
                     <select asp-for="OrderStatusValue">
                         @foreach (var item in Model.OrderItemStatusValues)
                         {
@@ -62,7 +62,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <button class="btn btn-outline-light btn-sm px-4 " type="submit" >Save </button>
+                    <button class="btn btn-outline-light btn-sm px-4 " type="submit" form="OrderDetailStatus">Save </button>
                 </div><!--end col-->
                 <div class="col-auto">
                     <nav aria-label="...">

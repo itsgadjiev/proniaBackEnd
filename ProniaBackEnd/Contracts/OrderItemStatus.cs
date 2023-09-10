@@ -10,12 +10,11 @@
 
         public enum OrderItemStatusValue
         {
-
-            Created = 0,
-            Confirmed = 1,
-            Rejected = 2,
-            Sended = 4,
-            Completed = 16
+            CREATED = 0,
+            CONFIRMED = 1,
+            REJECTED = 2,
+            SENDED = 4,
+            COMPLETED = 16
         }
 
     }
