@@ -14,7 +14,7 @@ namespace ProniaBackEnd.Services
         private readonly ICustomEmailService _emailSMTPService;
         private readonly AppDbContext _appDbContext;
 
-        public OrderStatusMessageService(ICustomEmailService emailSMTPService,AppDbContext appDbContext)
+        public OrderStatusMessageService(ICustomEmailService emailSMTPService, AppDbContext appDbContext)
         {
             _emailSMTPService = emailSMTPService;
             _appDbContext = appDbContext;
@@ -38,7 +38,17 @@ namespace ProniaBackEnd.Services
             {
                 throw new Exception("User doesnt exsists");
             }
-            _emailSMTPService.SendEmail(user.Email, "Order Status", PrepareMessageForOrder((string)field.GetValue(messageTemplate), order));
+
+            try
+            {
+                _emailSMTPService.SendEmail(user.Email, "Order Status", PrepareMessageForOrder((string)field.GetValue(messageTemplate), order));
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception($"This Order status was not found {e.StackTrace}");
+            }
         }
     }
 }

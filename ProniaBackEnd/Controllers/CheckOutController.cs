@@ -15,12 +15,14 @@ namespace ProniaBackEnd.Controllers
         private readonly UserService _userService;
         private readonly AppDbContext _appDbContext;
         private readonly OrderCodeGenerator _orderCodeGenerator;
+        private readonly OrderStatusMessageService _orderStatusMessageService;
 
-        public CheckOutController(UserService userService, AppDbContext appDbContext, OrderCodeGenerator orderCodeGenerator)
+        public CheckOutController(UserService userService, AppDbContext appDbContext, OrderCodeGenerator orderCodeGenerator, OrderStatusMessageService orderStatusMessageService)
         {
             _userService = userService;
             _appDbContext = appDbContext;
             _orderCodeGenerator = orderCodeGenerator;
+            _orderStatusMessageService = orderStatusMessageService;
         }
 
 
@@ -92,6 +94,7 @@ namespace ProniaBackEnd.Controllers
             }
 
             _appDbContext.SaveChanges();
+            _orderStatusMessageService.SendMessageDueStatusForOrder(order);
             return RedirectToAction("orders", "account");
         }
     }

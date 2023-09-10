@@ -43,7 +43,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
 
         }
 
-        [HttpGet("Details")]
+        [HttpGet("Details/{orderId}")]
         public IActionResult OrderDetails(int orderId)
         {
             OrderDetailStatusViewModel orderDetailStatusVM = new OrderDetailStatusViewModel();
@@ -63,7 +63,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             return View(orderDetailStatusVM);
         }
 
-        [HttpPost("Details")]
+        [HttpPost("Details/{orderId}")]
         public IActionResult OrderDetails(OrderDetailStatusViewModel orderDetailStatusViewModel)
         {
             Order order = _appDbContext.Orders.SingleOrDefault(x => x.Id == orderDetailStatusViewModel.OrderId);
