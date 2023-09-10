@@ -36,7 +36,8 @@ namespace ProniaBackEnd.Controllers
                     ProductPrice = x.Product.Price,
                     SizeName = x.Size.Name,
                     ProductQuantity = x.Quantity,
-                    ProductTotal = (x.Quantity * x.Product.Price).Value
+                    ProductTotal = (x.Quantity * x.Product.Price).Value,
+                    ImageUrl=x.Product.Image
                 })
                 .ToList();
 

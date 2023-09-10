@@ -1,11 +1,31 @@
 ﻿@model Order
 
 <div>
-    <h5>Order Details</h5>
+    
     <p>Order ID: @Model.Id</p>
     <p>Order Date: @Model.CreatedOn.ToString("d")</p>
     <p>Order Status: @Model.OrderItemStatusValue.ToString()</p>
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Customer</th>
+                <th>Update date</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>@Model.TracingCode</td>
+                <td>@Model.User.Name</td>
+                <td>@Model.UpdatedOn</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <h5>Basket Items</h5>
     <table class="table">
         <thead>
             <tr>
@@ -15,12 +35,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.OrderItems)
+            @foreach (var basketItem in Model.OrderItems)
             {
                 <tr>
-                    <td>@item.Order.TracingCode</td>
-                    <td>@item.ProductOrderQuantity</td>
-                    <td>$@item.ProductOrderPrice</td>
+                    <td>@basketItem.ProductOrderName</td>
+                    <td>@basketItem.ProductOrderQuantity</td>
+                    <td>$@basketItem.ProductOrderPrice</td>
                 </tr>
             }
         </tbody>

@@ -127,6 +127,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NccHJvZHVjdFxEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/Shared/Components/BasketItemCount/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQmFza2V0SXRlbUNvdW50XERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/Shared/Components/Cart/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2FydFxEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -137,6 +141,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/Shared/Partials/_NavbarAuthPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhcnRpYWxzXF9OYXZiYXJBdXRoUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/Shared/Partials/_NavbarBasketItemCountPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhcnRpYWxzXF9OYXZiYXJCYXNrZXRJdGVtQ291bnRQYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ceyhu/OneDrive/Рабочий стол/proniaBackEnd/ProniaBackEnd/Views/Shared/Partials/_OrderDetailsPartial.cshtml]

@@ -31,7 +31,7 @@
                         <a href="single-product-variable.html"
                        class="product-item_img">
                             <img class="img-full"
-                             src="@basketItem.ImageUrl"
+                             src="~/uploads/images/@basketItem.ImageUrl"
                              alt="Product Image" />
                         </a>
                         <div class="product-item_content">
@@ -51,7 +51,11 @@
         </div>
         <div class="group-btn_wrap d-grid gap-2">
             <a asp-action="index" asp-controller="cart" class="btn btn-dark">View Cart</a>
-            <a asp-action="index" asp-controller="checkout" class="btn btn-dark">Checkout</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+
+                <a asp-action="index" asp-controller="checkout" class="btn btn-dark">Checkout</a>
+            }
         </div>
     </div>
 </div>

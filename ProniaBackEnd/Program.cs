@@ -35,7 +35,10 @@ namespace ProniaBackEnd
 
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie();
+             .AddCookie(options =>
+             {
+                 options.LoginPath = "/client/auth/Login";
+             }); 
 
 
 

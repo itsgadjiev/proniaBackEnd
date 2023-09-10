@@ -36,7 +36,9 @@ namespace ProniaBackEnd.ViewComponents
                     ProductName = x.Product.ProductName,
                     ProductPrice = x.Product.Price,
                     SizeName = x.Size.Name,
-                    ProductQuantity = x.Quantity
+                    ProductQuantity = x.Quantity,
+                    ImageUrl = x.Product.Image
+                    
                 })
                 .ToList();
 
