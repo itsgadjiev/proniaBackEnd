@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Services;
 using ProniaBackEnd.ViewModels;
@@ -38,13 +39,30 @@ namespace ProniaBackEnd.Controllers
                     OrderStatus = x.OrderItemStatusValue.ToString(),
                     TracingCode = x.TracingCode,
                     Total=x.OrderItems.Where(ot=>ot.OrderId==x.Id).Sum(ot=>ot.ProductOrderQuantity * ot.ProductOrderPrice).Value,
-                    Count= x.OrderItems.Where(ot => ot.OrderId == x.Id).Count()
+                    Count= x.OrderItems.Where(ot => ot.OrderId == x.Id).Count(),
+                    OrderId=x.Id
                 })
                 .ToList();
 
 
             return View(orders);
         }
+
+        [HttpGet("order-details/{orderId}")]
+        public IActionResult GetOrderDetails(int orderId)
+        {
+            var order = _appDbContext.Orders
+                .Include(x => x.OrderItems)
+                .FirstOrDefault(x => x.Id == orderId && x.UserId == _userService.GetCurrentUser().Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("Partials/_OrderDetailsPartial", order);
+        }
+
 
         [HttpGet("Addresses")]
         public IActionResult Addresses()

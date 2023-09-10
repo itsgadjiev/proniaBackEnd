@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Vii3Fe3ralhdhBPh0vNwhP18rBDCnF3MmKNS3cjvBas=",
+  "Hash": "WJBqOcBOtKNoxFJvSmZWcYlxxHcEXTqKi6OxjtARYjE=",
   "Source": "ProniaBackEnd",
   "BasePath": "_content/ProniaBackEnd",
   "Mode": "Default",
@@ -18275,6 +18275,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\service.png"
     },
     {
+      "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\assets\\js\\customClient.js",
+      "SourceId": "ProniaBackEnd",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\",
+      "BasePath": "_content/ProniaBackEnd",
+      "RelativePath": "assets/js/customClient.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\customClient.js"
+    },
+    {
       "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\assets\\js\\main.js",
       "SourceId": "ProniaBackEnd",
       "SourceType": "Discovered",
@@ -19191,6 +19208,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\images\\e2c2384d-e74f-4e0a-9ed1-5aadb0957fa1.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\uploads\\images\\e9dbdb47-d300-4d1f-af04-c19ee34c1926.jpg",
+      "SourceId": "ProniaBackEnd",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\",
+      "BasePath": "_content/ProniaBackEnd",
+      "RelativePath": "uploads/images/e9dbdb47-d300-4d1f-af04-c19ee34c1926.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\images\\e9dbdb47-d300-4d1f-af04-c19ee34c1926.jpg"
     }
   ]
 }

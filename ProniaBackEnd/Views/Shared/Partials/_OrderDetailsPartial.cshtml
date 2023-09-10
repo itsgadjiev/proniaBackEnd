@@ -1,0 +1,28 @@
+﻿@model Order
+
+<div>
+    <h5>Order Details</h5>
+    <p>Order ID: @Model.Id</p>
+    <p>Order Date: @Model.CreatedOn.ToString("d")</p>
+    <p>Order Status: @Model.OrderItemStatusValue.ToString()</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Order.TracingCode</td>
+                    <td>@item.ProductOrderQuantity</td>
+                    <td>$@item.ProductOrderPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
