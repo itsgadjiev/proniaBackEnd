@@ -43,7 +43,7 @@
                                    @item.OrderStatus
                                 </td> 
                                 <td>
-                                    <a asp-action="detail" asp-controller="order" asp-area="manage" asp-route-id="@item.Id" class="mr-2"> <i class="las la-pen text-secondary font-16"></i></a>
+                                    <a asp-action="OrderDetails" asp-controller="order" asp-area="manage" asp-route-orderId="@item.Id" class="mr-2"> <i class="las la-pen text-secondary font-16"></i></a>
                                     @*<a asp-action="delete" asp-controller="products" asp-route-id="@item.Id"><i class="las la-trash-alt text-secondary font-16"></i></a>*@
 
                                 </td>
