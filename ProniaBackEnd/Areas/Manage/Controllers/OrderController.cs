@@ -60,6 +60,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             })
             .ToList();
             orderDetailStatusVM.OrderStatusValue = order.OrderItemStatusValue;
+            
             return View(orderDetailStatusVM);
         }
 

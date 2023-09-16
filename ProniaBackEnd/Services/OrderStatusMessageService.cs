@@ -30,6 +30,7 @@ namespace ProniaBackEnd.Services
 
         public void SendMessageDueStatusForOrder(Order order)
         {
+
             MessageTemplate messageTemplate = new MessageTemplate();
             Type type = messageTemplate.GetType();
             FieldInfo field = type.GetField(order.OrderItemStatusValue.ToString().ToUpper() + "_ORDER_" + "AZ")!;
@@ -42,7 +43,6 @@ namespace ProniaBackEnd.Services
             try
             {
                 _emailSMTPService.SendEmail(user.Email, "Order Status", PrepareMessageForOrder((string)field.GetValue(messageTemplate), order));
-
             }
             catch (Exception e)
             {

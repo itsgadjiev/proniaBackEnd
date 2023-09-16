@@ -1,4 +1,5 @@
-﻿﻿<div class="offcanvas-minicart_wrapper" id="miniCart">
+﻿@model AccountDetailViewModel
+﻿<div class="offcanvas-minicart_wrapper" id="miniCart">
     <div class="offcanvas-body">
         <div class="minicart-content">
             <div class="minicart-heading">
@@ -64,21 +65,21 @@
 
                 <div class="col-lg-9">
                     <div class="myaccount-details">
-                        <form action="#" class="myaccount-form">
+                        <form method="post" asp-action="SendVerificationLink" asp-controller="EmailVerification" class="myaccount-form">
                             <div class="myaccount-form-inner">
                                 <div class="single-input single-input-half">
                                     <label>First Name*</label>
-                                    <input type="text" />
+                                    <input type="text" readonly value="@Model.Name" />
                                 </div>
                                 <div class="single-input single-input-half">
                                     <label>Last Name*</label>
-                                    <input type="text" />
+                                    <input type="text" readonly value="@Model.LastName" />
                                 </div>
                                 <div class="single-input">
                                     <label>Email*</label>
-                                    <input type="email" />
+                                    <input type="email" readonly value="@Model.Email" />
                                 </div>
-                                <div class="single-input">
+                        @*        <div class="single-input">
                                     <label>
                                         Current Password(leave blank to leave
                                         unchanged)
@@ -95,15 +96,17 @@
                                 <div class="single-input">
                                     <label>Confirm New Password</label>
                                     <input type="password" />
-                                </div>
+                                </div>*@
                                 <div class="single-input">
                                     <button class="btn btn-custom-size lg-size btn-pronia-primary"
                                             type="submit">
-                                        <span>SAVE CHANGES</span>
+                                        <span>Verify Email</span>
                                     </button>
                                 </div>
                             </div>
                         </form>
+
+                        <a asp-action="VerifyEmail" asp-controller="EmailVerification" asp-route-userId="sdafasf" asp-route-token="aaaaa"></a>
                     </div>
                 </div>
             </div>

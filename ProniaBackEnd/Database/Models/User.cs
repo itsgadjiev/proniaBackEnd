@@ -12,5 +12,6 @@ namespace ProniaBackEnd.Database.Models
         public DateTime UpdatedOn { get; set; }
         public Role.RoleEnums Role { get; set; }
         public Basket Basket { get; set; }
+        public bool IsVerifiedEmail { get; set; }
     }
 }

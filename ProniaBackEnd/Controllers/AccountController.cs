@@ -73,8 +73,17 @@ namespace ProniaBackEnd.Controllers
         [HttpGet("AccountDetails")]
         public IActionResult AccountDetails()
         {
-            return View();
+            var user = _userService.GetCurrentUser();
+            AccountDetailViewModel accountDetailViewModel = new AccountDetailViewModel
+            {
+                Email=user.Email,
+                Name= user.Name,
+                LastName = user.LastName
+            };
+
+            return View(accountDetailViewModel);
         }
+
 
       
     }
