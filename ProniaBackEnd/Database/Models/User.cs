@@ -1,4 +1,5 @@
 ﻿using ProniaBackEnd.Database.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProniaBackEnd.Database.Models
 {
@@ -13,5 +14,9 @@ namespace ProniaBackEnd.Database.Models
         public Role.RoleEnums Role { get; set; }
         public Basket Basket { get; set; }
         public bool IsVerifiedEmail { get; set; }
+        public List<UserNotification> UserNotificationsSent { get; set; }
+        public List<UserNotification> UserNotificationsReceived { get; set; }
+
+
     }
 }

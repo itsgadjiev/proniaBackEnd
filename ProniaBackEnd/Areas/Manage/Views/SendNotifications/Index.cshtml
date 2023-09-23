@@ -1,0 +1,57 @@
+﻿@model List<UserNotification>
+@{
+    int counter = 0;
+}
+<div class="col-12 " style="margin-top:30px;">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>SendingUser</th>
+                            <th>RecievingUser</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>CreatedOn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.SendingUser.Name</td>
+                                <td>@item.RecievingUser.Name</td>
+                                <td>@item.Notification.Title</td>
+                                <td>@item.Notification.Description</td>
+                                <td>@item.Notification.CreatedOn</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-outline-light btn-sm px-4 " asp-action="send" asp-controller="SendNotifications">+ Add New</a>
+                </div><!--end col-->
+                <div class="col-auto">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul><!--end pagination-->
+                    </nav><!--end nav-->
+                </div> <!--end col-->
+            </div><!--end row-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div> <!-- end col -->

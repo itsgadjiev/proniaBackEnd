@@ -92,6 +92,8 @@ namespace ProniaBackEnd.Controllers
             {
                 item.IsOrdered = true;
             }
+            
+
 
             _appDbContext.SaveChanges();
             _orderStatusMessageService.SendMessageDueStatusForOrder(order);

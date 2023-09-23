@@ -15,7 +15,7 @@ namespace ProniaBackEnd.Database
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
-            
+
         }
 
 
@@ -60,7 +60,7 @@ namespace ProniaBackEnd.Database
                         auditable.UpdatedOn = DateTime.UtcNow;
                     }
                 }
-               
+
             }
 
             return base.SaveChanges();
@@ -133,13 +133,36 @@ namespace ProniaBackEnd.Database
               .ToTable("Baskets")
               .HasOne<User>(u => u.User)
               .WithOne(b => b.Basket);
-              
+
 
 
             modelBuilder
                 .Entity<User>()
                 .ToTable("Users");
 
+            modelBuilder.Entity<UserNotification>()
+       .HasKey(un => new { un.SendingUserId, un.RecievingUserId, un.NotificationId });
+
+            modelBuilder
+                .Entity<UserNotification>()
+                .HasOne<Notification>(un => un.Notification)
+                .WithMany(n => n.UserNotifications)
+                .HasForeignKey(un => un.NotificationId)
+                .IsRequired();
+
+            modelBuilder
+                .Entity<UserNotification>()
+                .HasOne<User>(un => un.RecievingUser)
+                .WithMany(u => u.UserNotificationsReceived)
+                .HasForeignKey(un => un.RecievingUserId)
+                .IsRequired();
+
+            modelBuilder
+                .Entity<UserNotification>()
+                .HasOne<User>(un => un.SendingUser)
+                .WithMany(u => u.UserNotificationsSent)
+                .HasForeignKey(un => un.SendingUserId)
+                .IsRequired();
 
 
             base.OnModelCreating(modelBuilder);
@@ -160,9 +183,12 @@ namespace ProniaBackEnd.Database
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<UserEmailToken> UserEmailTokens { get; set; }
+        public DbSet<UserNotification> UserNotifications { get; set; }
+        public DbSet<Notification> Notification { get; set; }
 
-        
-        
+
+
+
 
     }
 }

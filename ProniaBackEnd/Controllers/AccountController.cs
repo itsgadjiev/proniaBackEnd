@@ -84,6 +84,12 @@ namespace ProniaBackEnd.Controllers
             return View(accountDetailViewModel);
         }
 
+        public IActionResult Notifications()
+        {
+
+            return View();
+        }
+
 
       
     }

@@ -1,0 +1,71 @@
+﻿@using ProniaBackEnd.Areas.Manage.ViewModels.userNotifications;
+@model UserNotificationViewModel
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-end">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="product" asp-action="index">Products</a></li>
+                    <li class="breadcrumb-item active">Add Product</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Add product</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" asp-controller="SendNotifications" asp-action="send" enctype="multipart/form-data" id="submit-form">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Title">Title</label>
+                                <input class="form-control" asp-for="Title">
+                                <span asp-validation-for="Title" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label>Desc</label>
+                                <input class ="form-control" asp-for="Desc" >
+                                <span asp-validation-for="Desc" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label>Users</label>
+                                <select class="form-select" asp-for="SelectedUserIds" id="sizes-multiselect">
+                                    <option disabled>Select the Users</option>
+                                    @foreach (var user in Model.Users)
+                                    {
+                                        <option value="@user.Id">@user.Name @user.LastName</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="SelectedUserIds" class="invalid-feedback" style="display:block"></span>
+                            </div>
+                        </div>
+                       
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group mt-3 text-center">
+                    <button class="btn btn-primary" type="submit" form="submit-form">Create</button>
+                    <a asp-controller="product" asp-action="index" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
