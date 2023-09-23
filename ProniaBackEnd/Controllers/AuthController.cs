@@ -8,6 +8,9 @@ using System.Security.Claims;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
 using ProniaBackEnd.Services;
+using Microsoft.AspNetCore.SignalR;
+using ProniaBackEnd.Hubs;
+using ProniaBackEnd.Services.concrets;
 
 namespace ProniaBackEnd.Controllers
 {
@@ -16,13 +19,15 @@ namespace ProniaBackEnd.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly UserService _userService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHubContext<UserStatusHub> _hubContext;
+        private readonly UserOnlineStatusService _alertService;
 
-        public AuthController(AppDbContext appDbContext, UserService userService, IHttpContextAccessor httpContextAccessor)
+        public AuthController(AppDbContext appDbContext, UserService userService, IHubContext<UserStatusHub> hubContext, UserOnlineStatusService alertService)
         {
             _appDbContext = appDbContext;
             _userService = userService;
-            _httpContextAccessor = httpContextAccessor;
+            _hubContext = hubContext;
+            _alertService = alertService;
         }
         [HttpGet("auth/register")]
         public IActionResult Register()
@@ -122,6 +127,8 @@ namespace ProniaBackEnd.Controllers
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPricipal);
 
+            
+
             return RedirectToAction("index", "home");
         }
 
@@ -132,7 +139,9 @@ namespace ProniaBackEnd.Controllers
         [HttpGet("auth/logout")]
         public async Task<IActionResult> Logout()
         {
+
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
             return RedirectToAction("Index", "Home");
         }
         #endregion

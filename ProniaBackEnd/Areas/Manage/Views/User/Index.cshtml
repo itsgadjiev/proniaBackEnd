@@ -1,0 +1,67 @@
+﻿@using ProniaBackEnd.Areas.Manage.ViewModels.users;
+@model List<UserViewModel>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Users</h4> <!-- Update the title -->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="users-table" class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Session status</th>
+                                <th>Name</th> <!-- Replace with the appropriate user fields -->
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Is Confirmed</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int rowCounter = 1;
+                            }
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@(rowCounter++)</td>
+                                    @if (user.IsOnline)
+                                    {
+                                        <td>
+                                            <span id="online-tracked-@user.Id" class="badge badge-soft-success">Online</span>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <span id="online-tracked-@user.Id" class="badge badge-soft-danger">Offline</span>
+                                        </td>
+                                    }
+
+                                    <td>@user.Name</td>
+                                    <td>@user.LastName</td>
+                                    <td>@user.Email</td>
+                                    <td>@(user.IsConfirmed ? "Yes" : "No")</td>
+                                    <td>@user.Role</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section custom_scripts{
+    <script src="~/admin/assets/pages/staff-users-view-hub.js" asp-append-version="true"></script>
+}

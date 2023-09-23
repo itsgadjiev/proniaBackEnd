@@ -11,8 +11,8 @@
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="~/admin/assets/images/favicon.ico">
-      @RenderSection("plugin_styles", false)
-      @RenderSection("custom_styles", false)
+    @RenderSection("plugin_styles", false)
+    @RenderSection("custom_styles", false)
     <!-- App css -->
     <link href="~/admin/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -95,27 +95,28 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-action="index" asp-controller="slider">Sliders</a>
                         </li><!--end nav-item-->
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" asp-action="index" asp-controller="Email">Email Messages</a>
                         </li><!--end nav-item-->
-                          <li class="nav-item">
+                        <li class="nav-item">
                             @*<a class="nav-link" onclick="GetAjaxCategories()">Categories</a>*@
                             <a class="nav-link" asp-action="index" asp-controller="category">Categories</a>
                         </li><!--end nav-item-->
                         <li class="nav-item">
                             <a class="nav-link" asp-action="index" asp-controller="order" asp-area="manage">Orders</a>
                         </li><!--end nav-item-->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="index" asp-controller="user" asp-area="manage">Users</a>
+                        </li><!--end nav-item-->
 
                     </ul><!--end nav-->
-
-
-@*                    <div class="title-box">
-                        <h6 class="menu-title">Departments</h6>
+                    @*                    <div class="title-box">
+                    <h6 class="menu-title">Departments</h6>
                     </div>
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="index" asp-controller="department">All Departments</a>
-                        </li><!--end nav-item-->
+                    <li class="nav-item">
+                    <a class="nav-link" asp-action="index" asp-controller="department">All Departments</a>
+                    </li><!--end nav-item-->
                     </ul><!--end nav-->*@
                 </div><!-- end Dashboards -->
 
@@ -1111,10 +1112,17 @@
     <!-- end page-wrapper -->
     <!-- Javascript  -->
     <!-- App js -->
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer asp-append-version="true"></script>
     <script src="~/admin/assets/js/app.js" asp-append-version="true"></script>
     <script src="~/admin/assets/js/custom.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.11/signalr.min.js" integrity="sha512-BmbgtaebZ4BB5jiHMIauI5fFKc7dXo0Hqm7nmkHnoq63qBaYQWg1bhcNoaIBkfpw5bymrPEM8ap2fCB6ObSK4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script src="~/js/customSignal.js" asp-append-version="true"></script>
+
+    }
+
     @RenderSection("plugins_scripts", false);
     @RenderSection("custom_scripts", false);
 </body>

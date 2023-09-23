@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using NETCore.MailKit.Core;
 using ProniaBackEnd.Database;
+using ProniaBackEnd.Hubs;
 using ProniaBackEnd.Services;
 using ProniaBackEnd.Services.abstracts;
+using ProniaBackEnd.Services.concrets;
 using ProniaBackEnd.Validations;
 
 
@@ -31,6 +33,7 @@ namespace ProniaBackEnd
                 .AddScoped<CategoryValidator>()
                 .AddScoped<UserService>()
                 .AddScoped<OrderCodeGenerator>()
+                .AddSingleton<UserOnlineStatusService>()
                 .AddHttpContextAccessor();
 
 
@@ -38,9 +41,10 @@ namespace ProniaBackEnd
              .AddCookie(options =>
              {
                  options.LoginPath = "/client/auth/Login";
-             }); 
+             });
 
 
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
@@ -63,6 +67,9 @@ namespace ProniaBackEnd
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapHub<UserStatusHub>("/userStatusHub");
+
 
             app.Run();
         }

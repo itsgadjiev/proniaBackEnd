@@ -125,9 +125,9 @@
 
 
                                         @await Component.InvokeAsync("BasketItemCount")
-                                        
-                                        
-                                        
+
+
+
                                         <li class="mobile-menu_wrap d-block d-lg-none">
                                             <a href="#mobileMenu"
                                                class="mobile-menu_btn toolbar-btn pl-0">
@@ -498,21 +498,21 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                 @*   <button class="btn btn-link dropdown-toggle ht-btn p-0"
-                                            type="button"
-                                            id="settingButtonTwo"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                        <i class="pe-7s-users"></i>
+                                    @*   <button class="btn btn-link dropdown-toggle ht-btn p-0"
+                                    type="button"
+                                    id="settingButtonTwo"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="pe-7s-users"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="settingButtonTwo">
-                                        <li>
-                                            <a class="dropdown-item" href="my-account.html">My account</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="login-register.html">Login | Register</a>
-                                        </li>
+                                    aria-labelledby="settingButtonTwo">
+                                    <li>
+                                    <a class="dropdown-item" href="my-account.html">My account</a>
+                                    </li>
+                                    <li>
+                                    <a class="dropdown-item" href="login-register.html">Login | Register</a>
+                                    </li>
                                     </ul>*@
 
 
@@ -968,7 +968,6 @@
         </div>
         <!-- Footer Area End Here -->
         <!-- Begin Modal Area -->
-
         <!-- Modal Area End Here -->
         <!-- Begin Scroll To Top -->
         <a class="scroll-to-top" href="">
@@ -998,6 +997,13 @@
 
     <!--Main JS (Common Activation Codes)-->
     <script src="~/assets/js/main.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.11/signalr.min.js" integrity="sha512-BmbgtaebZ4BB5jiHMIauI5fFKc7dXo0Hqm7nmkHnoq63qBaYQWg1bhcNoaIBkfpw5bymrPEM8ap2fCB6ObSK4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script src="~/js/customSignal.js" asp-append-version="true"></script>
+    }
     <script src="~/assets/js/customClient.js" asp-append-version="true"></script>
+
+
 </body>
 </html>

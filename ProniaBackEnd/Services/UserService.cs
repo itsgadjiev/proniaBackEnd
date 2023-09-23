@@ -57,5 +57,13 @@ namespace ProniaBackEnd.Services
             return $"{user.Name} {user.LastName}";
         }
 
+        public List<User> GetAllStaffMembers()
+        {
+            return _appDbContext.Users
+                .Where(x => x.Role == Role.RoleEnums.Admin
+                || x.Role == Role.RoleEnums.SuperAdmin
+                || x.Role == Role.RoleEnums.Moderator)
+                .ToList();
+        }
     }
 }
