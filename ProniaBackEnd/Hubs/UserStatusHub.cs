@@ -49,24 +49,43 @@ public class UserStatusHub : Hub
     {
         var staffUsers = _userService.GetAllStaffMembers();
 
+        _userStatusService.RemoveConnectionId(_userService.GetCurrentUser(),Context.ConnectionId);
+        var userConnections= _userStatusService.GetAllConnectionIds(_userService.GetCurrentUser());
         foreach (var staffUser in staffUsers)
         {
             var connections = _userStatusService.GetAllConnectionIds(staffUser);
 
-            var userStatusVM = new
+            if (userConnections.Count != 0)
             {
-                UserId = _userService.GetCurrentUser().Id,
-                Status = false
-            };
+                var userStatusVM = new
+                {
+                    UserId = _userService.GetCurrentUser().Id,
+                    Status = true
+                };
 
-            _hubContext
-                .Clients
-                .Clients(connections)
-                .SendAsync("UserStatus", userStatusVM)
-                .Wait();
+                _hubContext
+                    .Clients
+                    .Clients(connections)
+                    .SendAsync("UserStatus", userStatusVM)
+                    .Wait();
+            }
+            else
+            {
+                var userStatusVM = new
+                {
+                    UserId = _userService.GetCurrentUser().Id,
+                    Status = false
+                };
+
+                _hubContext
+                    .Clients
+                    .Clients(connections)
+                    .SendAsync("UserStatus", userStatusVM)
+                    .Wait();
+            }
+
         }
 
-        _userStatusService.RemoveConnectionId(_userService.GetCurrentUser(),Context.ConnectionId);
         return base.OnDisconnectedAsync(exception);
     }
 }

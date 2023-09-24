@@ -91,13 +91,14 @@ public class SendNotificationsController : Controller
                 _hubContext
                     .Clients
                     .Clients(connections)
-                    .SendAsync("UserNotificationFromAdmin", 
-                    new {
-                        Sender=_userService.GetCurrentUser().Name,
-                        Reciever=user.Name,
-                        Date=DateTime.Now,
-                        Title= notification.Title,
-                        Desc= notification.Description
+                    .SendAsync("UserNotificationFromAdmin",
+                    new
+                    {
+                        Sender = _userService.GetCurrentUser().Name,
+                        Reciever = user.Name,
+                        Date = DateTime.Now,
+                        Title = notification.Title,
+                        Desc = notification.Description
 
                     })
                     .Wait();
