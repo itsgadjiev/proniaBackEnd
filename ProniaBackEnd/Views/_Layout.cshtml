@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="~/assets/css/nice-select.css" />
     <link rel="stylesheet" href="~/assets/css/magnific-popup.min.css" />
     <link rel="stylesheet" href="~/assets/css/ion.rangeSlider.min.css" />
+    <link rel="stylesheet" href="sweetalert2.min.css">
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="~/assets/css/style.css" asp-append-version="true" />
@@ -1000,6 +1001,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.11/signalr.min.js" integrity="sha512-BmbgtaebZ4BB5jiHMIauI5fFKc7dXo0Hqm7nmkHnoq63qBaYQWg1bhcNoaIBkfpw5bymrPEM8ap2fCB6ObSK4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @if (User.Identity.IsAuthenticated)
     {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="~/js/customSignal.js" asp-append-version="true"></script>
         <script src="~/js/userNoteficationSignalR.js" asp-append-version="true"></script>
     }

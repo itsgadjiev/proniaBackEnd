@@ -17,8 +17,6 @@ try {
 userNotificationConnection.on("UserNotificationFromAdmin", data => {
     const userNotificationWrapper = document.querySelector(".user-notification-wrapper");
 
-    console.log("userNotification", data)
-
     const card = document.createElement("div");
     card.classList.add("card mt-5");
 
@@ -43,4 +41,16 @@ userNotificationConnection.on("UserNotificationFromAdmin", data => {
     card.appendChild(cardBody);
 
     userNotificationWrapper.appendChild(card);
+});
+
+
+userNotificationConnection.on("UserOrderStatusNotificationFromAdmin", data => {
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: data.message,
+        showConfirmButton: false,
+        timer: 4500
+    })
+    
 });

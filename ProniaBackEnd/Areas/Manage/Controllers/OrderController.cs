@@ -16,6 +16,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
         private readonly AppDbContext _appDbContext;
         private readonly OrderStatusMessageService _orderStatusMessageService;
 
+
         public OrderController(AppDbContext appDbContext, OrderStatusMessageService orderStatusMessageService)
         {
             _appDbContext = appDbContext;
@@ -60,7 +61,7 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             })
             .ToList();
             orderDetailStatusVM.OrderStatusValue = order.OrderItemStatusValue;
-            
+
             return View(orderDetailStatusVM);
         }
 
@@ -74,8 +75,8 @@ namespace ProniaBackEnd.Areas.Manage.Controllers
             order.OrderItemStatusValue = orderDetailStatusViewModel.OrderStatusValue;
             _orderStatusMessageService.SendMessageDueStatusForOrder(order);
             _appDbContext.SaveChanges();
-            
-           
+
+
             return RedirectToAction(nameof(Index));
         }
     }

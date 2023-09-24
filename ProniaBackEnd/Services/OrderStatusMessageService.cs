@@ -1,11 +1,12 @@
-﻿using ProniaBackEnd.Constants;
+﻿using Microsoft.AspNetCore.SignalR;
+using ProniaBackEnd.Constants;
 using ProniaBackEnd.Database;
 using ProniaBackEnd.Database.Models;
+using ProniaBackEnd.Hubs;
 using ProniaBackEnd.Services.abstracts;
+using ProniaBackEnd.Services.concrets;
 using ProniaBackEnd.Templates;
-using System.Net.Mail;
 using System.Reflection;
-using System.Reflection.Metadata;
 
 namespace ProniaBackEnd.Services
 {
@@ -13,11 +14,15 @@ namespace ProniaBackEnd.Services
     {
         private readonly ICustomEmailService _emailSMTPService;
         private readonly AppDbContext _appDbContext;
+        private readonly UserNotificationService _userNotificationService;
+        private readonly IHubContext<UserMessageHub> _hubContext;
 
-        public OrderStatusMessageService(ICustomEmailService emailSMTPService, AppDbContext appDbContext)
+        public OrderStatusMessageService(ICustomEmailService emailSMTPService, AppDbContext appDbContext, UserNotificationService userNotificationService, IHubContext<UserMessageHub> hubContext)
         {
             _emailSMTPService = emailSMTPService;
             _appDbContext = appDbContext;
+            _userNotificationService = userNotificationService;
+            _hubContext = hubContext;
         }
 
         public string PrepareMessageForOrder(string preparedMessage, Order order)
@@ -31,6 +36,7 @@ namespace ProniaBackEnd.Services
         public void SendMessageDueStatusForOrder(Order order)
         {
 
+
             MessageTemplate messageTemplate = new MessageTemplate();
             Type type = messageTemplate.GetType();
             FieldInfo field = type.GetField(order.OrderItemStatusValue.ToString().ToUpper() + "_ORDER_" + "AZ")!;
@@ -42,7 +48,23 @@ namespace ProniaBackEnd.Services
 
             try
             {
-                _emailSMTPService.SendEmail(user.Email, "Order Status", PrepareMessageForOrder((string)field.GetValue(messageTemplate), order));
+                string preparedMessage = PrepareMessageForOrder((string)field.GetValue(messageTemplate), order);
+                _emailSMTPService.SendEmail(user.Email, "Order Status", preparedMessage);
+
+                var connections = _userNotificationService.GetAllConnectionIds(order.User);
+                if (connections.Any())
+                {
+                    _hubContext
+                        .Clients
+                        .Clients(connections)
+                        .SendAsync("UserOrderStatusNotificationFromAdmin",
+                        new
+                        {
+                            Message = preparedMessage
+                        })
+                        .Wait();
+                }
+
             }
             catch (Exception e)
             {
