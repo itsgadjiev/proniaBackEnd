@@ -2,11 +2,11 @@
 
 namespace ProniaBackEnd.Services.concrets
 {
-    public class UserOrderNotificationService
+    public class UserNotificationService
     {
         public Dictionary<int, List<string>> _userConnections { get; set; }
 
-        public UserOrderNotificationService()
+        public UserNotificationService()
         {
             _userConnections = new Dictionary<int, List<string>>();
         }
@@ -33,6 +33,16 @@ namespace ProniaBackEnd.Services.concrets
             {
                 _userConnections.Remove(user.Id);
             }
+        }
+
+        public List<string> GetAllConnectionIds(User user)
+        {
+            if (_userConnections.ContainsKey(user.Id))
+            {
+                return _userConnections[user.Id];
+            }
+
+            return new List<string>();
         }
     }
 }

@@ -1,11 +1,15 @@
-﻿<div class="container user-notification-wrapper" >
-    <div class="card">
-        <div class="card-header">
-            Featured
+﻿@model List<UserNotification>
+<div class="container user-notification-wrapper">
+    @foreach (var item in Model)
+    {
+        <div class="card mt-5">
+            <div class="card-header">
+                (@item.CreatedOn) @item.SendingUser.Name  ==> @item.RecievingUser.Name
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@item.Notification.Title</h5>
+                <p class="card-text">@item.Notification.Description</p>
+            </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-    </div>
+    }
 </div>

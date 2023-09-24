@@ -9,25 +9,25 @@ namespace ProniaBackEnd.Hubs;
 [Authorize]
 public class UserStatusHub : Hub
 {
-    private readonly UserOnlineStatusService _alertService;
+    private readonly UserOnlineStatusService _userStatusService;
     private readonly UserService _userService;
     private readonly IHubContext<UserStatusHub> _hubContext;
     public UserStatusHub(UserOnlineStatusService alertService, UserService userService, IHubContext<UserStatusHub> hubContext)
     {
-        _alertService = alertService;
+        _userStatusService = alertService;
         _userService = userService;
         _hubContext = hubContext;
     }
 
     public override Task OnConnectedAsync()
     {
-        _alertService.AddConnectionId(_userService.GetCurrentUser(), Context.ConnectionId);
+        _userStatusService.AddConnectionId(_userService.GetCurrentUser(), Context.ConnectionId);
 
         var staffUsers = _userService.GetAllStaffMembers();
 
         foreach (var staffUser in staffUsers)
         {
-            var connections = _alertService.GetAllConnectionIds(staffUser);
+            var connections = _userStatusService.GetAllConnectionIds(staffUser);
 
             var userStatusVM = new
             {
@@ -51,7 +51,7 @@ public class UserStatusHub : Hub
 
         foreach (var staffUser in staffUsers)
         {
-            var connections = _alertService.GetAllConnectionIds(staffUser);
+            var connections = _userStatusService.GetAllConnectionIds(staffUser);
 
             var userStatusVM = new
             {
@@ -66,7 +66,7 @@ public class UserStatusHub : Hub
                 .Wait();
         }
 
-        _alertService.RemoveConnectionId(_userService.GetCurrentUser(),Context.ConnectionId);
+        _userStatusService.RemoveConnectionId(_userService.GetCurrentUser(),Context.ConnectionId);
         return base.OnDisconnectedAsync(exception);
     }
 }

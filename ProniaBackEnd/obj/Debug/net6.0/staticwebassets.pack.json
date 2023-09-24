@@ -4493,6 +4493,10 @@
       "PackagePath": "staticwebassets\\js\\customSignal.js"
     },
     {
+      "Id": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\js\\userNoteficationSignalR.js",
+      "PackagePath": "staticwebassets\\js\\userNoteficationSignalR.js"
+    },
+    {
       "Id": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\uploads\\images\\2a33f1cb-06d0-4b39-a6aa-44d209bf2911.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\2a33f1cb-06d0-4b39-a6aa-44d209bf2911.jpg"
     },

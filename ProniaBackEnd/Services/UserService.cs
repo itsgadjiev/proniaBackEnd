@@ -65,5 +65,13 @@ namespace ProniaBackEnd.Services
                 || x.Role == Role.RoleEnums.Moderator)
                 .ToList();
         }
+
+
+        public List<User> GetAllBasicMembers()
+        {
+            return _appDbContext.Users
+                .Where(x => x.Role == Role.RoleEnums.User)
+                .ToList();
+        }
     }
 }

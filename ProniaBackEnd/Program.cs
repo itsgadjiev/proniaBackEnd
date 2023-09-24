@@ -34,7 +34,7 @@ namespace ProniaBackEnd
                 .AddScoped<UserService>()
                 .AddScoped<OrderCodeGenerator>()
                 .AddSingleton<UserOnlineStatusService>()
-                .AddSingleton<UserOrderNotificationService>()
+                .AddSingleton<UserNotificationService>()
                 .AddHttpContextAccessor();
 
 
@@ -70,7 +70,7 @@ namespace ProniaBackEnd
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.MapHub<UserStatusHub>("/userStatusHub");
-            app.MapHub<OrderAlertHub>("/orderAlertHub");
+            app.MapHub<UserMessageHub>("/userMessageHub");
 
 
             app.Run();

@@ -28,7 +28,7 @@ connection.on("UserStatus", data => {
             element.classList.add("badge-soft-danger"); 
         }
     }
-    console.log(element)
+    
 });
 
 

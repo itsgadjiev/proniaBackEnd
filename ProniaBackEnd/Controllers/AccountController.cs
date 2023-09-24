@@ -14,7 +14,7 @@ namespace ProniaBackEnd.Controllers
         private readonly AppDbContext _appDbContext;
         private readonly UserService _userService;
 
-        public AccountController(AppDbContext appDbContext,UserService userService)
+        public AccountController(AppDbContext appDbContext, UserService userService)
         {
             _appDbContext = appDbContext;
             _userService = userService;
@@ -32,15 +32,15 @@ namespace ProniaBackEnd.Controllers
         {
             var user = _userService.GetCurrentUser();
             var orders = _appDbContext.Orders
-                .Where(x => x.UserId == user.Id )
+                .Where(x => x.UserId == user.Id)
                 .Select(x => new AccountOrderViewModel
                 {
-                    CreatedOn=x.CreatedOn,
+                    CreatedOn = x.CreatedOn,
                     OrderStatus = x.OrderItemStatusValue.ToString(),
                     TracingCode = x.TracingCode,
-                    Total=x.OrderItems.Where(ot=>ot.OrderId==x.Id).Sum(ot=>ot.ProductOrderQuantity * ot.ProductOrderPrice).Value,
-                    Count= x.OrderItems.Where(ot => ot.OrderId == x.Id).Count(),
-                    OrderId=x.Id
+                    Total = x.OrderItems.Where(ot => ot.OrderId == x.Id).Sum(ot => ot.ProductOrderQuantity * ot.ProductOrderPrice).Value,
+                    Count = x.OrderItems.Where(ot => ot.OrderId == x.Id).Count(),
+                    OrderId = x.Id
                 })
                 .ToList();
 
@@ -54,7 +54,7 @@ namespace ProniaBackEnd.Controllers
             var order = _appDbContext.Orders
                 .Include(x => x.OrderItems)
                 .FirstOrDefault(x => x.Id == orderId && x.UserId == _userService.GetCurrentUser().Id);
-            
+
             if (order == null)
             {
                 return NotFound();
@@ -76,8 +76,8 @@ namespace ProniaBackEnd.Controllers
             var user = _userService.GetCurrentUser();
             AccountDetailViewModel accountDetailViewModel = new AccountDetailViewModel
             {
-                Email=user.Email,
-                Name= user.Name,
+                Email = user.Email,
+                Name = user.Name,
                 LastName = user.LastName
             };
 
@@ -86,11 +86,15 @@ namespace ProniaBackEnd.Controllers
 
         public IActionResult Notifications()
         {
-
-            return View();
+            var notifications = _appDbContext.UserNotifications
+                .Include(x => x.Notification)
+                .Include(x => x.SendingUser)
+                .Include(x => x.RecievingUser)
+                .Where(x => x.RecievingUser == _userService.GetCurrentUser()).ToList();
+            return View(notifications);
         }
 
 
-      
+
     }
 }

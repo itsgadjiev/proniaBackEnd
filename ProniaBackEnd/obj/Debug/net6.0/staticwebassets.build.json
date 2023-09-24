@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "clg5ExmOd053ZvWiy0yCzuT9DtjxsMpZG7ULbZdcI5A=",
+  "Hash": "keKVBxqbQsVmcuSTxmtpS9Wghy8IG3BGz0pXgeGIfXY=",
   "Source": "ProniaBackEnd",
   "BasePath": "_content/ProniaBackEnd",
   "Mode": "Default",
@@ -19123,6 +19123,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\customSignal.js"
+    },
+    {
+      "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\js\\userNoteficationSignalR.js",
+      "SourceId": "ProniaBackEnd",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\",
+      "BasePath": "_content/ProniaBackEnd",
+      "RelativePath": "js/userNoteficationSignalR.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\userNoteficationSignalR.js"
     },
     {
       "Identity": "C:\\Users\\ceyhu\\OneDrive\\Рабочий стол\\proniaBackEnd\\ProniaBackEnd\\wwwroot\\uploads\\images\\2a33f1cb-06d0-4b39-a6aa-44d209bf2911.jpg",
