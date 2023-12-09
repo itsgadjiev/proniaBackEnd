@@ -1,16 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using ProniaBackEnd.Database;
+using ProniaBackEnd.Hubs;
 using ProniaBackEnd.ViewModels;
+using System.Diagnostics;
 
 namespace ProniaBackEnd.Controllers
 {
     public class HomeController : Controller
     {
         private readonly AppDbContext _appDbContext;
+        private readonly IHubContext<LiveStreamHub> _hubContext;
 
-        public HomeController(AppDbContext appDbContext)
+        public HomeController(AppDbContext appDbContext, IHubContext<LiveStreamHub> hubContext)
         {
             _appDbContext = appDbContext;
+            _hubContext = hubContext;
         }
 
         public IActionResult Index()
@@ -24,5 +29,8 @@ namespace ProniaBackEnd.Controllers
 
             return View(homeViewModel);
         }
+
+
+
     }
 }
